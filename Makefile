@@ -11,3 +11,6 @@ serve: clean
 
 build:
 	mkdocs build
+
+deploy:
+	mkdocs gh-deploy
