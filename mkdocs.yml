@@ -1,0 +1,241 @@
+site_name: Ultrabug
+repo_url: https://github.com/ultrabug/fpv-handbook
+
+# https://squidfunk.github.io/mkdocs-material/
+theme:
+  name: material
+  favicon: assets/images/favicon.ico
+  font:
+    text: Ubuntu
+    code: Ubuntu Mono
+  # https://materialdesignicons.com/
+  icon:
+    logo: material/human-greeting
+    logo_tech: material/bash
+    logo_fpv: material/quadcopter
+  features:
+    - navigation.tabs
+    - navigation.expand
+    - navigation.sections
+    - toc.integrate
+  custom_dir: theme_overrides
+extra_css:
+  - assets/stylesheets/extra.css
+extra:
+  social:
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/ultrabug
+      name: ultrabug on Twitter
+    - icon: fontawesome/brands/github
+      link: https://github.com/ultrabug
+      name: ultrabug on Github
+copyright: Copyright &copy; 2011-2021 Alexys Jacob
+
+# https://facelessuser.github.io/pymdown-extensions/
+markdown_extensions:
+  - attr_list
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.superfences
+
+plugins:
+  - awesome-pages
+  - search
+  # https://github.com/datarobot/mkdocs-redirects
+  - redirects:
+      redirect_maps:
+        "renaming-and-reshaping-scylla-tables-using-scylla-migrator.md": "Tech Blog/2020/2020-11-06-renaming-and-reshaping-scylla-tables-using-scylla-migrator.md"
+        "py3status-v3-29.md": "Tech Blog/2020/2020-09-07-py3status-v3-29.md"
+        "python-scylla-driver-how-we-unleashed-the-scylla-monsters-performance.md": "Tech Blog/2020/2020-08-24-python-scylla-driver-how-we-unleashed-the-scylla-monsters-performance.md"
+        "py3status-v3-28-goodbye-py2-6-3-4.md": "Tech Blog/2020/2020-04-14-py3status-v3-28-goodbye-py2-6-3-4.md"
+        "scylla-summit-2019.md": "Tech Blog/2019/2019-12-28-scylla-summit-2019.md"
+        "py3status-v3-20-europython-2019-edition.md": "Tech Blog/2019/2019-09-22-py3status-v3-20-europython-2019-edition.md"
+        "meet-the-py3status-logo.md": "Tech Blog/2019/2019-04-17-meet-the-py3status-logo.md"
+        "scylla-four-ways-to-optimize-your-disk-space-consumption.md": "Tech Blog/2019/2019-03-29-scylla-four-ways-to-optimize-your-disk-space-consumption.md"
+        "py3status-v3-17.md": "Tech Blog/2019/2019-03-25-py3status-v3-17.md"
+        "bye-bye-google-analytics.md": "Tech Blog/2019/2019-03-01-bye-bye-google-analytics.md"
+        "py3status-v3-16.md": "Tech Blog/2019/2019-01-20-py3status-v3-16.md"
+        "scylla-summit-2018-write-up.md": "Tech Blog/2018/2018-12-06-scylla-summit-2018-write-up.md"
+        "py3status-v3-14.md": "Tech Blog/2018/2018-11-10-py3status-v3-14.md"
+        "py3status-v3-13.md": "Tech Blog/2018/2018-09-28-py3status-v3-13.md"
+        "authenticating-and-connecting-to-a-ssl-enabled-scylla-cluster-using-spark-2.md": "Tech Blog/2018/2018-07-19-authenticating-and-connecting-to-a-ssl-enabled-scylla-cluster-using-spark-2.md"
+        "a-botspot-story.md": "Tech Blog/2018/2018-07-06-a-botspot-story.md"
+        "py3status-v3-8.md": "Tech Blog/2018/2018-04-03-py3status-v3-8.md"
+        "evaluating-scylladb-for-production-2-2.md": "Tech Blog/2018/2018-02-28-evaluating-scylladb-for-production-2-2.md"
+        "evaluating-scylladb-for-production-1-2.md": "Tech Blog/2018/2018-01-23-evaluating-scylladb-for-production-1-2.md"
+        "talks-page.md": "Tech Blog/2017/2017-12-22-talks-page.md"
+        "py3status-v3-7.md": "Tech Blog/2017/2017-12-12-py3status-v3-7.md"
+        "gentoo-linux-on-dell-xps-13-9365-and-9360.md": "Tech Blog/2017/2017-11-02-gentoo-linux-on-dell-xps-13-9365-and-9360.md"
+        "gentoo-linux-listed-rethinkdbs-website.md": "Tech Blog/2017/2017-10-13-gentoo-linux-listed-rethinkdbs-website.md"
+        "py3status-v3-6.md": "Tech Blog/2017/2017-08-22-py3status-v3-6.md"
+        "scylladb-meets-gentoo-linux.md": "Tech Blog/2017/2017-08-08-scylladb-meets-gentoo-linux.md"
+        "load-balancing-hadoop-hive-with-f5-big-ip.md": "Tech Blog/2017/2017-06-02-load-balancing-hadoop-hive-with-f5-big-ip.md"
+        "hardening-ssh-authentication-using-yubikey-32.md": "Tech Blog/2017/2017-05-16-hardening-ssh-authentication-using-yubikey-32.md"
+        "hardening-ssh-authentication-using-yubikey-22.md": "Tech Blog/2017/2017-05-12-hardening-ssh-authentication-using-yubikey-22.md"
+        "hardening-ssh-authentication-using-yubikey-12.md": "Tech Blog/2017/2017-05-12-hardening-ssh-authentication-using-yubikey-12.md"
+        "py3status-v3-5.md": "Tech Blog/2017/2017-04-10-py3status-v3-5.md"
+        "py3status-v3-4.md": "Tech Blog/2017/2017-01-27-py3status-v3-4.md"
+        "py3status-v3-3.md": "Tech Blog/2016/2016-11-21-py3status-v3-3.md"
+        "rethinkdb-on-gentoo-linux.md": "Tech Blog/2016/2016-09-02-rethinkdb-on-gentoo-linux.md"
+        "py3status-v3-0.md": "Tech Blog/2016/2016-06-25-py3status-v3-0.md"
+        "py3status-v2-9.md": "Tech Blog/2016/2016-03-02-py3status-v2-9.md"
+        "gentoo-linux-on-dell-xps-13-9350.md": "Tech Blog/2016/2016-01-02-gentoo-linux-on-dell-xps-13-9350.md"
+        "uwsgi-v2-0-12.md": "Tech Blog/2015/2015-12-31-uwsgi-v2-0-12.md"
+        "py3status-v2-7.md": "Tech Blog/2015/2015-11-26-py3status-v2-7.md"
+        "uhashring-consistent-hashing-in-python.md": "Tech Blog/2015/2015-10-20-uhashring-consistent-hashing-in-python.md"
+        "consistent-hashing-101.md": "Tech Blog/2015/2015-10-19-consistent-hashing-101.md"
+        "mongodb-3-0-upgrade-in-production-step-4-victory.md": "Tech Blog/2015/2015-09-14-mongodb-3-0-upgrade-in-production-step-4-victory.md"
+        "py3status-v2-6.md": "Tech Blog/2015/2015-08-27-py3status-v2-6.md"
+        "py3status-v2-5.md": "Tech Blog/2015/2015-08-17-py3status-v2-5.md"
+        "designing-a-scalable-and-distributed-application.md": "Tech Blog/2015/2015-07-22-designing-a-scalable-and-distributed-application.md"
+        "mongodb-3-0-upgrade-in-production-step-3-hope.md": "Tech Blog/2015/2015-07-09-mongodb-3-0-upgrade-in-production-step-3-hope.md"
+        "mongodb-3-0-upgrade-in-production-step-2-failed.md": "Tech Blog/2015/2015-05-26-mongodb-3-0-upgrade-in-production-step-2-failed.md"
+        "gevent-ssl-support-fixed-for-python-2-7-9.md": "Tech Blog/2015/2015-05-23-gevent-ssl-support-fixed-for-python-2-7-9.md"
+        "uwsgi-gevent-and-pymongo-3-threads-mayhem.md": "Tech Blog/2015/2015-05-13-uwsgi-gevent-and-pymongo-3-threads-mayhem.md"
+        "mongodb-3-0-upgrade-in-production-first-steps.md": "Tech Blog/2015/2015-05-07-mongodb-3-0-upgrade-in-production-first-steps.md"
+        "py3status-v2-4.md": "Tech Blog/2015/2015-03-31-py3status-v2-4.md"
+        "mongodb-3-0-1.md": "Tech Blog/2015/2015-03-17-mongodb-3-0-1.md"
+        "mongodb-2-6-8-2-4-13-the-upcoming-3-0-0.md": "Tech Blog/2015/2015-02-27-mongodb-2-6-8-2-4-13-the-upcoming-3-0-0.md"
+        "py3status-v2-0.md": "Tech Blog/2015/2015-01-04-py3status-v2-0.md"
+        "gentoo-linux-pxe-builder.md": "Tech Blog/2014/2014-12-20-gentoo-linux-pxe-builder.md"
+        "rip-ns2.md": "Tech Blog/2014/2014-11-20-rip-ns2.md"
+        "one-month-in-turkey.md": "Tech Blog/2014/2014-10-14-one-month-in-turkey.md"
+        "py3status-v1-6.md": "Tech Blog/2014/2014-10-08-py3status-v1-6.md"
+        "using-uwsgi-and-consul-to-design-a-distributed-application.md": "Tech Blog/2014/2014-08-14-using-uwsgi-and-consul-to-design-a-distributed-application.md"
+        "hd-daymaker-led-headlamp.md": "Tech Blog/2014/2014-08-12-hd-daymaker-led-headlamp.md"
+        "europython-2014.md": "Tech Blog/2014/2014-08-01-europython-2014.md"
+        "iran-yazd.md": "Tech Blog/2014/2014-06-15-iran-yazd.md"
+        "consul-on-gentoo-linux.md": "Tech Blog/2014/2014-06-04-consul-on-gentoo-linux.md"
+        "uwsgi-v2-0-5-1.md": "Tech Blog/2014/2014-06-02-uwsgi-v2-0-5-1.md"
+        "iran-shiraz.md": "Tech Blog/2014/2014-05-25-iran-shiraz.md"
+        "rsyslog-v7-6-3.md": "Tech Blog/2014/2014-05-23-rsyslog-v7-6-3.md"
+        "iran-tehran.md": "Tech Blog/2014/2014-05-20-iran-tehran.md"
+        "mongodb-v2-6-1.md": "Tech Blog/2014/2014-05-14-mongodb-v2-6-1.md"
+        "uwsgi-v2-0-4.md": "Tech Blog/2014/2014-05-06-uwsgi-v2-0-4.md"
+        "after-vacation-bug-hunting.md": "Tech Blog/2014/2014-05-04-after-vacation-bug-hunting.md"
+        "py3status-v1-4.md": "Tech Blog/2014/2014-04-16-py3status-v1-4.md"
+        "mongodb-2-4-10-pymongo-2-7.md": "Tech Blog/2014/2014-04-08-mongodb-2-4-10-pymongo-2-7.md"
+        "convert-special-characters-to-ascii-in-python.md": "Tech Blog/2014/2014-04-04-convert-special-characters-to-ascii-in-python.md"
+        "nightster-bw.md": "Tech Blog/2014/2014-03-17-nightster-bw.md"
+        "couchbase-on-gentoo-linux.md": "Tech Blog/2014/2014-03-07-couchbase-on-gentoo-linux.md"
+        "py3status-v1-3.md": "Tech Blog/2014/2014-02-23-py3status-v1-3.md"
+        "mongodb-v2-4-9v2-2-7-rabbitmq-v3-2-3.md": "Tech Blog/2014/2014-02-18-mongodb-v2-4-9v2-2-7-rabbitmq-v3-2-3.md"
+        "keepalived-v1-2-11-glusterfs-v3-4-2.md": "Tech Blog/2014/2014-01-31-keepalived-v1-2-11-glusterfs-v3-4-2.md"
+        "uwsgi-v2-0.md": "Tech Blog/2014/2014-01-17-uwsgi-v2-0.md"
+        "py3status-v1-2.md": "Tech Blog/2014/2014-01-12-py3status-v1-2.md"
+        "tuning-pacemaker-for-large-clusters.md": "Tech Blog/2014/2014-01-10-tuning-pacemaker-for-large-clusters.md"
+        "aircraft-boneyard.md": "Tech Blog/2014/2014-01-03-aircraft-boneyard.md"
+        "rsyslog-v7-4-7.md": "Tech Blog/2013/2013-12-24-rsyslog-v7-4-7.md"
+        "py3status-v1-1.md": "Tech Blog/2013/2013-12-15-py3status-v1-1.md"
+        "arcosanti.md": "Tech Blog/2013/2013-12-05-arcosanti.md"
+        "rip-stabber.md": "Tech Blog/2013/2013-11-27-rip-stabber.md"
+        "keepalived-v1-2-9.md": "Tech Blog/2013/2013-11-15-keepalived-v1-2-9.md"
+        "mongodb-v2-4-8-rabbitmq-v3-2-1-rsyslog-v-7-4-6.md": "Tech Blog/2013/2013-11-09-mongodb-v2-4-8-rabbitmq-v3-2-1-rsyslog-v-7-4-6.md"
+        "monument-valley.md": "Tech Blog/2013/2013-11-07-monument-valley.md"
+        "north-rim-grand-canyon-the-navajo-indians.md": "Tech Blog/2013/2013-11-03-north-rim-grand-canyon-the-navajo-indians.md"
+        "bryce-canyon.md": "Tech Blog/2013/2013-10-29-bryce-canyon.md"
+        "death-valley.md": "Tech Blog/2013/2013-10-27-death-valley.md"
+        "drop-down-terminal-in-i3.md": "Tech Blog/2013/2013-10-25-drop-down-terminal-in-i3.md"
+        "mongodb-v2-4-7-pymongo-v2-6-3.md": "Tech Blog/2013/2013-10-22-mongodb-v2-4-7-pymongo-v2-6-3.md"
+        "usa-roadtrip-facts-start.md": "Tech Blog/2013/2013-10-20-usa-roadtrip-facts-start.md"
+        "latest-cluster-releases.md": "Tech Blog/2013/2013-10-17-latest-cluster-releases.md"
+        "wonderlands-roadtrip.md": "Tech Blog/2013/2013-10-15-wonderlands-roadtrip.md"
+        "rsyslog-v7-4-4-released.md": "Tech Blog/2013/2013-09-10-rsyslog-v7-4-4-released.md"
+        "pacemaker-v1-1-10-corosync-v2-3-1.md": "Tech Blog/2013/2013-09-03-pacemaker-v1-1-10-corosync-v2-3-1.md"
+        "py3status-v1-0.md": "Tech Blog/2013/2013-08-30-py3status-v1-0.md"
+        "mongodb-v2-4-6-pymongo-v2-6.md": "Tech Blog/2013/2013-08-21-mongodb-v2-4-6-pymongo-v2-6.md"
+        "rabbitmq-v3-1-5-released.md": "Tech Blog/2013/2013-08-16-rabbitmq-v3-1-5-released.md"
+        "rabbitmq-v3-1-4-released.md": "Tech Blog/2013/2013-08-13-rabbitmq-v3-1-4-released.md"
+        "rsyslog-v7-4-3-released.md": "Tech Blog/2013/2013-08-02-rsyslog-v7-4-3-released.md"
+        "paris-siege-du-pcf.md": "Tech Blog/2013/2013-07-11-paris-siege-du-pcf.md"
+        "mongodb-v2-4-5-rabbitmq-v3-1-3.md": "Tech Blog/2013/2013-07-10-mongodb-v2-4-5-rabbitmq-v3-1-3.md"
+        "py3status-v0-13.md": "Tech Blog/2013/2013-06-24-py3status-v0-13.md"
+        "py3status-v0-12.md": "Tech Blog/2013/2013-06-20-py3status-v0-12.md"
+        "hp-moonshot.md": "Tech Blog/2013/2013-06-15-hp-moonshot.md"
+        "vertigo.md": "Tech Blog/2013/2013-06-13-vertigo.md"
+        "mongodb-latest-releases.md": "Tech Blog/2013/2013-06-05-mongodb-latest-releases.md"
+        "roadtrip-3600.md": "Tech Blog/2013/2013-06-02-roadtrip-3600.md"
+        "using-keepalived-for-a-self-balancing-cluster.md": "Tech Blog/2013/2013-05-31-using-keepalived-for-a-self-balancing-cluster.md"
+        "san-francisco-street-art.md": "Tech Blog/2013/2013-05-25-san-francisco-street-art.md"
+        "rabbitmq-v3-1-0-released.md": "Tech Blog/2013/2013-05-21-rabbitmq-v3-1-0-released.md"
+        "squid-proxy-blocking-download-of-some-file-extensions.md": "Tech Blog/2013/2013-05-17-squid-proxy-blocking-download-of-some-file-extensions.md"
+        "fujifilm-gf670w.md": "Tech Blog/2013/2013-05-16-fujifilm-gf670w.md"
+        "mongodb-and-pacemaker-recent-bumps.md": "Tech Blog/2013/2013-04-26-mongodb-and-pacemaker-recent-bumps.md"
+        "hello-gentoo-planet.md": "Tech Blog/2013/2013-04-24-hello-gentoo-planet.md"
+        "san-francisco-streets.md": "Tech Blog/2013/2013-04-18-san-francisco-streets.md"
+        "py3status-v0-9.md": "Tech Blog/2013/2013-04-18-py3status-v0-9.md"
+        "mongodb-v2-4-2-released.md": "Tech Blog/2013/2013-04-18-mongodb-v2-4-2-released.md"
+        "san-francisco-chinatown.md": "Tech Blog/2013/2013-04-16-san-francisco-chinatown.md"
+        "py3status-v0-8.md": "Tech Blog/2013/2013-04-14-py3status-v0-8.md"
+        "py3status-v0-7.md": "Tech Blog/2013/2013-04-06-py3status-v0-7.md"
+        "tokyo-mont-fuji.md": "Tech Blog/2013/2013-03-30-tokyo-mont-fuji.md"
+        "mongodb-v2-4-1-and-pymongo-2-5-released.md": "Tech Blog/2013/2013-03-25-mongodb-v2-4-1-and-pymongo-2-5-released.md"
+        "python-writing-a-proper-setup-for-your-project.md": "Tech Blog/2013/2013-03-24-python-writing-a-proper-setup-for-your-project.md"
+        "mongodb-v2-4-0-released.md": "Tech Blog/2013/2013-03-20-mongodb-v2-4-0-released.md"
+        "py3status-v0-5.md": "Tech Blog/2013/2013-03-19-py3status-v0-5.md"
+        "rabbitmq-v3-0-4-released.md": "Tech Blog/2013/2013-03-16-rabbitmq-v3-0-4-released.md"
+        "follow-up-on-pacemaker-v1-1-9-and-updated-pacemaker-gui.md": "Tech Blog/2013/2013-03-15-follow-up-on-pacemaker-v1-1-9-and-updated-pacemaker-gui.md"
+        "pacemaker-vulnerability-and-v1-1-9-release.md": "Tech Blog/2013/2013-03-13-pacemaker-vulnerability-and-v1-1-9-release.md"
+        "uwsgi-v1-4-9-released.md": "Tech Blog/2013/2013-03-11-uwsgi-v1-4-9-released.md"
+        "switching-from-xchat-to-hexchat.md": "Tech Blog/2013/2013-03-05-switching-from-xchat-to-hexchat.md"
+        "uwsgi-v1-4-8-released.md": "Tech Blog/2013/2013-03-04-uwsgi-v1-4-8-released.md"
+        "uwsgi-v1-4-6-released.md": "Tech Blog/2013/2013-02-26-uwsgi-v1-4-6-released.md"
+        "uwsgi-mono-asp-net-support.md": "Tech Blog/2013/2013-02-26-uwsgi-mono-asp-net-support.md"
+        "packaging-py3status.md": "Tech Blog/2013/2013-02-23-packaging-py3status.md"
+        "meet-py3status.md": "Tech Blog/2013/2013-02-21-meet-py3status.md"
+        "mongodb-2-4-0-rc.md": "Tech Blog/2013/2013-02-18-mongodb-2-4-0-rc.md"
+        "postfix-2-10-0.md": "Tech Blog/2013/2013-02-16-postfix-2-10-0.md"
+        "clustering-resource-agents-v3-9-5-crmsh-v1-2-5.md": "Tech Blog/2013/2013-02-15-clustering-resource-agents-v3-9-5-crmsh-v1-2-5.md"
+        "moosefs-v1-6-26-released.md": "Tech Blog/2013/2013-02-13-moosefs-v1-6-26-released.md"
+        "rabbitmq-v3-0-2-released.md": "Tech Blog/2013/2013-02-12-rabbitmq-v3-0-2-released.md"
+        "mongodb-v2-2-3-uwsgi-v1-4-5.md": "Tech Blog/2013/2013-02-02-mongodb-v2-2-3-uwsgi-v1-4-5.md"
+        "turkey-istanbul.md": "Tech Blog/2013/2013-01-27-turkey-istanbul.md"
+        "python-new-zeromq-and-mongodb-drivers.md": "Tech Blog/2013/2013-01-25-python-new-zeromq-and-mongodb-drivers.md"
+        "portugal-villa-extramuros.md": "Tech Blog/2013/2013-01-20-portugal-villa-extramuros.md"
+        "clustering-corosync-v2-3-0-resource-agents-3-9-4.md": "Tech Blog/2013/2013-01-18-clustering-corosync-v2-3-0-resource-agents-3-9-4.md"
+        "coming-soon-on-mongodb.md": "Tech Blog/2013/2013-01-15-coming-soon-on-mongodb.md"
+        "rabbitmq-2-8-7-3-0-1-released.md": "Tech Blog/2013/2013-01-11-rabbitmq-2-8-7-3-0-1-released.md"
+        "uwsgi-v1-4-4-released.md": "Tech Blog/2013/2013-01-10-uwsgi-v1-4-4-released.md"
+        "portugal-algarve.md": "Tech Blog/2012/2012-12-16-portugal-algarve.md"
+        "uwsgi-v1-4-3-released.md": "Tech Blog/2012/2012-12-13-uwsgi-v1-4-3-released.md"
+        "python-appnexus.md": "Tech Blog/2012/2012-12-05-python-appnexus.md"
+        "uwsgi-v1-4-2-released.md": "Tech Blog/2012/2012-11-28-uwsgi-v1-4-2-released.md"
+        "mongodb-v2-2-2-and-pymongo-v2-4-released.md": "Tech Blog/2012/2012-11-28-mongodb-v2-2-2-and-pymongo-v2-4-released.md"
+        "rsyslog-new-v7-branch-released.md": "Tech Blog/2012/2012-11-20-rsyslog-new-v7-branch-released.md"
+        "uwsgi-v1-4-1-lts-released.md": "Tech Blog/2012/2012-11-19-uwsgi-v1-4-1-lts-released.md"
+        "clustering-corosync-v2-1-0-pacemaker-v1-1-8.md": "Tech Blog/2012/2012-11-09-clustering-corosync-v2-1-0-pacemaker-v1-1-8.md"
+        "portugal-tavira.md": "Tech Blog/2012/2012-11-05-portugal-tavira.md"
+        "mongodb-ebuilds-cleanup-and-v2-2-1-released.md": "Tech Blog/2012/2012-11-04-mongodb-ebuilds-cleanup-and-v2-2-1-released.md"
+        "my-views-on-python.md": "Tech Blog/2012/2012-11-02-my-views-on-python.md"
+        "uwsgi-v1-2-6-and-v1-3-released.md": "Tech Blog/2012/2012-10-29-uwsgi-v1-2-6-and-v1-3-released.md"
+        "gentoo-make-conf-et-make-profile-demenagent.md": "Tech Blog/2012/2012-09-11-gentoo-make-conf-et-make-profile-demenagent.md"
+        "rabbitmq-2-8-6-released.md": "Tech Blog/2012/2012-09-03-rabbitmq-2-8-6-released.md"
+        "the-mongodb-2-2-era.md": "Tech Blog/2012/2012-08-30-the-mongodb-2-2-era.md"
+        "les-vosges.md": "Tech Blog/2012/2012-08-27-les-vosges.md"
+        "mongodb-v2-0-7-released.md": "Tech Blog/2012/2012-08-20-mongodb-v2-0-7-released.md"
+        "uwsgi-v1-2-5-released.md": "Tech Blog/2012/2012-08-14-uwsgi-v1-2-5-released.md"
+        "rabbitmq-v2-8-5-released.md": "Tech Blog/2012/2012-08-07-rabbitmq-v2-8-5-released.md"
+        "httping.md": "Tech Blog/2012/2012-08-03-httping.md"
+        "clustering-glue-v1-0-10-released.md": "Tech Blog/2012/2012-07-23-clustering-glue-v1-0-10-released.md"
+        "uwsgi-v1-2-4-released.md": "Tech Blog/2012/2012-07-09-uwsgi-v1-2-4-released.md"
+        "pymongo-v2-2-1-released.md": "Tech Blog/2012/2012-07-09-pymongo-v2-2-1-released.md"
+        "flask-pymongo-new-ebuild-in-portage.md": "Tech Blog/2012/2012-06-18-flask-pymongo-new-ebuild-in-portage.md"
+        "rsyslog-v6-2-2-released.md": "Tech Blog/2012/2012-06-15-rsyslog-v6-2-2-released.md"
+        "mongodb-export-based-on-objectids-timestamp.md": "Tech Blog/2012/2012-06-12-mongodb-export-based-on-objectids-timestamp.md"
+        "mongodb-v2-0-6-release.md": "Tech Blog/2012/2012-06-06-mongodb-v2-0-6-release.md"
+        "rsyslog-new-v6-branch-in-portage.md": "Tech Blog/2012/2012-06-01-rsyslog-new-v6-branch-in-portage.md"
+        "state-of-the-event-log-architecture-enhancements.md": "Tech Blog/2012/2012-05-25-state-of-the-event-log-architecture-enhancements.md"
+        "clustering-corosync-v1-4-3-pacemaker-v1-1-7-released.md": "Tech Blog/2012/2012-05-16-clustering-corosync-v1-4-3-pacemaker-v1-1-7-released.md"
+        "uwsgi-new-ebuild-in-portage.md": "Tech Blog/2012/2012-05-15-uwsgi-new-ebuild-in-portage.md"
+        "pymongo-v2-2-released.md": "Tech Blog/2012/2012-05-11-pymongo-v2-2-released.md"
+        "mongodb-v2-0-5-released.md": "Tech Blog/2012/2012-05-11-mongodb-v2-0-5-released.md"
+        "uwsgi-network-spooling-of-messages-between-applications.md": "Tech Blog/2012/2012-03-19-uwsgi-network-spooling-of-messages-between-applications.md"
+        "nginx-conditional-uwsgi-error-handling.md": "Tech Blog/2012/2012-02-27-nginx-conditional-uwsgi-error-handling.md"
+        "portage-internals.md": "Tech Blog/2012/2012-01-13-portage-internals.md"
+        "portage-basics.md": "Tech Blog/2012/2012-01-11-portage-basics.md"

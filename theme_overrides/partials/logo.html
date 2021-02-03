@@ -1,0 +1,12 @@
+{% if config.theme.logo %}
+  <img src="{{ config.theme.logo | url }}" alt="logo">
+{% else %}
+  {% if "FPV" in page.url %}
+    {% set icon = config.theme.icon.logo_fpv or "material/library" %}
+  {% elif "Tech" in page.url %}
+    {% set icon = config.theme.icon.logo_tech or "material/library" %}
+  {% else %}
+    {% set icon = config.theme.icon.logo or "material/library" %}
+  {% endif %}
+  {% include ".icons/" ~ icon ~ ".svg" %}
+{% endif %}
