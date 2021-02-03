@@ -1,0 +1,4250 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.7">
+    
+    
+      
+        <title>Evaluating ScyllaDB for production 2/2 - Ultrabug</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.cb6bc1d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.39b8e14a.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700%7CUbuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Ubuntu",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#business-context" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../../.." title="Ultrabug" class="md-header-nav__button md-logo" aria-label="Ultrabug">
+      
+  
+    
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 9h2.31l.32-3h2l-.32 3h2l.32-3h2l-.32 3H15v2h-1.9l-.2 2H15v2h-2.31l-.32 3h-2l.32-3h-2l-.32 3h-2l.32-3H5v-2h1.9l.2-2H5V9m4.1 2l-.2 2h2l.2-2M19 6h-2v8h2m0 2h-2v2h2z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            Ultrabug
+          </span>
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            
+              Evaluating ScyllaDB for production 2/2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/ultrabug/fpv-handbook/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      About
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../2020/2020-11-06-renaming-and-reshaping-scylla-tables-using-scylla-migrator/" class="md-tabs__link md-tabs__link--active">
+        Tech Blog
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Tech%20Talks/" class="md-tabs__link">
+        Tech Talks
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../FPV%20Handbook/" class="md-tabs__link">
+        FPV Handbook
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../FPV%20Builds/ImpulseRC%20Apex/" class="md-tabs__link">
+        FPV Builds
+      </a>
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Ultrabug" class="md-nav__button md-logo" aria-label="Ultrabug">
+      
+  
+    
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 9h2.31l.32-3h2l-.32 3h2l.32-3h2l-.32 3H15v2h-1.9l-.2 2H15v2h-2.31l-.32 3h-2l.32-3h-2l-.32 3h-2l.32-3H5v-2h1.9l.2-2H5V9m4.1 2l-.2 2h2l.2-2M19 6h-2v8h2m0 2h-2v2h2z"/></svg>
+
+    </a>
+    Ultrabug
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/ultrabug/fpv-handbook/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+      
+      <label class="md-nav__link" for="nav-2">
+        Tech Blog
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tech Blog" data-md-level="1">
+        <label class="md-nav__title" for="nav-2">
+          <span class="md-nav__icon md-icon"></span>
+          Tech Blog
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-1" data-md-state="indeterminate" type="checkbox" id="nav-2-1" checked>
+      
+      <label class="md-nav__link" for="nav-2-1">
+        2020
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2020" data-md-level="2">
+        <label class="md-nav__title" for="nav-2-1">
+          <span class="md-nav__icon md-icon"></span>
+          2020
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2020/2020-11-06-renaming-and-reshaping-scylla-tables-using-scylla-migrator/" class="md-nav__link">
+        Renaming and reshaping Scylla tables using scylla-migrator
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2020/2020-09-07-py3status-v3-29/" class="md-nav__link">
+        py3status v3.29
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2020/2020-08-24-python-scylla-driver-how-we-unleashed-the-scylla-monsters-performance/" class="md-nav__link">
+        Python scylla-driver: how we unleashed the Scylla monster's performance
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2020/2020-04-14-py3status-v3-28-goodbye-py2-6-3-4/" class="md-nav__link">
+        py3status v3.28 - goodbye py2.6-3.4
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-2" data-md-state="indeterminate" type="checkbox" id="nav-2-2" checked>
+      
+      <label class="md-nav__link" for="nav-2-2">
+        2019
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2019" data-md-level="2">
+        <label class="md-nav__title" for="nav-2-2">
+          <span class="md-nav__icon md-icon"></span>
+          2019
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2019/2019-12-28-scylla-summit-2019/" class="md-nav__link">
+        Scylla Summit 2019
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2019/2019-09-22-py3status-v3-20-europython-2019-edition/" class="md-nav__link">
+        py3status v3.20 - EuroPython 2019 edition
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2019/2019-04-17-meet-the-py3status-logo/" class="md-nav__link">
+        Meet the py3status logo
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2019/2019-03-29-scylla-four-ways-to-optimize-your-disk-space-consumption/" class="md-nav__link">
+        Scylla: four ways to optimize your disk space consumption
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2019/2019-03-25-py3status-v3-17/" class="md-nav__link">
+        py3status v3.17
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2019/2019-03-01-bye-bye-google-analytics/" class="md-nav__link">
+        Bye bye Google Analytics
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2019/2019-01-20-py3status-v3-16/" class="md-nav__link">
+        py3status v3.16
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3" checked>
+      
+      <label class="md-nav__link" for="nav-2-3">
+        2018
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2018" data-md-level="2">
+        <label class="md-nav__title" for="nav-2-3">
+          <span class="md-nav__icon md-icon"></span>
+          2018
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2018-12-06-scylla-summit-2018-write-up/" class="md-nav__link">
+        Scylla Summit 2018 write-up
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2018-11-10-py3status-v3-14/" class="md-nav__link">
+        py3status v3.14
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2018-09-28-py3status-v3-13/" class="md-nav__link">
+        py3status v3.13
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2018-07-19-authenticating-and-connecting-to-a-ssl-enabled-scylla-cluster-using-spark-2/" class="md-nav__link">
+        Authenticating and connecting to a SSL enabled Scylla cluster using Spark 2
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2018-07-06-a-botspot-story/" class="md-nav__link">
+        A botspot story
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2018-04-03-py3status-v3-8/" class="md-nav__link">
+        py3status v3.8
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Evaluating ScyllaDB for production 2/2
+      </a>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2018-01-23-evaluating-scylladb-for-production-1-2/" class="md-nav__link">
+        Evaluating ScyllaDB for production 1/2
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-4" data-md-state="indeterminate" type="checkbox" id="nav-2-4" checked>
+      
+      <label class="md-nav__link" for="nav-2-4">
+        2017
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2017" data-md-level="2">
+        <label class="md-nav__title" for="nav-2-4">
+          <span class="md-nav__icon md-icon"></span>
+          2017
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-12-22-talks-page/" class="md-nav__link">
+        Talks page
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-12-12-py3status-v3-7/" class="md-nav__link">
+        py3status v3.7
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-11-02-gentoo-linux-on-dell-xps-13-9365-and-9360/" class="md-nav__link">
+        Gentoo Linux on DELL XPS 13 9365 and 9360
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-10-13-gentoo-linux-listed-rethinkdbs-website/" class="md-nav__link">
+        Gentoo Linux listed RethinkDB's website
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-08-22-py3status-v3-6/" class="md-nav__link">
+        py3status v3.6
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-08-08-scylladb-meets-gentoo-linux/" class="md-nav__link">
+        ScyllaDB meets Gentoo Linux
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-06-02-load-balancing-hadoop-hive-with-f5-big-ip/" class="md-nav__link">
+        Load balancing Hadoop Hive with F5 BIG-IP
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-05-16-hardening-ssh-authentication-using-yubikey-32/" class="md-nav__link">
+        Hardening SSH authentication using Yubikey (3/2)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-05-12-hardening-ssh-authentication-using-yubikey-22/" class="md-nav__link">
+        Hardening SSH authentication using Yubikey (2/2)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-05-12-hardening-ssh-authentication-using-yubikey-12/" class="md-nav__link">
+        Hardening SSH authentication using Yubikey (1/2)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-04-10-py3status-v3-5/" class="md-nav__link">
+        py3status v3.5
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-01-27-py3status-v3-4/" class="md-nav__link">
+        py3status v3.4
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-5" data-md-state="indeterminate" type="checkbox" id="nav-2-5" checked>
+      
+      <label class="md-nav__link" for="nav-2-5">
+        2016
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2016" data-md-level="2">
+        <label class="md-nav__title" for="nav-2-5">
+          <span class="md-nav__icon md-icon"></span>
+          2016
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2016/2016-11-21-py3status-v3-3/" class="md-nav__link">
+        py3status v3.3
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2016/2016-09-02-rethinkdb-on-gentoo-linux/" class="md-nav__link">
+        RethinkDB on Gentoo Linux
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2016/2016-06-25-py3status-v3-0/" class="md-nav__link">
+        py3status v3.0
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2016/2016-03-02-py3status-v2-9/" class="md-nav__link">
+        py3status v2.9
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2016/2016-01-02-gentoo-linux-on-dell-xps-13-9350/" class="md-nav__link">
+        Gentoo Linux on DELL XPS 13 9350
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-6" data-md-state="indeterminate" type="checkbox" id="nav-2-6" checked>
+      
+      <label class="md-nav__link" for="nav-2-6">
+        2015
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2015" data-md-level="2">
+        <label class="md-nav__title" for="nav-2-6">
+          <span class="md-nav__icon md-icon"></span>
+          2015
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-12-31-uwsgi-v2-0-12/" class="md-nav__link">
+        uWSGI v2.0.12
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-11-26-py3status-v2-7/" class="md-nav__link">
+        py3status v2.7
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-10-20-uhashring-consistent-hashing-in-python/" class="md-nav__link">
+        uhashring : consistent hashing in python
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-10-19-consistent-hashing-101/" class="md-nav__link">
+        Consistent Hashing 101
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-09-14-mongodb-3-0-upgrade-in-production-step-4-victory/" class="md-nav__link">
+        MongoDB 3.0 upgrade in production : step 4 victory !
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-08-27-py3status-v2-6/" class="md-nav__link">
+        py3status v2.6
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-08-17-py3status-v2-5/" class="md-nav__link">
+        py3status v2.5
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-07-22-designing-a-scalable-and-distributed-application/" class="md-nav__link">
+        Designing a scalable and distributed application
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-07-09-mongodb-3-0-upgrade-in-production-step-3-hope/" class="md-nav__link">
+        MongoDB 3.0 upgrade in production : step 3 hope
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-05-26-mongodb-3-0-upgrade-in-production-step-2-failed/" class="md-nav__link">
+        MongoDB 3.0 upgrade in production : step 2 failed
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-05-23-gevent-ssl-support-fixed-for-python-2-7-9/" class="md-nav__link">
+        Gevent : SSL support fixed for python 2.7.9
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-05-13-uwsgi-gevent-and-pymongo-3-threads-mayhem/" class="md-nav__link">
+        uWSGI, gevent and pymongo 3 threads mayhem
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-05-07-mongodb-3-0-upgrade-in-production-first-steps/" class="md-nav__link">
+        MongoDB 3.0 upgrade in production : first steps
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-03-31-py3status-v2-4/" class="md-nav__link">
+        py3status v2.4
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-03-17-mongodb-3-0-1/" class="md-nav__link">
+        mongoDB 3.0.1
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-02-27-mongodb-2-6-8-2-4-13-the-upcoming-3-0-0/" class="md-nav__link">
+        mongoDB 2.6.8, 2.4.13 & the upcoming 3.0.0
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-01-04-py3status-v2-0/" class="md-nav__link">
+        py3status v2.0
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7" data-md-state="indeterminate" type="checkbox" id="nav-2-7" checked>
+      
+      <label class="md-nav__link" for="nav-2-7">
+        2014
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2014" data-md-level="2">
+        <label class="md-nav__title" for="nav-2-7">
+          <span class="md-nav__icon md-icon"></span>
+          2014
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-12-20-gentoo-linux-pxe-builder/" class="md-nav__link">
+        Gentoo Linux PXE builder
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-11-20-rip-ns2/" class="md-nav__link">
+        RIP ns2
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-10-14-one-month-in-turkey/" class="md-nav__link">
+        One month in Turkey
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-10-08-py3status-v1-6/" class="md-nav__link">
+        py3status v1.6
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-08-14-using-uwsgi-and-consul-to-design-a-distributed-application/" class="md-nav__link">
+        Using uWSGI and Consul to design a distributed application
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-08-12-hd-daymaker-led-headlamp/" class="md-nav__link">
+        HD Daymaker LED Headlamp
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-08-01-europython-2014/" class="md-nav__link">
+        Europython 2014
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-06-15-iran-yazd/" class="md-nav__link">
+        Iran : Yazd
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-06-04-consul-on-gentoo-linux/" class="md-nav__link">
+        Consul on Gentoo Linux
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-06-02-uwsgi-v2-0-5-1/" class="md-nav__link">
+        uWSGI v2.0.5.1
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-05-25-iran-shiraz/" class="md-nav__link">
+        Iran : Shiraz
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-05-23-rsyslog-v7-6-3/" class="md-nav__link">
+        rsyslog v7.6.3
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-05-20-iran-tehran/" class="md-nav__link">
+        Iran : Tehran
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-05-14-mongodb-v2-6-1/" class="md-nav__link">
+        mongoDB v2.6.1
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-05-06-uwsgi-v2-0-4/" class="md-nav__link">
+        uWSGI v2.0.4
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-05-04-after-vacation-bug-hunting/" class="md-nav__link">
+        After vacation bug hunting
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-04-16-py3status-v1-4/" class="md-nav__link">
+        py3status v1.4
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-04-08-mongodb-2-4-10-pymongo-2-7/" class="md-nav__link">
+        mongoDB 2.4.10 & pymongo 2.7
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-04-04-convert-special-characters-to-ascii-in-python/" class="md-nav__link">
+        Convert special characters to ASCII in python
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-03-17-nightster-bw/" class="md-nav__link">
+        Nightster B&W
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-03-07-couchbase-on-gentoo-linux/" class="md-nav__link">
+        Couchbase on Gentoo Linux
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-02-23-py3status-v1-3/" class="md-nav__link">
+        py3status v1.3
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-02-18-mongodb-v2-4-9v2-2-7-rabbitmq-v3-2-3/" class="md-nav__link">
+        mongoDB v2.4.9/v2.2.7, rabbitMQ v3.2.3
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-01-31-keepalived-v1-2-11-glusterfs-v3-4-2/" class="md-nav__link">
+        keepalived v1.2.11 & glusterfs v3.4.2
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-01-17-uwsgi-v2-0/" class="md-nav__link">
+        uWSGI v2.0
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-01-12-py3status-v1-2/" class="md-nav__link">
+        py3status v1.2
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-01-10-tuning-pacemaker-for-large-clusters/" class="md-nav__link">
+        Tuning pacemaker for large clusters
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-01-03-aircraft-boneyard/" class="md-nav__link">
+        Aircraft Boneyard
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-8" data-md-state="indeterminate" type="checkbox" id="nav-2-8" checked>
+      
+      <label class="md-nav__link" for="nav-2-8">
+        2013
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2013" data-md-level="2">
+        <label class="md-nav__title" for="nav-2-8">
+          <span class="md-nav__icon md-icon"></span>
+          2013
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-12-24-rsyslog-v7-4-7/" class="md-nav__link">
+        rsyslog v7.4.7
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-12-15-py3status-v1-1/" class="md-nav__link">
+        py3status v1.1
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-12-05-arcosanti/" class="md-nav__link">
+        Arcosanti
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-11-27-rip-stabber/" class="md-nav__link">
+        RIP stabber
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-11-15-keepalived-v1-2-9/" class="md-nav__link">
+        keepalived v1.2.9
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-11-09-mongodb-v2-4-8-rabbitmq-v3-2-1-rsyslog-v-7-4-6/" class="md-nav__link">
+        mongoDB v2.4.8, rabbitMQ v3.2.1, rsyslog v7.4.6
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-11-07-monument-valley/" class="md-nav__link">
+        Monument Valley
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-11-03-north-rim-grand-canyon-the-navajo-indians/" class="md-nav__link">
+        North rim Grand Canyon & the Navajo Indians
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-10-29-bryce-canyon/" class="md-nav__link">
+        Bryce Canyon
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-10-27-death-valley/" class="md-nav__link">
+        Death Valley
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-10-25-drop-down-terminal-in-i3/" class="md-nav__link">
+        Drop-down terminal in i3
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-10-22-mongodb-v2-4-7-pymongo-v2-6-3/" class="md-nav__link">
+        mongoDB v2.4.7 & pymongo v2.6.3
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-10-20-usa-roadtrip-facts-start/" class="md-nav__link">
+        USA roadtrip facts & start
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-10-17-latest-cluster-releases/" class="md-nav__link">
+        Latest cluster releases
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-10-15-wonderlands-roadtrip/" class="md-nav__link">
+        Wonderlands roadtrip
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-09-10-rsyslog-v7-4-4-released/" class="md-nav__link">
+        rsyslog : v7.4.4 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-09-03-pacemaker-v1-1-10-corosync-v2-3-1/" class="md-nav__link">
+        pacemaker v1.1.10 & corosync v2.3.1
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-08-30-py3status-v1-0/" class="md-nav__link">
+        py3status v1.0
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-08-21-mongodb-v2-4-6-pymongo-v2-6/" class="md-nav__link">
+        mongoDB v2.4.6 & pymongo v2.6
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-08-16-rabbitmq-v3-1-5-released/" class="md-nav__link">
+        rabbitMQ : v3.1.5 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-08-13-rabbitmq-v3-1-4-released/" class="md-nav__link">
+        rabbitMQ : v3.1.4 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-08-02-rsyslog-v7-4-3-released/" class="md-nav__link">
+        rsyslog : v7.4.3 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-07-11-paris-siege-du-pcf/" class="md-nav__link">
+        Paris : siège du PCF
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-07-10-mongodb-v2-4-5-rabbitmq-v3-1-3/" class="md-nav__link">
+        mongoDB v2.4.5 & rabbitMQ v3.1.3
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-06-24-py3status-v0-13/" class="md-nav__link">
+        py3status v0.13
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-06-20-py3status-v0-12/" class="md-nav__link">
+        py3status v0.12
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-06-15-hp-moonshot/" class="md-nav__link">
+        HP Moonshot
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-06-13-vertigo/" class="md-nav__link">
+        Vertigo
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-06-05-mongodb-latest-releases/" class="md-nav__link">
+        mongoDB : latest releases
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-06-02-roadtrip-3600/" class="md-nav__link">
+        Roadtrip 3600
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-05-31-using-keepalived-for-a-self-balancing-cluster/" class="md-nav__link">
+        Using keepalived for a self-balancing cluster
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-05-25-san-francisco-street-art/" class="md-nav__link">
+        San Francisco : street art
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-05-21-rabbitmq-v3-1-0-released/" class="md-nav__link">
+        rabbitMQ : v3.1.1 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-05-17-squid-proxy-blocking-download-of-some-file-extensions/" class="md-nav__link">
+        Squid proxy : blocking download of some file extensions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-05-16-fujifilm-gf670w/" class="md-nav__link">
+        Fujifilm GF670W
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-04-26-mongodb-and-pacemaker-recent-bumps/" class="md-nav__link">
+        mongoDB and Pacemaker recent bumps
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-04-24-hello-gentoo-planet/" class="md-nav__link">
+        Hello Gentoo Planet
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-04-18-san-francisco-streets/" class="md-nav__link">
+        San Francisco : streets
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-04-18-py3status-v0-9/" class="md-nav__link">
+        py3status v0.9
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-04-18-mongodb-v2-4-2-released/" class="md-nav__link">
+        mongoDB v2.4.2 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-04-16-san-francisco-chinatown/" class="md-nav__link">
+        San Francisco : chinatown
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-04-14-py3status-v0-8/" class="md-nav__link">
+        py3status v0.8
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-04-06-py3status-v0-7/" class="md-nav__link">
+        py3status v0.7
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-30-tokyo-mont-fuji/" class="md-nav__link">
+        Tokyo, mont Fuji
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-25-mongodb-v2-4-1-and-pymongo-2-5-released/" class="md-nav__link">
+        mongoDB v2.4.1 and pymongo 2.5 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-24-python-writing-a-proper-setup-for-your-project/" class="md-nav__link">
+        Python : writing a proper setup for your project
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-20-mongodb-v2-4-0-released/" class="md-nav__link">
+        mongoDB : v2.4.0 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-19-py3status-v0-5/" class="md-nav__link">
+        py3status v0.5
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-16-rabbitmq-v3-0-4-released/" class="md-nav__link">
+        rabbitMQ : v3.0.4 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-15-follow-up-on-pacemaker-v1-1-9-and-updated-pacemaker-gui/" class="md-nav__link">
+        Follow-up on pacemaker v1.1.9 and updated pacemaker-gui
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-13-pacemaker-vulnerability-and-v1-1-9-release/" class="md-nav__link">
+        Pacemaker vulnerability and v1.1.9 release
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-11-uwsgi-v1-4-9-released/" class="md-nav__link">
+        uWSGI : v1.4.9 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-05-switching-from-xchat-to-hexchat/" class="md-nav__link">
+        Switching from Xchat to HexChat
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-04-uwsgi-v1-4-8-released/" class="md-nav__link">
+        uWSGI : v1.4.8 released & v2.0 sneak peek
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-02-26-uwsgi-v1-4-6-released/" class="md-nav__link">
+        uWSGI : v1.4.6 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-02-26-uwsgi-mono-asp-net-support/" class="md-nav__link">
+        uWSGI : Mono ASP.NET support
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-02-23-packaging-py3status/" class="md-nav__link">
+        Packaging py3status
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-02-21-meet-py3status/" class="md-nav__link">
+        Meet py3status
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-02-18-mongodb-2-4-0-rc/" class="md-nav__link">
+        mongoDB 2.4.0 RC
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-02-16-postfix-2-10-0/" class="md-nav__link">
+        Postfix 2.10.0
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-02-15-clustering-resource-agents-v3-9-5-crmsh-v1-2-5/" class="md-nav__link">
+        Clustering : resource-agents v3.9.5 & crmsh v1.2.5
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-02-13-moosefs-v1-6-26-released/" class="md-nav__link">
+        MooseFS : v1.6.26 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-02-12-rabbitmq-v3-0-2-released/" class="md-nav__link">
+        rabbitMQ : v3.0.2 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-02-02-mongodb-v2-2-3-uwsgi-v1-4-5/" class="md-nav__link">
+        mongoDB v2.2.3 & uwsgi v1.4.5
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-01-27-turkey-istanbul/" class="md-nav__link">
+        Turkey, Istanbul
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-01-25-python-new-zeromq-and-mongodb-drivers/" class="md-nav__link">
+        Python : new zeroMQ and mongoDB drivers
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-01-20-portugal-villa-extramuros/" class="md-nav__link">
+        Portugal, Villa Extramuros
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-01-18-clustering-corosync-v2-3-0-resource-agents-3-9-4/" class="md-nav__link">
+        Clustering : corosync v2.3.0 & resource-agents-3.9.4
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-01-15-coming-soon-on-mongodb/" class="md-nav__link">
+        Coming soon on mongoDB
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-01-11-rabbitmq-2-8-7-3-0-1-released/" class="md-nav__link">
+        rabbitMQ 2.8.7 & 3.0.1 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-01-10-uwsgi-v1-4-4-released/" class="md-nav__link">
+        uWSGI : v1.4.4 released
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-9" data-md-state="indeterminate" type="checkbox" id="nav-2-9" checked>
+      
+      <label class="md-nav__link" for="nav-2-9">
+        2012
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2012" data-md-level="2">
+        <label class="md-nav__title" for="nav-2-9">
+          <span class="md-nav__icon md-icon"></span>
+          2012
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-12-16-portugal-algarve/" class="md-nav__link">
+        Portugal, Algarve
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-12-13-uwsgi-v1-4-3-released/" class="md-nav__link">
+        uWSGI : v1.4.3 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-12-05-python-appnexus/" class="md-nav__link">
+        Python @ Appnexus
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-11-28-uwsgi-v1-4-2-released/" class="md-nav__link">
+        uWSGI : v1.4.2 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-11-28-mongodb-v2-2-2-and-pymongo-v2-4-released/" class="md-nav__link">
+        mongoDB v2.2.2 and pymongo v2.4 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-11-20-rsyslog-new-v7-branch-released/" class="md-nav__link">
+        rsyslog : new v7 branch released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-11-19-uwsgi-v1-4-1-lts-released/" class="md-nav__link">
+        uWSGI : v1.4.1 LTS released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-11-09-clustering-corosync-v2-1-0-pacemaker-v1-1-8/" class="md-nav__link">
+        Clustering : corosync v2.1.0 & pacemaker v1.1.8
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-11-05-portugal-tavira/" class="md-nav__link">
+        Portugal, Tavira
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-11-04-mongodb-ebuilds-cleanup-and-v2-2-1-released/" class="md-nav__link">
+        mongoDB : ebuilds cleanup and v2.2.1 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-11-02-my-views-on-python/" class="md-nav__link">
+        My views on Python
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-10-29-uwsgi-v1-2-6-and-v1-3-released/" class="md-nav__link">
+        uWSGI : v1.2.6 and v1.3 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-09-11-gentoo-make-conf-et-make-profile-demenagent/" class="md-nav__link">
+        Gentoo : make.conf et make.profile déménagent
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-09-03-rabbitmq-2-8-6-released/" class="md-nav__link">
+        rabbitMQ 2.8.6 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-08-30-the-mongodb-2-2-era/" class="md-nav__link">
+        The mongoDB 2.2 era
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-08-27-les-vosges/" class="md-nav__link">
+        Les Vosges
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-08-20-mongodb-v2-0-7-released/" class="md-nav__link">
+        mongoDB : v2.0.7 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-08-14-uwsgi-v1-2-5-released/" class="md-nav__link">
+        uWSGI : v1.2.5 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-08-07-rabbitmq-v2-8-5-released/" class="md-nav__link">
+        rabbitMQ : v2.8.5 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-08-03-httping/" class="md-nav__link">
+        Httping
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-07-23-clustering-glue-v1-0-10-released/" class="md-nav__link">
+        Clustering : glue v1.0.10 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-07-09-uwsgi-v1-2-4-released/" class="md-nav__link">
+        uWSGI : v1.2.4 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-07-09-pymongo-v2-2-1-released/" class="md-nav__link">
+        pymongo : v2.2.1 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-06-18-flask-pymongo-new-ebuild-in-portage/" class="md-nav__link">
+        Flask-PyMongo : new ebuild in portage
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-06-15-rsyslog-v6-2-2-released/" class="md-nav__link">
+        rsyslog : v6.2.2 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-06-12-mongodb-export-based-on-objectids-timestamp/" class="md-nav__link">
+        mongoDB : export based on objectIDs' timestamp
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-06-06-mongodb-v2-0-6-release/" class="md-nav__link">
+        mongoDB : v2.0.6 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-06-01-rsyslog-new-v6-branch-in-portage/" class="md-nav__link">
+        rsyslog : new v6 branch in portage
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-05-25-state-of-the-event-log-architecture-enhancements/" class="md-nav__link">
+        State of the event log architecture enhancements
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-05-16-clustering-corosync-v1-4-3-pacemaker-v1-1-7-released/" class="md-nav__link">
+        Clustering : corosync v1.4.3 & pacemaker v1.1.7 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-05-15-uwsgi-new-ebuild-in-portage/" class="md-nav__link">
+        uWSGI : new ebuild in portage
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-05-11-pymongo-v2-2-released/" class="md-nav__link">
+        pymongo : v2.2 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-05-11-mongodb-v2-0-5-released/" class="md-nav__link">
+        mongoDB : v2.0.5 released
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-03-19-uwsgi-network-spooling-of-messages-between-applications/" class="md-nav__link">
+        uWSGI : network spooling of messages between applications
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-02-27-nginx-conditional-uwsgi-error-handling/" class="md-nav__link">
+        nginx : conditional uWSGI error handling
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-01-13-portage-internals/" class="md-nav__link">
+        Portage internals
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-01-11-portage-basics/" class="md-nav__link">
+        Portage basics
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" data-md-state="indeterminate" type="checkbox" id="nav-3" checked>
+      
+      <label class="md-nav__link" for="nav-3">
+        Tech Talks
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tech Talks" data-md-level="1">
+        <label class="md-nav__title" for="nav-3">
+          <span class="md-nav__icon md-icon"></span>
+          Tech Talks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/" class="md-nav__link">
+        Community talks and awards
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-2" data-md-state="indeterminate" type="checkbox" id="nav-3-2" checked>
+      
+      <label class="md-nav__link" for="nav-3-2">
+        2021
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2021" data-md-level="2">
+        <label class="md-nav__title" for="nav-3-2">
+          <span class="md-nav__icon md-icon"></span>
+          2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2021/scylla-summit-2021/" class="md-nav__link">
+        Scylla Summit 2021
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-3" data-md-state="indeterminate" type="checkbox" id="nav-3-3" checked>
+      
+      <label class="md-nav__link" for="nav-3-3">
+        2020
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2020" data-md-level="2">
+        <label class="md-nav__title" for="nav-3-3">
+          <span class="md-nav__icon md-icon"></span>
+          2020
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2020/europython-2020/" class="md-nav__link">
+        EuroPython 2020
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2020/pycon-india-2020/" class="md-nav__link">
+        PyCon India 2020
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2020/scylla-university/" class="md-nav__link">
+        Scylla University
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-4" data-md-state="indeterminate" type="checkbox" id="nav-3-4" checked>
+      
+      <label class="md-nav__link" for="nav-3-4">
+        2019
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2019" data-md-level="2">
+        <label class="md-nav__title" for="nav-3-4">
+          <span class="md-nav__icon md-icon"></span>
+          2019
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2019/europython-2019/" class="md-nav__link">
+        EuroPython 2019
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2019/scylla-summit-2019/" class="md-nav__link">
+        Scylla Summit 2019
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-5" data-md-state="indeterminate" type="checkbox" id="nav-3-5" checked>
+      
+      <label class="md-nav__link" for="nav-3-5">
+        2018
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2018" data-md-level="2">
+        <label class="md-nav__title" for="nav-3-5">
+          <span class="md-nav__icon md-icon"></span>
+          2018
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2018/europython-2018/" class="md-nav__link">
+        EuroPython 2018
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2018/pyconfr-2018/" class="md-nav__link">
+        PyConFR 2018
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2018/scylla-summit-2018/" class="md-nav__link">
+        Scylla Summit 2018
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-6" data-md-state="indeterminate" type="checkbox" id="nav-3-6" checked>
+      
+      <label class="md-nav__link" for="nav-3-6">
+        2017
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2017" data-md-level="2">
+        <label class="md-nav__title" for="nav-3-6">
+          <span class="md-nav__icon md-icon"></span>
+          2017
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2017/europython2017/" class="md-nav__link">
+        EuroPython 2017
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2017/scaling-python/" class="md-nav__link">
+        Scaling Python interview (book)
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-7" data-md-state="indeterminate" type="checkbox" id="nav-3-7" checked>
+      
+      <label class="md-nav__link" for="nav-3-7">
+        2016
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2016" data-md-level="2">
+        <label class="md-nav__title" for="nav-3-7">
+          <span class="md-nav__icon md-icon"></span>
+          2016
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2016/" class="md-nav__link">
+        EuroPython 2016
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-8" data-md-state="indeterminate" type="checkbox" id="nav-3-8" checked>
+      
+      <label class="md-nav__link" for="nav-3-8">
+        2015
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2015" data-md-level="2">
+        <label class="md-nav__title" for="nav-3-8">
+          <span class="md-nav__icon md-icon"></span>
+          2015
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2015/" class="md-nav__link">
+        EuroPython 2015
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-9" data-md-state="indeterminate" type="checkbox" id="nav-3-9" checked>
+      
+      <label class="md-nav__link" for="nav-3-9">
+        2014
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2014" data-md-level="2">
+        <label class="md-nav__title" for="nav-3-9">
+          <span class="md-nav__icon md-icon"></span>
+          2014
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2014/" class="md-nav__link">
+        Paris.py 5
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-10" data-md-state="indeterminate" type="checkbox" id="nav-3-10" checked>
+      
+      <label class="md-nav__link" for="nav-3-10">
+        2013
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2013" data-md-level="2">
+        <label class="md-nav__title" for="nav-3-10">
+          <span class="md-nav__icon md-icon"></span>
+          2013
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2013/" class="md-nav__link">
+        EuroPython 2013
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" data-md-state="indeterminate" type="checkbox" id="nav-4" checked>
+      
+      <label class="md-nav__link" for="nav-4">
+        FPV Handbook
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="FPV Handbook" data-md-level="1">
+        <label class="md-nav__title" for="nav-4">
+          <span class="md-nav__icon md-icon"></span>
+          FPV Handbook
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-2" data-md-state="indeterminate" type="checkbox" id="nav-4-2" checked>
+      
+      <label class="md-nav__link" for="nav-4-2">
+        Batteries
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Batteries" data-md-level="2">
+        <label class="md-nav__title" for="nav-4-2">
+          <span class="md-nav__icon md-icon"></span>
+          Batteries
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/Batteries/" class="md-nav__link">
+        Comparision sheet
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-3" data-md-state="indeterminate" type="checkbox" id="nav-4-3" checked>
+      
+      <label class="md-nav__link" for="nav-4-3">
+        Betaflight
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Betaflight" data-md-level="2">
+        <label class="md-nav__title" for="nav-4-3">
+          <span class="md-nav__icon md-icon"></span>
+          Betaflight
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/Betaflight/" class="md-nav__link">
+        CLI dump for DJI FPV Goggles OSD
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-4" data-md-state="indeterminate" type="checkbox" id="nav-4-4" checked>
+      
+      <label class="md-nav__link" for="nav-4-4">
+        FC & ESC
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="FC & ESC" data-md-level="2">
+        <label class="md-nav__title" for="nav-4-4">
+          <span class="md-nav__icon md-icon"></span>
+          FC & ESC
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/FC%20%26%20ESC/" class="md-nav__link">
+        T-Motor F7+F55A PROII HD
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-5" data-md-state="indeterminate" type="checkbox" id="nav-4-5" checked>
+      
+      <label class="md-nav__link" for="nav-4-5">
+        Frames
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Frames" data-md-level="2">
+        <label class="md-nav__title" for="nav-4-5">
+          <span class="md-nav__icon md-icon"></span>
+          Frames
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/Frames/" class="md-nav__link">
+        ImpulseRC Apex
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-6" data-md-state="indeterminate" type="checkbox" id="nav-4-6" checked>
+      
+      <label class="md-nav__link" for="nav-4-6">
+        Legal documents
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Legal documents" data-md-level="2">
+        <label class="md-nav__title" for="nav-4-6">
+          <span class="md-nav__icon md-icon"></span>
+          Legal documents
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/Legal%20documents/" class="md-nav__link">
+        DGAC
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-7" data-md-state="indeterminate" type="checkbox" id="nav-4-7" checked>
+      
+      <label class="md-nav__link" for="nav-4-7">
+        RX
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="RX" data-md-level="2">
+        <label class="md-nav__title" for="nav-4-7">
+          <span class="md-nav__icon md-icon"></span>
+          RX
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/RX/" class="md-nav__link">
+        TBS Tracer
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-8" data-md-state="indeterminate" type="checkbox" id="nav-4-8" checked>
+      
+      <label class="md-nav__link" for="nav-4-8">
+        VTX
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="VTX" data-md-level="2">
+        <label class="md-nav__title" for="nav-4-8">
+          <span class="md-nav__icon md-icon"></span>
+          VTX
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/VTX/" class="md-nav__link">
+        Caddx Vista
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" data-md-state="indeterminate" type="checkbox" id="nav-5" checked>
+      
+      <label class="md-nav__link" for="nav-5">
+        FPV Builds
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="FPV Builds" data-md-level="1">
+        <label class="md-nav__title" for="nav-5">
+          <span class="md-nav__icon md-icon"></span>
+          FPV Builds
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1" data-md-state="indeterminate" type="checkbox" id="nav-5-1" checked>
+      
+      <label class="md-nav__link" for="nav-5-1">
+        ImpulseRC Apex
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="ImpulseRC Apex" data-md-level="2">
+        <label class="md-nav__title" for="nav-5-1">
+          <span class="md-nav__icon md-icon"></span>
+          ImpulseRC Apex
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Builds/ImpulseRC%20Apex/" class="md-nav__link">
+        Apex 5" HD on base frame kit
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/ultrabug/fpv-handbook/edit/master/docs/Tech Blog/2018/2018-02-28-evaluating-scylladb-for-production-2-2.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <p><img alt="" src="../images/800x300-blog-SLA-Trumps-IOPS-1.jpg" /></p>
+<p>In my previous blog post, I shared <a href="https://www.ultrabug.fr/evaluating-scylladb-for-production-1-2/">7 lessons on our experience in evaluating Scylla</a> for production.</p>
+<p>Those lessons were focused on the setup and execution of the POC and I promised a more technical blog post with technical details and lessons learned from the POC, here it is!</p>
+<p>Before you read on, be mindful that <strong>our POC was set up to test workloads</strong> and workflows, <strong>not to benchmark</strong> technologies. So even if the Scylla figures are great, they have not been the main drivers of the actual conclusion of the POC.</p>
+<h1 id="business-context">Business context<a class="headerlink" href="#business-context" title="Permanent link">&para;</a></h1>
+<p>As a data driven company working in the Marketing and Advertising industry, we help our clients make sense of multiple sources of data to build and improve their relationship with their customers and prospects.</p>
+<p>Dealing with multiple sources of data is nothing new but their volume has dramatically changed during the past decade. I will spare you with the Big-Data-means-nothing term and the technical challenges that comes with it as you already heard enough of it.</p>
+<p>Still, it is clear that our line of business is tied to our capacity at <strong>mixing and correlating a massive amount of different types of events</strong> (data sources/types) coming from various sources which all have their own identifiers (think primary keys):</p>
+<ul>
+<li>Web navigation tracking: identifier is a cookie that's tied to the tracking domain (we have our own)</li>
+<li>CRM databases: usually the email address or an internal account ID serve as an identifier</li>
+<li>Partners' digital platform: identifier is also a cookie tied to their tracking domain</li>
+</ul>
+<p>To try to make things simple, let's take a concrete example:</p>
+<p>You work for UNICEF and want to optimize their banner ads budget by targeting the donors of their last fundraising campaign.</p>
+<ul>
+<li>Your reference user database is composed of the donors who registered with their email address on the last campaign: main identifier is the email address.</li>
+<li>To buy web display ads, you use an Ad Exchange partner such as AppNexus or DoubleClick (Google). From their point of view, users are seen as cookie IDs which are tied to their own domain.</li>
+</ul>
+<p>So you basically need to be able to translate an email address to a cookie ID for every partner you work with.</p>
+<h1 id="use-case-id-matching-tables">Use case: ID matching tables<a class="headerlink" href="#use-case-id-matching-tables" title="Permanent link">&para;</a></h1>
+<p><strong>We operate and maintain huge ID matching tables</strong> for every partner and a great deal of our time is spent translating those IDs from one to another. In SQL terms, we are basically doing JOINs between a dataset and those ID matching tables.</p>
+<ul>
+<li>You select your reference population</li>
+<li>You JOIN it with the corresponding ID matching table</li>
+<li>You get a matched population that your partner can recognize and interact with</li>
+</ul>
+<p><img alt="" src="../images/matching_ids-1024x617.png" /></p>
+<p>Those ID matching tables have a <strong>pretty high read AND write throughput</strong> because they're updated and queried all the time.</p>
+<p>Usual figures are <strong>JOINs between a 10+ Million dataset and 1.5+ Billion ID</strong> matching tables.</p>
+<p>The reference query basically looks like this:</p>
+<p>SELECT count(m.partnerid)
+FROM population_10M_rows AS p JOIN partner_id_match_400M_rows AS m
+ON p.id = m.id</p>
+<h2 id="current-implementations">Current implementations<a class="headerlink" href="#current-implementations" title="Permanent link">&para;</a></h2>
+<p>We operate a lambda architecture where we handle real time ID matching using <strong>MongoDB</strong> and batch ones using <strong>Hive</strong> (Apache Hadoop).</p>
+<p>The first downside to note is that it requires us to maintain <strong>two copies of every ID matching table.</strong> We also couldn't choose one over the other because <strong>neither MongoDB nor Hive can sustain both the read/write lookup/update ratio while performing within the low latencies that we need</strong>.</p>
+<p><strong>This is an operational burden</strong> and requires quite a bunch of engineering to ensure data consistency between different data stores.</p>
+<h3 id="production-hardware-overview">Production hardware overview:<a class="headerlink" href="#production-hardware-overview" title="Permanent link">&para;</a></h3>
+<ul>
+<li>MongoDB is running on a 15 nodes (5 shards) cluster<ul>
+<li>64GB RAM, 2 sockets, RAID10 SAS spinning disks, 10Gbps dual NIC</li>
+</ul>
+</li>
+<li>Hive is running on 50+ YARN NodeManager instances<ul>
+<li>128GB RAM, 2 sockets, JBOD SAS spinning disks, 10Gbps dual NIC</li>
+</ul>
+</li>
+</ul>
+<h2 id="target-implementation">Target implementation<a class="headerlink" href="#target-implementation" title="Permanent link">&para;</a></h2>
+<p>The key question is simple: is there a technology out there that can sustain our ID matching tables workloads while maintaining consistently low upsert/write and lookup/read latencies?</p>
+<p>Having one technology to handle both use cases would allow:</p>
+<ul>
+<li>Simpler data consistency</li>
+<li>Operational simplicity and efficiency</li>
+<li>Reduced costs</li>
+</ul>
+<h3 id="poc-hardware-overview">POC hardware overview:<a class="headerlink" href="#poc-hardware-overview" title="Permanent link">&para;</a></h3>
+<p>So we decided to find out if Scylla could be that technology. For this, we used three decommissioned machines that we had in the basement of our Paris office.</p>
+<ul>
+<li>2 DELL R510<ul>
+<li>19GB RAM, 2 socket 8 cores, RAID0 SAS spinning disks, 1Gbps NIC</li>
+</ul>
+</li>
+<li>1 DELL R710<ul>
+<li>19GB RAM, 2 socket 4 cores, RAID0 SAS spinning disks, 1Gbps NIC</li>
+</ul>
+</li>
+</ul>
+<p>I know, these are not glamorous machines and they are even inconsistent in specs, but we still set up a 3 node Scylla cluster running <strong>Gentoo Linux</strong> with them.</p>
+<p>Our take? If those three lousy machines can challenge or beat the production machines on our current workloads, then Scylla can seriously be considered for production.</p>
+<h1 id="step-1-validate-a-schema-model">Step 1: Validate a schema model<a class="headerlink" href="#step-1-validate-a-schema-model" title="Permanent link">&para;</a></h1>
+<p>Once the POC document was complete and the ScyllaDB team understood what we were trying to do, we started iterating on the schema model using a query based modeling strategy.</p>
+<p>So we wrote down and rated the questions that our model(s) should answer to, they included stuff like:</p>
+<ul>
+<li>What are all our cookie IDs associated to the given partner ID ?</li>
+<li>What are all the cookie IDs associated to the given partner ID over the last N months ?</li>
+<li>What is the last cookie ID/date for the given partner ID ?</li>
+<li>What is the last date we have seen the given cookie ID / partner ID couple ?</li>
+</ul>
+<p>As you can imagine, the reverse questions are also to be answered so ID translations can be done both ways (ouch!).</p>
+<h2 id="prototyping">Prototyping<a class="headerlink" href="#prototyping" title="Permanent link">&para;</a></h2>
+<p>This is no news that I'm a Python addict so I did all my prototyping using Python and the <strong>cassandra-driver</strong>.</p>
+<p>I ended up using a <strong>test-driven data modelling</strong> strategy using <strong>pytest</strong>. I wrote tests on my dataset so I could concentrate on the model while making sure that all my questions were being answered correctly and consistently.</p>
+<h2 id="schema">Schema<a class="headerlink" href="#schema" title="Permanent link">&para;</a></h2>
+<p>In our case, we ended up with three denormalized tables to answer all the questions we had. To answer the first three questions above, you could use the schema below:</p>
+<p>CREATE TABLE IF NOT EXISTS ids_by_partnerid(
+ partnerid text,
+ id text,
+ date timestamp,
+ PRIMARY KEY ((partnerid), date, id)
+ )
+ WITH CLUSTERING ORDER BY (date DESC)</p>
+<h2 id="note-on-clustering-key-ordering">Note on clustering key ordering<a class="headerlink" href="#note-on-clustering-key-ordering" title="Permanent link">&para;</a></h2>
+<p>One important learning I got in the process of validating the model is about the internals of Cassandra's file format that resulted in the choice of using a descending order DESC on the date clustering key as you can see above.</p>
+<p>If your main use case of querying is to look for the <strong>latest value</strong> of an history-like table design like ours, then make sure to change the default ASC order of your clustering key to DESC. This will ensure that the latest values (rows) are stored at the beginning of the sstable file effectively reducing the read latency when the row is not in cache!</p>
+<p>Let me quote Glauber Costa's detailed explanation on this:</p>
+<blockquote>
+<p><em>Basically in Cassandra's file format, the index points to an entire partition (for very large partitions there is a hack to avoid that, but the logic is mostly the same). So if you want to read the first row, that's easy you get the index to the partition</em> <em>and read the first row. I__f you want to read the last row, then you get the index to the partition</em> <em>and do a linear scan to the next.</em></p>
+</blockquote>
+<p>This is the kind of learning you can only get from experts like Glauber and that can justify the whole POC on its own!</p>
+<h1 id="step-2-set-up-scylla-grafana-monitoring">Step 2: Set up scylla-grafana-monitoring<a class="headerlink" href="#step-2-set-up-scylla-grafana-monitoring" title="Permanent link">&para;</a></h1>
+<p>As I said before, make sure to set up and run the <a href="https://github.com/scylladb/scylla-grafana-monitoring">scylla-grafana-monitoring</a> project before running your test workloads. This easy to run solution will be of great help to <strong>understand the performance</strong> of your cluster and to <strong>tune your workload for optimal performances</strong>.</p>
+<p><img alt="" src="../images/2018-02-25-140230_532x319_scrot-300x180.png" /></p>
+<p>If you can, also discuss with the ScyllaDB team to allow them to access the Grafana dashboard. This will be very valuable since they know where to look better than we usually do... I gained a lot of understandings thanks to this!</p>
+<h2 id="note-on-scrape-interval">Note on scrape interval<a class="headerlink" href="#note-on-scrape-interval" title="Permanent link">&para;</a></h2>
+<p>I advise you to <strong>lower the Prometheus scrape interval</strong> to have a shorter and finer sampling of your metrics. This will allow your dashboard to be more reactive when you start your test workloads.</p>
+<p>For this, change the <strong>prometheus/prometheus.yml</strong> file like this:</p>
+<p>scrape_interval: 2s # Scrape targets every 2 seconds (5s default)
+scrape_timeout: 1s # Timeout before trying to scrape a target again (4s default)</p>
+<h2 id="test-your-monitoring">Test your monitoring<a class="headerlink" href="#test-your-monitoring" title="Permanent link">&para;</a></h2>
+<p>Before going any further, <strong>I strongly advise you to run a stress test on your POC cluster</strong> using the <strong>cassandra-stress</strong> tool and share the results and their monitoring graphs with the ScyllaDB team.</p>
+<p>This will give you a common understanding of the general performances of your cluster as well as help in outlining any obvious misconfiguration or hardware problem.</p>
+<h2 id="key-graphs-to-look-at">Key graphs to look at<a class="headerlink" href="#key-graphs-to-look-at" title="Permanent link">&para;</a></h2>
+<p>There are a lot of interesting graphs so I'd like to share the ones that I have been mainly looking at. Remember that depending on your test workloads, some other graphs may be more relevant for you.</p>
+<ul>
+<li><strong>number of open connections</strong></li>
+</ul>
+<p>You'll want to see a steady and high enough number of open connections which will prove that your clients are pushed at their maximum (at the time of testing this graph was not on Grafana and you had to add it yourself)</p>
+<ul>
+<li><strong>cache hits / misses</strong></li>
+</ul>
+<p>Depending on your reference dataset, you'll obviously see that cache hits and misses will have a direct correlation with disk I/O and overall performances. Running your test workloads multiple times should trigger higher cache hits if your RAM is big enough.</p>
+<ul>
+<li><strong>per shard/node distribution</strong></li>
+</ul>
+<p>The <em>Requests Served per</em> <em>shard</em> graph should display a nicely distributed load between your shards and nodes so that you're sure that you're getting the best out of your cluster.</p>
+<p>The same is true for almost every other "per shard/node" graph: you're looking for evenly distributed load.</p>
+<ul>
+<li><strong>sstable reads</strong></li>
+</ul>
+<p>Directly linked with your disk performances, you'll be trying to make sure that you have almost no queued sstable reads.</p>
+<h1 id="step-3-get-your-reference-data-and-metrics">Step 3: Get your reference data and metrics<a class="headerlink" href="#step-3-get-your-reference-data-and-metrics" title="Permanent link">&para;</a></h1>
+<p>We obviously need to have <strong>some reference metrics</strong> on our current production stack so we can compare them with the results on our POC Scylla cluster.</p>
+<p>Whether you choose to use your current production machines or set up a similar stack on the side to run your test workloads is up to you. We chose to run the vast majority of our tests on our current production machines to be as close to our real workloads as possible.</p>
+<h2 id="prepare-a-reference-dataset">Prepare a reference dataset<a class="headerlink" href="#prepare-a-reference-dataset" title="Permanent link">&para;</a></h2>
+<p>During your work on the POC document, you should have detailed the usual <strong>data cardinality and volume</strong> you work with. Use this information to set up a reference dataset that you can use on all of the platforms that you plan to compare.</p>
+<p>In our case, we chose a 10 Million reference dataset that we JOINed with a 400+ Million extract of an ID matching table. Those volumes seemed easy enough to work with and allowed some nice ratio for memory bound workloads.</p>
+<h2 id="measure-on-your-current-stack">Measure on your current stack<a class="headerlink" href="#measure-on-your-current-stack" title="Permanent link">&para;</a></h2>
+<p>Then it's time to load this reference datasets on your current platforms.</p>
+<ul>
+<li>If you run a MongoDB cluster like we do, <strong>make sure to shard and index the dataset</strong> just like you do on the production collections.</li>
+<li>On Hive, make sure to <strong>respect the storage file format</strong> of your current implementations <strong>as well as their partitioning</strong>.</li>
+</ul>
+<p>If you chose to run your test workloads on your production machines, make sure to run them multiple times and at different hours of the day and night so you can correlate the measures with the load on the cluster at the time of the tests.</p>
+<h2 id="reference-metrics">Reference metrics<a class="headerlink" href="#reference-metrics" title="Permanent link">&para;</a></h2>
+<p>For the sake of simplicity I'll focus on the Hive-only batch workloads. I performed a count on the JOIN of the dataset and the ID matching table using Spark 2 and then I also ran the JOIN using a simple Hive query through Beeline.</p>
+<p>I gave the following definitions on the reference load:</p>
+<ul>
+<li><strong>IDLE</strong>: YARN available containers and free resources are optimal, parallelism is very limited</li>
+<li><strong>NORMAL</strong>: YARN sustains some casual load, parallelism exists but we are not bound by anything still</li>
+<li><strong>HIGH</strong>: YARN has pending containers, parallelism is high and applications have to wait for containers before executing</li>
+</ul>
+<p>There's always an error margin on the results you get and I found that there was not significant enough differences between the results using Spark 2 and Beeline so I stuck with a simple set of results:</p>
+<ul>
+<li>IDLE: 2 minutes, 15 seconds</li>
+<li>NORMAL: 4 minutes</li>
+<li>HIGH: 15 minutes</li>
+</ul>
+<h1 id="step-4-get-scylla-in-the-mix">Step 4: Get Scylla in the mix<a class="headerlink" href="#step-4-get-scylla-in-the-mix" title="Permanent link">&para;</a></h1>
+<p>It's finally time to do your best to break Scylla or at least to push it to its limits on your hardware... But most importantly, you'll be looking to understand what those limits are depending on your test workloads as well as outlining out all the required tuning that you will be required to do on the client side to reach those limits.</p>
+<p>Speaking about the results, we will have to differentiate two cases:</p>
+<ol>
+<li>The Scylla cluster is fresh and its <strong>cache is empty</strong> (cold start): performance is mostly <strong>Disk I/O bound</strong></li>
+<li>The Scylla cluster has been running some test workload already and its <strong>cache is hot</strong>: performance is mostly <strong>Memory bound</strong> with some Disk I/O depending on the size of your RAM</li>
+</ol>
+<h2 id="spark-2-scala-test-workload">Spark 2 / Scala test workload<a class="headerlink" href="#spark-2-scala-test-workload" title="Permanent link">&para;</a></h2>
+<p>Here I used Scala (yes, I did) and DataStax's <a href="https://github.com/datastax/spark-cassandra-connector"><strong>spark-cassandra-connector</strong></a> so I could use the magic <strong>joinWithCassandraTable</strong> function.</p>
+<ul>
+<li>spark-cassandra-connector-2.0.1-s_2.11.jar</li>
+<li>Java 7</li>
+</ul>
+<p>I had to stick with the 2.0.1 version of the spark-cassandra-connector because newer version (2.0.5 at the time of testing) were performing bad with no apparent reason. The ScyllaDB team couldn't help on this.</p>
+<p>You can interact with your test workload using the spark2-shell:</p>
+<p>spark2-shell --jars jars/commons-beanutils_commons-beanutils-1.9.3.jar,jars/com.twitter_jsr166e-1.1.0.jar,jars/io.netty_netty-all-4.0.33.Final.jar,jars/org.joda_joda-convert-1.2.jar,jars/commons-collections_commons-collections-3.2.2.jar,jars/joda-time_joda-time-2.3.jar,jars/org.scala-lang_scala-reflect-2.11.8.jar,jars/spark-cassandra-connector-2.0.1-s_2.11.jar</p>
+<p>Then use the following Scala imports:</p>
+<p>// main connector import
+import com.datastax.spark.connector._</p>
+<p>// the joinWithCassandraTable failed without this (dunno why, I'm no Scala guy)
+import com.datastax.spark.connector.writer._
+implicit val rowWriter = SqlRowWriter.Factory</p>
+<p>Finally I could run my test workload to select the data from Hive and JOIN it with Scylla easily:</p>
+<p>val df_population = spark.sql("SELECT id FROM population_10M_rows")
+val join_rdd = df_population.rdd.repartitionByCassandraReplica("test_keyspace", "partner_id_match_400M_rows").joinWithCassandraTable("test_keyspace", "partner_id_match_400M_rows")
+val joined_count = join_rdd.count()</p>
+<h3 id="notes-on-tuning-spark-cassandra-connector">Notes on tuning spark-cassandra-connector<a class="headerlink" href="#notes-on-tuning-spark-cassandra-connector" title="Permanent link">&para;</a></h3>
+<p>I experienced <strong>pretty crappy performances at first</strong>. Thanks to the easy Grafana monitoring, I could see that Scylla was not being the bottleneck at all and that I instead had trouble getting some real load on it.</p>
+<p>So I engaged in a thorough tuning of the spark-cassandra-connector with the help of Glauber... and it was pretty painful but we finally made it and got the best parameters to get the load on the Scylla cluster close to 100% when running the test workloads.</p>
+<p>This tuning was done in the <strong>spark-defaults.conf</strong> file:</p>
+<ul>
+<li>have a <strong>fixed set of executors</strong> and boost their overhead memory</li>
+</ul>
+<p>This will increase test results reliability by making sure you always have a reserved number of available workers at your disposal.</p>
+<p>spark.dynamicAllocation.enabled=false
+spark.executor.instances=30
+spark.yarn.executor.memoryOverhead=1024</p>
+<ul>
+<li>set the <strong>split size to 1MB</strong></li>
+</ul>
+<p>Default is 8MB but Scylla uses a split size of 1MB so you'll see a great boost of performance and stability by setting this setting to the right number.</p>
+<p>spark.cassandra.input.split.size_in_mb=1</p>
+<ul>
+<li>align <strong>driver timeouts with server timeouts</strong></li>
+</ul>
+<p>It is advised to make sure that your read request timeouts are the same on the driver and the server so you do not get stalled states waiting for a timeout to happen on one hand. You can do the same with write timeouts if your test workloads are write intensive.</p>
+<p>/etc/scylla/scylla.yaml</p>
+<p>read_request_timeout_in_ms: 150000</p>
+<p>spark-defaults.conf</p>
+<p>spark.cassandra.connection.timeout_ms=150000
+spark.cassandra.read.timeout_ms=150000</p>
+<p>// optional if you want to fail / retry faster for HA scenarios
+spark.cassandra.connection.reconnection_delay_ms.max=5000
+spark.cassandra.connection.reconnection_delay_ms.min=1000
+spark.cassandra.query.retry.count=100</p>
+<ul>
+<li>adjust your <strong>reads per second</strong> rate</li>
+</ul>
+<p>Last but surely not least, this setting you will need to try and find out the best value for yourself since it has a direct impact on the load on your Scylla cluster. You will be looking at pushing your POC cluster to almost 100% load.</p>
+<p>spark.cassandra.input.reads_per_sec=6666</p>
+<p>As I said before, I could only get this to work perfectly using the 2.0.1 version of the spark-cassandra-connector driver. But then it worked very well and with great speed.</p>
+<h3 id="spark-2-results">Spark 2 results<a class="headerlink" href="#spark-2-results" title="Permanent link">&para;</a></h3>
+<p>Once tuned, the best results I was able to reach on this hardware are listed below. It's interesting to see that with spinning disks, the cold start result can compete with the results of a heavily loaded Hadoop cluster where pending containers and parallelism are knocking down its performances.</p>
+<ul>
+<li><strong>hot cache:</strong> 2min</li>
+<li><strong>cold cache:</strong> 12min</li>
+</ul>
+<p>Wow! <strong>Those three refurbished machines can compete with our current production machines and implementations</strong>, they can even match an idle Hive cluster of a medium size!</p>
+<h2 id="python-test-workload">Python test workload<a class="headerlink" href="#python-test-workload" title="Permanent link">&para;</a></h2>
+<p>I couldn't conclude on a Scala/Spark 2 only test workload. So I obviously went back to my language of choice <strong>Python</strong> only to discover at my disappointment that there is no <strong>joinWithCassandraTable</strong> equivalent available on <strong>pyspark</strong>...</p>
+<p>I tried with some projects claiming otherwise with no success until I changed my mind and decided that I probably didn't need Spark 2 at all. So <strong>I went into the crazy quest of beating Spark 2 performances using a pure Python implementation</strong>.</p>
+<p>This basically means that instead of having a JOIN like helper, I had to do a massive amount of single "id -&gt; partnerid" lookups. Simple but greatly inefficient you say? Really?</p>
+<p>When I broke down the pieces, I was left with the following steps to implement and optimize:</p>
+<ul>
+<li>Load the 10M rows worth of population data from Hive</li>
+<li>For every row, lookup the corresponding partnerid in the ID matching table from Scylla</li>
+<li>Count the resulting number of matches</li>
+</ul>
+<p>The main problem to compete with Spark 2 is that it is a distributed framework and Python by itself is not. So <strong>you can't possibly imagine outperforming Spark 2 with your single machine</strong>.</p>
+<p>However, let's remember that Spark 2 is shipped and ran on executors using YARN so we are firing up JVMs and dispatching containers all the time. This is a quite expensive process that we have a chance to avoid using Python!</p>
+<p>So what <strong>I needed was a distributed computation framework</strong> that would allow to load data in a partitioned way and run the lookups on all the partitions in parallel before merging the results. In Python, this framework exists and is named <strong>Dask!</strong></p>
+<p>You will obviously need to have to deploy a dask topology (that's easy and <a href="https://dask.pydata.org/en/latest/">well documented</a>) to have a comparable number of dask workers than of Spark 2 executors (30 in my case) .</p>
+<p>The corresponding Python <a href="https://gist.github.com/ultrabug/8a13fe2ef7a616aa7301c3e4e88eda13">code samples are here</a>.</p>
+<h3 id="hive-scylla-results">Hive + Scylla results<a class="headerlink" href="#hive-scylla-results" title="Permanent link">&para;</a></h3>
+<p>Reading the population id's from Hive, the workload can be split and executed concurrently on multiple dask workers.</p>
+<ul>
+<li>read the 10M population rows from Hive in a partitioned manner</li>
+<li>for each partition (slice of 10M), query Scylla to lookup the possibly matching partnerid</li>
+<li>create a dataframe from the resulting matches</li>
+<li>gather back all the dataframes and merge them</li>
+<li>count the number of matches</li>
+</ul>
+<p>The results showed that <strong>it is possible to compete with Spark 2 with Dask</strong>:</p>
+<ul>
+<li>hot cache: <strong>2min</strong> (rounded up)</li>
+<li>cold cache: <strong>6min</strong></li>
+</ul>
+<p>Interestingly, those almost two minutes can be broken down like this:</p>
+<ul>
+<li>distributed read data from Hive: 50s</li>
+<li>distributed lookup from Scylla: 60s</li>
+<li>merge + count: 10s</li>
+</ul>
+<p>This meant that if I could cut down the reading of data from Hive <strong>I could go even faster</strong>!</p>
+<h3 id="parquet-scylla-results">Parquet + Scylla results<a class="headerlink" href="#parquet-scylla-results" title="Permanent link">&para;</a></h3>
+<p>Going further on my previous remark <strong>I decided to get rid of Hive</strong> and put the 10M rows population data in a <strong>parquet file</strong> instead. I ended up trying to find out the most efficient way to read and load a parquet file from HDFS.</p>
+<p>My conclusion so far is that you can't be the amazing <strong>libhdfs3 + pyarrow</strong> combo. It is faster to load everything on a single machine than loading from Hive on multiple ones!</p>
+<p>The results showed that I could almost get rid of a whole minute in the total process, <strong>effectively and easily beating Spark 2</strong>!</p>
+<ul>
+<li>hot cache: <strong>1min 5s</strong></li>
+<li>cold cache: <strong>5min</strong></li>
+</ul>
+<h3 id="notes-on-the-python-cassandra-driver">Notes on the Python <strong>cassandra-driver</strong><a class="headerlink" href="#notes-on-the-python-cassandra-driver" title="Permanent link">&para;</a></h3>
+<p>Tests using Python showed robust queries experiencing far less failures than the spark-cassandra-connector, even more during the cold start scenario.</p>
+<ul>
+<li>The usage of <strong>execute_concurrent()</strong> provides a clean and linear interface to submit a large number of queries while providing some level of concurrency control</li>
+<li>Increasing the <strong>concurrency</strong> parameter from 100 to <strong>512</strong> provided additional throughput, but increasing it more looked useless</li>
+<li><strong>Protocol version 4</strong> forbids the tuning of connection requests / number to some sort of auto configuration. All tentative to hand tune it (by lowering protocol version to 2) failed to achieve higher throughput</li>
+<li>Installation of <strong>libev</strong> on the system allows the cassandra-driver to use it to handle concurrency instead of asyncore with a somewhat lower load footprint on the worker node but no noticeable change on the throughput</li>
+<li>When reading a parquet file stored on HDFS, the <strong>hdfs3 + pyarrow</strong> combo provides an insane speed (less than 10s to fully load 10M rows of a single column)</li>
+</ul>
+<h1 id="step-5-play-with-high-availability">Step 5: Play with High Availability<a class="headerlink" href="#step-5-play-with-high-availability" title="Permanent link">&para;</a></h1>
+<p>I was quite disappointed and surprised by the lack of maturity of the Cassandra community on this critical topic. Maybe the main reason is that the cassandra-driver allows for too many levels of configuration and strategies.</p>
+<p>I wrote this simple bash script to allow me to <strong>simulate node failures.</strong> Then I could play with handling those failures and retries on the Python client code.</p>
+<h1 id="binbash">!/bin/bash<a class="headerlink" href="#binbash" title="Permanent link">&para;</a></h1>
+<p>iptables -t filter -X
+iptables -t filter -F</p>
+<p>ip="0.0.0.0/0"
+for port in 9042 9160 9180 10000 7000; do
+    iptables -t filter -A INPUT -p tcp --dport ${port} -s ${ip} -j DROP
+    iptables -t filter -A OUTPUT -p tcp --sport ${port} -d ${ip} -j DROP
+done</p>
+<p>while true; do
+    trap break INT
+    clear
+    iptables -t filter -vnL
+    sleep 1
+done</p>
+<p>iptables -t filter -X
+iptables -t filter -F
+iptables -t filter -vnL</p>
+<p>This topic is worth going in more details on a dedicated blog post that I shall write later on while providing code samples.</p>
+<h1 id="concluding-the-evaluation">Concluding the evaluation<a class="headerlink" href="#concluding-the-evaluation" title="Permanent link">&para;</a></h1>
+<p>I'm happy to say that <strong>Scylla passed our production evaluation</strong> and will soon go live on our infrastructure!</p>
+<p>As I said at the beginning of this post, the conclusion of the evaluation has not been driven by the good figures we got out of our test workloads. Those are no benchmarks and never pretended to be but we could still prove that performances were solid enough to not be a blocker in the adoption of Scylla.</p>
+<p>Instead we decided on the following points of interest (in no particular order):</p>
+<ul>
+<li>data consistency</li>
+<li>production reliability</li>
+<li>datacenter awareness</li>
+<li>ease of operation</li>
+<li>infrastructure rationalisation</li>
+<li>developer friendliness</li>
+<li>costs</li>
+</ul>
+<p><img alt="" src="../images/mascot-linux-love-1-150x150.png" /></p>
+<p>On the side, I tried Scylla on two other different use cases which proved interesting to follow later on to displace MongoDB again...</p>
+<h1 id="moving-to-production">Moving to production<a class="headerlink" href="#moving-to-production" title="Permanent link">&para;</a></h1>
+<p>Since our relationship was great <strong>we also decided to partner with ScyllaDB and support them by subscribing to their enterprise offerings</strong>. They also accepted to support us using <strong>Gentoo Linux</strong>!</p>
+<p>We are starting with a three nodes heavy duty cluster:</p>
+<ul>
+<li>DELL R640<ul>
+<li>dual socket 2,6GHz 14C, 512GB RAM, Samsung 17xxx NVMe 3,2 TB</li>
+</ul>
+</li>
+</ul>
+<p>I'm eager to see ScyllaDB building up and will continue to help with my modest contributions. <strong>Thanks again to the ScyllaDB team</strong> for their patience and support during the POC!</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+<!--
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../2018-04-03-py3status-v3-8/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous on <b>2018</b>:
+                </span>
+                py3status v3.8
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../2018-01-23-evaluating-scylladb-for-production-1-2/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                    Next on <b>Tech Blog</b>:
+                </span>
+                Evaluating ScyllaDB for production 1/2
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+-->
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2011-2021 Alexys Jacob
+          </div>
+        
+        This website uses no tracker and is made with ❤ in Paris using
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://twitter.com/ultrabug" target="_blank" rel="noopener" title="ultrabug on Twitter" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://github.com/ultrabug" target="_blank" rel="noopener" title="ultrabug on Github" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/vendor.53cc9318.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.e9c9f54f.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../../..",
+          features: ['navigation.tabs', 'navigation.expand', 'navigation.sections', 'toc.integrate'],
+          search: Object.assign({
+            worker: "../../../assets/javascripts/worker/search.9c0e82ba.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
