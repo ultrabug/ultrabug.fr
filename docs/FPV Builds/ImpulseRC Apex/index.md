@@ -18,7 +18,7 @@ I enjoyed working on it very much and I hope you'll get a sense of it reading th
 
 J'ai choisi le **ImpulseRC Apex Base Frame Kit** car je ne voulais pas dépendre d'une frame spécifique HD et perdre la place faite spécifiquement pour le DJI Air Unit.
 
-Ce fut un challenge de tout faire tenir proprement mais j'adore le résultat and j'espère que vous apprécierez la densité et l'équilibre du build.
+Ce fut un challenge de tout faire tenir proprement mais j'adore le résultat et j'espère que vous apprécierez la densité et l'équilibre du build.
 
 Cela donne vie à un build compact (mais pas trop) sans sacrifier la place pour l'électronique. C'est propre (en tout cas pour moi) et très puissant.
 
