@@ -1,5 +1,6 @@
 site_name: Ultrabug
-repo_url: https://github.com/ultrabug/fpv-handbook
+site_url: https://ultrabug.fr
+repo_url: https://github.com/ultrabug/ultrabug.fr
 
 # https://squidfunk.github.io/mkdocs-material/
 theme:
