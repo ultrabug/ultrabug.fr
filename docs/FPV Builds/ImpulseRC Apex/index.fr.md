@@ -2,22 +2,22 @@
 
 ## A digital HD build on the Apex Base Frame Kit
 
-:gb: For my first DIY build ever I wanted a strong 5" frame.
+:fr: Pour mon premier build DIY je voulais un 5" solide.
 
-I chose the **ImpulseRC Apex Base Frame Kit** because I did not want to rely on a HD specific frame and loose the space made for the DJI Air Unit.
+J'ai choisi le **ImpulseRC Apex Base Frame Kit** car je ne voulais pas dépendre d'une frame spécifique HD et perdre la place faite spécifiquement pour le DJI Air Unit.
 
-It was quite a challenge to get everything to fit properly but I love the result and I hope you'll appreciate the density and great balance of this build.
+Ce fut un challenge de tout faire tenir proprement mais j'adore le résultat et j'espère que vous apprécierez la densité et l'équilibre du build.
 
-This ends up as a compact (but not too much) build without sacrifying the space for the electronics. It is clean (to my standards at least) and very powerful.
+Cela donne vie à un build compact (mais pas trop) sans sacrifier la place pour l'électronique. C'est propre (en tout cas pour moi) et très puissant.
 
-I enjoyed working on it very much and I hope you'll get a sense of it reading this build guide. Enjoy!
+J'ai pris énormément de plaisir à travailler dessus et j'espère que vous le sentirez au long de votre lecture. Amusez-vous bien !
 
 ![Apex HD on Base Kit overview](images/IMG_20210110_114845.jpg){: style="opacity:0.5;"}
 
 ## Hardware list
 
 !!! note
-    Those links are **NOT** affiliate links. I just share the links where I actually bought the stuff needed for this build.
+    Les liens ci-dessous ne sont **PAS** des liens d'affiliation. Ce sont tout simplement les liens où j'ai moi-même commandé le matériel nécessaire à ce build.
 
 - [X] [ImpulseRC Apex Base Frame Kit](https://www.drone-fpv-racer.com/apex-5-base-frame-kit-5135.html)
     - [X] [T-Motor Combo F7 HD FC + F55A PRO II](https://www.drone-fpv-racer.com/t-motor-combo-f7-hd-fc-f55a-pro-ii-5548.html)
@@ -41,26 +41,26 @@ I enjoyed working on it very much and I hope you'll get a sense of it reading th
 
 ### Frame assembly
 
-Follow the [official ImpulseRC Apex guide](http://apex-docs.impulserc.com/) to assemble the frame.
+Suivre le [guide officiel de ImpulseRC](http://apex-docs.impulserc.com/) pour assembler la frame.
 
 ![Apex Base Kit](images/apex_kit.jpg)
 
 ### Caddx Vista on the 20x20 rear mounting holes
 
 !!! note
-    You will need 4 long M2 screws that are not provided with the kit. Nuts are the ones provided with the kit.
+    Vous aurez besoin de 4 longues vis M2 non incluses dans le kit. Les écrous sont cependant ceux fournis avec le kit.
 
 ![Apex Base Kit 20x20 Caddx Vista screws](images/IMG_20210108_145719.jpg)
 
 ![Apex Base Kit 20x20 Caddx Vista mounted](images/IMG_20210108_220902.jpg)
 
-The **20cm cable for Caddx Vista** is better protected than the standard one.
+Le **câble de 20cm pour Caddx Vista** est mieux protégé que celui d'origine.
 
 ![Apex Base Kit 20x20 Caddx Vista cable](images/IMG_20210109_171121.jpg)
 
 ### Caddx Vista VTX antenna mounting
 
-Use the **U.FL TBS Unify Pro/HV SMA** cable with the **provided Apex clamp** and fix it to the rear for the antenna.
+Utiliser le câble **U.FL TBS Unify Pro/HV SMA** avec le **sabot Apex fourni** fixé à l'arrière pour l'antenne.
 
 ![Apex Base Kit 20x20 Caddx Vista antenna mount](images/IMG_20210109_172100.jpg)
 
@@ -68,12 +68,12 @@ Use the **U.FL TBS Unify Pro/HV SMA** cable with the **provided Apex clamp** and
 
 ### ESC and XT60 mounting
 
-Do not fear to cut short the XT60 leads: its TPU support will strain releave the cable on the standoff.
+N'ayez pas peur de couper fort les câbles de la prise XT60 : son support TPU va sécuriser le câble contre l'arrachement sur l'entretoise.
 
 ![Apex Base Kit XT60 cable cut](images/IMG_20210109_173831.jpg)
 
 !!! warning
-    Be mindful of the fact that **the ESC mounted in reverse position**to leverage the space at the front for the capacitor. You will need to reallocate the motor resources on the CLI (see the betaflight section below).
+    Notez bien que **l'ESC est monté à l'envers** afin d'utiliser l'espace disponible à l'avant pour placer le capacitor. Vous devrez réallouer les ressources moteurs dans la CLI (voir la section betaflight ci-après).
 
 ![Apex Base Kit ESC mount view](images/IMG_20210109_180115.jpg)
 
@@ -83,7 +83,7 @@ Do not fear to cut short the XT60 leads: its TPU support will strain releave the
 
 ### RX wiring
 
-Nothing surprising here, wiring the TBS Tracer Nano RX is straightforward!
+Aucune surprise dans le branchement du TBS Tracer Nano RX !
 
 ![Apex Base Kit TBS Tracer RX wiring](images/tmotor_f7_pro2_hd_tbs_tracer_wiring.jpe)
 
@@ -91,7 +91,7 @@ Nothing surprising here, wiring the TBS Tracer Nano RX is straightforward!
 
 ### FC mounting
 
-Use the longest of the provided FC-to-ESC cables (it connects perfectly, mind the wire direction) and connect the Caddx Vista.
+Utilisez le câble FC-vers-ESC fourni le plus long (cela passe parfaitement, attention il y a un sens) et connectez la Caddx Vista.
 
 ![Apex Base Kit FC mount view](images/IMG_20210109_180958.jpg)
 
@@ -99,11 +99,11 @@ Use the longest of the provided FC-to-ESC cables (it connects perfectly, mind th
 
 ### RX placement
 
-Once protected, the RX is stuck on top of the Caddx Vista using double sided tape.
+Une fois protégé, le RX tient sur le Caddx Vista grâce à du scotch double face.
 
 ![Apex Base Kit RX mount view](images/IMG_20210109_183016.jpg)
 
-The Tracer Immortal T antennas fit well: one is zip tied in the lower plate by the provided clamp and the other is passing through the remaining hole in the upper VTX clamp.
+Les antennes Tracer Immortal T tiennent bien : une est zippée sur le sabot de la plate du bas fourni et l'autre tient fermement dans le trou du sabot VTX du haut.
 
 ![Apex Base Kit RX mount view back](images/IMG_20210109_183056.jpg)
 
@@ -111,7 +111,7 @@ The Tracer Immortal T antennas fit well: one is zip tied in the lower plate by t
 
 ### Finishing the build
 
-Finish the build by placing the top plate and the plastic provided covers on the arms.
+Finissez le build en plaçant la top plate et les caches en plastiques sur les bras fournis.
 
 ![Apex Base Kit RX mount view fixed](images/IMG_20210110_114900.jpg)
 
@@ -141,7 +141,7 @@ Joshua Bardwell's OSD for DJI FPV Google settings:
 
 ### Motor resource reallocation
 
-Since the ESC is mounted in reverse position, the motors need to be reassigned on the CLI. Depending on your wiring, IDs may change.
+Comme l'ESC a été monté à l'envers il est nécessaire de repositionner les moteurs dans la CLI. Selon votre montage, les ID peuvent changer.
 
 ```
 # resources
@@ -154,7 +154,7 @@ save
 
 ### Minimal CLI diff
 
-This is the minimal CLI diff that I set up without advanced tuning. It flies very well but as I will tune it better I will add a section to this build guide.
+CLI diff de la configuration minimale sans tuning approfondi pour l'instant. Ca vol déjà super bien mais j'ajouterai une section à ce guide lorsque j'ajusterai le tuning.
 
 ```
 # 
