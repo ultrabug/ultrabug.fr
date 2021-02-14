@@ -3770,6 +3770,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#tbs-cloud-xf-wifi-firmware-update" class="md-nav__link">
+    TBS Cloud XF WiFi firmware update
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3938,6 +3945,43 @@
 <p><img alt="TBS Tracer Nano receiver" src="images/tbs_tracer_nano_receiver_pic.png" style="width:500px;" /></p>
 <h2 id="nano-receiver-general-wiring">Nano receiver general wiring<a class="headerlink" href="#nano-receiver-general-wiring" title="Permanent link">&para;</a></h2>
 <p><img alt="TBS Tracer Nano receiver" src="images/tbs_tracer_nano_receiver.png" style="width:500px;" /></p>
+<h2 id="tbs-cloud-xf-wifi-firmware-update">TBS Cloud XF WiFi firmware update<a class="headerlink" href="#tbs-cloud-xf-wifi-firmware-update" title="Permanent link">&para;</a></h2>
+<p>Updating the TBS Cloud WiFi firmware is done by using the TBS Agent X software and the TBS Cloud WiFi:</p>
+<ul>
+<li>You need to be logged into TBS Agent X</li>
+<li>Download the <a href="https://www.team-blacksheep.com/tbs-cloud-activation.zip">TBS Cloud activation</a> ZIP file</li>
+<li>Unzip the file, you should get something like:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>├── V1.15
+│   ├── CROSSFIRE
+│   │   └── firmware.bin
+│   ├── FUSION
+│   │   └── firmware.bin
+│   └── TANGO2
+│       └── firmware.bin
+├── V1.17
+│   ├── CROSSFIRE
+│   │   └── firmware.bin
+│   ├── FUSION
+│   │   └── firmware.bin
+│   └── TANGO2
+│       └── firmware.bin
+</code></pre></div>
+<ul>
+<li>Connect your TBS RX module using USB</li>
+<li>Make sure the Cloud XF WiFi module is green</li>
+<li>On your PC, look for and connect to a SSID named <strong>tbs_crossfire_xxxx</strong></li>
+<li>Once connected to your TBS XF WiFi, go to <a href="http://192.168.4.1">http://192.168.4.1</a></li>
+<li>Select <strong>Upgrade</strong> on the XF WiFi interface, choose the latest <strong>CROSSFIRE/firmware.bin</strong></li>
+</ul>
+<p><img alt="TBS XF WiFi Upgrade" src="images/xf_wifi_upgrade.png" /></p>
+<ul>
+<li>Push the <strong>Upgrade</strong> button and wait for the upgrade to be completed.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>After the upgrade is done, your module will reboot but the version displayed in TBS Agent X will remain the same. To refresh it, just unplug/replug your RX module.</p>
+</div>
                 
               
               
