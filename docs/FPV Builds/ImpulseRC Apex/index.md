@@ -157,9 +157,9 @@ save
 This is the minimal CLI diff that I set up without advanced tuning. It flies very well but as I will tune it better I will add a section to this build guide.
 
 ```
-# 
+#
 # Building AutoComplete Cache ... Done!
-# 
+#
 # diff all
 
 # version
@@ -175,7 +175,7 @@ defaults nosave
 board_name TMOTORF7
 manufacturer_id TMTR
 mcu_id 002f00263338510639393832
-signature 
+signature
 
 # resources
 resource MOTOR 1 B01
@@ -202,6 +202,9 @@ aux 1 1 2 1300 1700 0 0
 aux 2 13 1 1300 2100 0 0
 aux 3 35 2 1800 2100 0 0
 
+# rxfail
+rxfail 7 s 750
+
 # master
 set gyro_lowpass2_hz = 375
 set dyn_notch_width_percent = 0
@@ -212,11 +215,13 @@ set dyn_lpf_gyro_min_hz = 300
 set dyn_lpf_gyro_max_hz = 750
 set acc_calibration = 26,3,238,1
 set min_check = 1000
-set rssi_channel = 12
+set rssi_channel = 8
 set serialrx_provider = CRSF
 set dshot_bidir = ON
 set motor_pwm_protocol = DSHOT600
 set small_angle = 180
+set osd_warn_rssi = ON
+set osd_rssi_alarm = 40
 set osd_vbat_pos = 257
 set osd_rssi_pos = 2486
 set osd_rssi_dbm_pos = 161
@@ -226,10 +231,10 @@ set osd_flymode_pos = 2241
 set osd_throttle_pos = 313
 set osd_vtx_channel_pos = 193
 set osd_craft_name_pos = 33
-set osd_gps_speed_pos = 2209
-set osd_gps_lon_pos = 2081
-set osd_gps_lat_pos = 2049
-set osd_gps_sats_pos = 2113
+set osd_gps_speed_pos = 161
+set osd_gps_lon_pos = 33
+set osd_gps_lat_pos = 1
+set osd_gps_sats_pos = 65
 set osd_home_dir_pos = 2275
 set osd_home_dist_pos = 2145
 set osd_flight_dist_pos = 184
