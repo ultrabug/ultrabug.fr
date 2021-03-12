@@ -35,7 +35,7 @@ I enjoyed working on it very much and I hope you'll get a sense of it reading th
 ## Notes to self for future improvements
 
 - [ ] Switch to the [Caddx Nebula Pro Vista Kit](https://caddxfpv.com/collections/%E5%B0%81%E9%9D%A2%E5%88%86%E7%B1%BB-hd-digital-cameras/products/nebula-pro-vista-kit-720p-120fps-low-latency-hd-digital-fpv-system) so we do not need the [Apex HD CAMERA SIDE PLATE KIT](https://www.drone-fpv-racer.com/apex-hd-camera-side-plate-kit-5208.html) any more, save 3 grams and money?
-- [ ] Drop the ESC capacitor and replace it with TVS diodes [RUSHFPV RUSH BLADE Power Filter Board](https://www.getfpv.com/rushfpv-rush-blade-power-filter-board.html)
+- [ ] Drop the ESC capacitor and replace it with TVS diodes [RUSHFPV RUSH BLADE Power Filter Board](https://www.drone-fpv-racer.com/rushfpv-rush-blade-power-filter-board-7437.html)
 
 ## Build steps
 
