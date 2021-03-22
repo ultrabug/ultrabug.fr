@@ -53,3 +53,9 @@ Updating the TBS Cloud WiFi firmware is done by using the TBS Agent X software a
 
 !!! note
     After the upgrade is done, your module will reboot but the version displayed in TBS Agent X will remain the same. To refresh it, just unplug/replug your RX module.
+
+## Antenna mounting tips
+
+I find Joshua Bardwell's tips on antenna mounting quite useful:
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/KA2OLTBIjKk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
