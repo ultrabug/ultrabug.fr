@@ -154,12 +154,12 @@ save
 
 ### Minimal CLI diff
 
-CLI diff de la configuration minimale sans tuning approfondi pour l'instant. Ca vol déjà super bien mais j'ajouterai une section à ce guide lorsque j'ajusterai le tuning.
+CLI diff de la configuration minimale sans tuning approfondi. Voir la section d'après pour avoir ma dernière version tunée.
 
 ```
-# 
+#
 # Building AutoComplete Cache ... Done!
-# 
+#
 # diff all
 
 # version
@@ -175,7 +175,7 @@ defaults nosave
 board_name TMOTORF7
 manufacturer_id TMTR
 mcu_id 002f00263338510639393832
-signature 
+signature
 
 # resources
 resource MOTOR 1 B01
@@ -202,6 +202,9 @@ aux 1 1 2 1300 1700 0 0
 aux 2 13 1 1300 2100 0 0
 aux 3 35 2 1800 2100 0 0
 
+# rxfail
+rxfail 7 s 750
+
 # master
 set gyro_lowpass2_hz = 375
 set dyn_notch_width_percent = 0
@@ -212,11 +215,13 @@ set dyn_lpf_gyro_min_hz = 300
 set dyn_lpf_gyro_max_hz = 750
 set acc_calibration = 26,3,238,1
 set min_check = 1000
-set rssi_channel = 12
+set rssi_channel = 8
 set serialrx_provider = CRSF
 set dshot_bidir = ON
 set motor_pwm_protocol = DSHOT600
 set small_angle = 180
+set osd_warn_rssi = ON
+set osd_rssi_alarm = 40
 set osd_vbat_pos = 257
 set osd_rssi_pos = 2486
 set osd_rssi_dbm_pos = 161
@@ -226,10 +231,10 @@ set osd_flymode_pos = 2241
 set osd_throttle_pos = 313
 set osd_vtx_channel_pos = 193
 set osd_craft_name_pos = 33
-set osd_gps_speed_pos = 2209
-set osd_gps_lon_pos = 2081
-set osd_gps_lat_pos = 2049
-set osd_gps_sats_pos = 2113
+set osd_gps_speed_pos = 161
+set osd_gps_lon_pos = 33
+set osd_gps_lat_pos = 1
+set osd_gps_sats_pos = 65
 set osd_home_dir_pos = 2275
 set osd_home_dist_pos = 2145
 set osd_flight_dist_pos = 184
@@ -265,6 +270,157 @@ rateprofile 0
 rateprofile 1
 
 rateprofile 2
+
+rateprofile 3
+
+rateprofile 4
+
+rateprofile 5
+
+# restore original rateprofile selection
+rateprofile 2
+
+# save configuration
+save
+```
+
+### CLI diff actuel
+
+Ce CLI diff est mis à jour au fur et à mesure de l'avancement de mon tune.
+
+J'ai commencé par me baser sur les [presets freestyle de UAV Tech](https://theuavtech.com/presets/#/5-freestyle) que je tente modestement d'améliorer avec le temps.
+
+```
+# 
+# Building AutoComplete Cache ... Done!
+# 
+# diff all
+
+# version
+# Betaflight / STM32F7X2 (S7X2) 4.2.6 Jan  5 2021 / 19:08:42 (a4b6db1e7) MSP API: 1.43
+# config: manufacturer_id: TMTR, board_name: TMOTORF7, version: e02dd6f2, date: 2020-11-04T11:31:26Z
+
+# start the command batch
+batch start
+
+# reset configuration to default settings
+defaults nosave
+
+board_name TMOTORF7
+manufacturer_id TMTR
+mcu_id 002f00263338510639393832
+signature 
+
+# resources
+resource MOTOR 1 B01
+resource MOTOR 2 B00
+resource MOTOR 3 C07
+resource MOTOR 4 C06
+
+# feature
+feature -RX_PARALLEL_PWM
+feature RX_SERIAL
+feature TELEMETRY
+
+# serial
+serial 1 1 115200 57600 0 115200
+serial 4 64 115200 57600 0 115200
+
+# aux
+aux 0 0 0 1800 2100 0 0
+aux 1 1 2 1300 1700 0 0
+aux 2 13 1 1300 2100 0 0
+aux 3 35 2 1800 2100 0 0
+
+# rxfail
+rxfail 7 s 750
+
+# master
+set gyro_lowpass2_hz = 375
+set dyn_notch_width_percent = 0
+set dyn_notch_q = 250
+set dyn_notch_max_hz = 350
+set dyn_lpf_gyro_min_hz = 300
+set dyn_lpf_gyro_max_hz = 750
+set acc_calibration = 26,3,238,1
+set min_check = 1000
+set rssi_channel = 8
+set serialrx_provider = CRSF
+set sbus_baud_fast = ON
+set dshot_bidir = ON
+set motor_pwm_protocol = DSHOT600
+set small_angle = 180
+set osd_warn_rssi = ON
+set osd_rssi_alarm = 40
+set osd_vbat_pos = 257
+set osd_rssi_pos = 2486
+set osd_rssi_dbm_pos = 161
+set osd_tim_1_pos = 353
+set osd_tim_2_pos = 321
+set osd_flymode_pos = 2241
+set osd_throttle_pos = 313
+set osd_vtx_channel_pos = 193
+set osd_craft_name_pos = 33
+set osd_gps_speed_pos = 161
+set osd_gps_lon_pos = 33
+set osd_gps_lat_pos = 1
+set osd_gps_sats_pos = 65
+set osd_home_dir_pos = 227
+set osd_home_dist_pos = 97
+set osd_flight_dist_pos = 184
+set osd_altitude_pos = 129
+set osd_warnings_pos = 2441
+set osd_avg_cell_voltage_pos = 2516
+set osd_disarmed_pos = 2411
+set osd_flip_arrow_pos = 65
+set osd_core_temp_pos = 248
+set osd_log_status_pos = 97
+set osd_gps_sats_show_hdop = OFF
+set gyro_rpm_notch_harmonics = 2
+
+profile 0
+
+# profile 0
+set dyn_lpf_dterm_min_hz = 105
+set dyn_lpf_dterm_max_hz = 255
+set dterm_lowpass2_hz = 225
+set pidsum_limit = 1000
+set pidsum_limit_yaw = 1000
+set p_pitch = 69
+set d_pitch = 44
+set f_pitch = 171
+set p_roll = 63
+set d_roll = 40
+set f_roll = 162
+set p_yaw = 68
+set f_yaw = 162
+set d_min_roll = 0
+set d_min_pitch = 0
+
+profile 1
+
+profile 2
+
+# restore original profile selection
+profile 0
+
+rateprofile 0
+
+rateprofile 1
+
+rateprofile 2
+
+# rateprofile 2
+set rates_type = ACTUAL
+set roll_rc_rate = 1
+set pitch_rc_rate = 1
+set yaw_rc_rate = 1
+set roll_expo = 54
+set pitch_expo = 54
+set yaw_expo = 54
+set roll_srate = 100
+set pitch_srate = 100
+set tpa_breakpoint = 1750
 
 rateprofile 3
 
