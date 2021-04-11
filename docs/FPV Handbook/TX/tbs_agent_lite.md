@@ -1,6 +1,4 @@
-# OpenTX
-
-## TBS Agent Lite
+# TBS Agent Lite
 
 The TBS Agent Lite is a modern replacement for the default Crossfire LUA scripts.
 
