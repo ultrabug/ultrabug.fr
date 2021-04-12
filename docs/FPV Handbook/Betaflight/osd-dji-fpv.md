@@ -1,6 +1,6 @@
-# CLI dump for DJI FPV Goggles OSD
+# DJI FPV Goggles OSD setup
 
-Credits to Joshua Bardwell:
+CLI dump credits to Joshua Bardwell:
 
 ```
 set osd_units = METRIC
