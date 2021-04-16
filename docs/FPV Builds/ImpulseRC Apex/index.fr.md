@@ -12,7 +12,7 @@ Cela donne vie à un build compact (mais pas trop) sans sacrifier la place pour 
 
 J'ai pris énormément de plaisir à travailler dessus et j'espère que vous le sentirez au long de votre lecture. Amusez-vous bien !
 
-![Apex HD on Base Kit overview](images/IMG_20210110_114845.jpg){: style="opacity:0.5;"}
+![Apex HD on Base Kit overview](images/IMG_20210409_145024.jpg){: style="opacity:0.5;"}
 
 ## Hardware list
 
@@ -23,19 +23,19 @@ J'ai pris énormément de plaisir à travailler dessus et j'espère que vous le 
     - [X] [T-Motor Combo F7 HD FC + F55A PRO II](https://www.drone-fpv-racer.com/t-motor-combo-f7-hd-fc-f55a-pro-ii-5548.html)
     - [X] [TBS Motor Steele Ethix Stout V3](https://www.drone-fpv-racer.com/tbs-moteur-steele-ethix-stout-v3-5183.html)
     - [X] [TBS Tracer Nano RX](https://www.drone-fpv-racer.com/tbs-tracer-micro-tx-6960.html)
-    - [X] [Cable U.FL TBS Unify Pro/HV SMA](https://www.drone-fpv-racer.com/cable-d-antenne-ufl-pour-tbs-unify-pro-899.html)
     - [X] [Caddx Vista HD System](https://www.drone-fpv-racer.com/caddx-vista-hd-system-5821.html) (see improvement notes below)
     - [X] [Apex HD CAMERA SIDE PLATE KIT](https://www.drone-fpv-racer.com/apex-hd-camera-side-plate-kit-5208.html) (see improvement notes below)
     - [X] [20cm Coaxial Cable for Caddx Vista](https://www.drone-fpv-racer.com/cable-coaxial-pour-caddx-vista-6441.html) (20cm !)
-    - [X] [Support XT60 on standoff - TPU by DFR](https://www.drone-fpv-racer.com/support-xt60-sur-entretoise-tpu-by-dfr-6044.html)
+    - [X] [Vifly Finder Mini - Buzzer](https://www.drone-fpv-racer.com/vifly-finder-mini-buzzer-autonome-7589.html) (lightweight, does a good job)
+    - [X] [XT60 14AWG 10cm cable](https://www.drone-fpv-racer.com/cable-xt60-male-14awg-10cm-250.html) (longer)
+    - [X] [Apex DJI antenna TPU holder](https://www.drone-fpv-racer.com/support-d-antenne-dji-pour-apex-hd-tpu-by-dfr-6029.html) (will fit tracer immortal-t)
 - [X] [HQProp ETHIX P3 Peanut Butter & Jelly 5.1x3x3 - PC (2x CW + 2xCCW)](https://www.drone-fpv-racer.com/hqprop-ethix-p3-peanut-butter-jelly-51x3x3-pc-2x-cw-2xccw-6886.html)
-- [X] [TrueRC Singularity 5.8GHz SMA - LHCP](https://www.drone-fpv-racer.com/antenne-truerc-singularity-58ghz-sma-lhcp-5469.html)
+- [X] [TrueRC Singularity U.FL Lite 112mm 5.8GHz - LHCP](https://www.drone-fpv-racer.com/antenne-truerc-singularity-ufl-lite-112mm-58ghz-lhcp-6994.html)
 - [X] [Strap Lipo KEVLAR 240x16mm - DFR](https://www.drone-fpv-racer.com/strap-lipo-kevlar-antiderapant-240x16mm-dfr-3155.html)
 
 ## Notes pour améliorations futures
 
 - [ ] Passer sur le [Caddx Nebula Pro Vista Kit](https://caddxfpv.com/collections/%E5%B0%81%E9%9D%A2%E5%88%86%E7%B1%BB-hd-digital-cameras/products/nebula-pro-vista-kit-720p-120fps-low-latency-hd-digital-fpv-system) pour ne plus dépendre du [Apex HD CAMERA SIDE PLATE KIT](https://www.drone-fpv-racer.com/apex-hd-camera-side-plate-kit-5208.html) et gagner 3 grammes et quelques euros ?
-- [ ] Remplacer le capacitor de l'ESC par des diodes TVS [RUSHFPV RUSH BLADE Power Filter Board](https://www.drone-fpv-racer.com/rushfpv-rush-blade-power-filter-board-7437.html)
 
 ## Build steps
 
@@ -60,26 +60,26 @@ Le **câble de 20cm pour Caddx Vista** est mieux protégé que celui d'origine.
 
 ### Caddx Vista VTX antenna mounting
 
-Utiliser le câble **U.FL TBS Unify Pro/HV SMA** avec le **sabot Apex fourni** fixé à l'arrière pour l'antenne.
+Utiliser le **TPU pour antennes DJI** fixé à l'arrière pour l'antenne U.FL en la zippant sur une entretoise pour protéger le vista.
 
-![Apex Base Kit 20x20 Caddx Vista antenna mount](images/IMG_20210109_172100.jpg)
+Les antennes Tracer Immortal T tiennent bien : une est zippée sur le sabot de la plate du bas fourni et l'autre est enfichée dans la partie verticale du TPU.
 
-![Apex Base Kit 20x20 Caddx Vista antenna mount back](images/IMG_20210109_172120.jpg)
+![Apex Base Kit 20x20 Caddx Vista antenna mount](images/IMG_20210407_152454.jpg)
+
+![Apex Base Kit 20x20 Caddx Vista antenna mount back](images/IMG_20210407_152157.jpg)
 
 ### ESC and XT60 mounting
 
-N'ayez pas peur de couper fort les câbles de la prise XT60 : son support TPU va sécuriser le câble contre l'arrachement sur l'entretoise.
-
-![Apex Base Kit XT60 cable cut](images/IMG_20210109_173831.jpg)
+Dans ma première version de ce build j'ai coupé le XT60 trop court et les hélices finissent par le toucher. Depuis j'utilise un XT60 de 10cm zippé à l'entretoise avant.
 
 !!! warning
     Notez bien que **l'ESC est monté à l'envers** afin d'utiliser l'espace disponible à l'avant pour placer le capacitor. Vous devrez réallouer les ressources moteurs dans la CLI (voir la section betaflight ci-après).
 
-![Apex Base Kit ESC mount view](images/IMG_20210109_180115.jpg)
+![Apex Base Kit ESC mount view](images/IMG_20210407_152215.jpg)
 
-![Apex Base Kit ESC mount view side](images/IMG_20210109_180129.jpg)
+![Apex Base Kit ESC mount view side](images/IMG_20210407_152307.jpg)
 
-![Apex Base Kit ESC mount view top](images/IMG_20210109_180145.jpg)
+![Apex Base Kit ESC mount view bottom](images/IMG_20210407_152834.jpg)
 
 ### RX wiring
 
@@ -93,27 +93,29 @@ Aucune surprise dans le branchement du TBS Tracer Nano RX !
 
 Utilisez le câble FC-vers-ESC fourni le plus long (cela passe parfaitement, attention il y a un sens) et connectez la Caddx Vista.
 
-![Apex Base Kit FC mount view](images/IMG_20210109_180958.jpg)
+![Apex Base Kit FC mount view](images/IMG_20210407_152516.jpg)
 
-![Apex Base Kit FC mount view focus](images/IMG_20210109_181052.jpg)
+![Apex Base Kit FC mount view focus](images/IMG_20210407_152319.jpg)
 
 ### RX placement
 
 Une fois protégé, le RX tient sur le Caddx Vista grâce à du scotch double face.
 
-![Apex Base Kit RX mount view](images/IMG_20210109_183016.jpg)
+![Apex Base Kit RX mount view](images/IMG_20210407_152444.jpg)
 
-Les antennes Tracer Immortal T tiennent bien : une est zippée sur le sabot de la plate du bas fourni et l'autre tient fermement dans le trou du sabot VTX du haut.
+### Buzzer
 
-![Apex Base Kit RX mount view back](images/IMG_20210109_183056.jpg)
+Le Vifly finder mini est léger à l'avant et occupe parfaitement l'espace disponible, c'est un super compromis.
 
-![Apex Base Kit RX mount view fixed](images/IMG_20210110_114913.jpg)
+![Apex Base Kit RX mount view](images/IMG_20210407_152252.jpg)
 
 ### Finishing the build
 
 Finissez le build en plaçant la top plate et les caches en plastiques sur les bras fournis.
 
-![Apex Base Kit RX mount view fixed](images/IMG_20210110_114900.jpg)
+![Apex Base Kit mounted front](images/IMG_20210409_145038.jpg)
+
+![Apex Base Kit mounted back](images/IMG_20210409_145100.jpg)
 
 ## Betaflight configuration
 
