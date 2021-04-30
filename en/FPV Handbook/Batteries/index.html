@@ -16,7 +16,7 @@
     
     
       
-        <title>Comparision sheet - Ultrabug</title>
+        <title>Batteries notes - Ultrabug</title>
       
     
     
@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#comparision-sheet" class="md-skip">
+        <a href="#batteries-notes" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +96,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Comparision sheet
+              Batteries notes
             
           </span>
         </div>
@@ -3505,10 +3505,58 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Batteries notes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
-        Comparision sheet
+        Batteries notes
       </a>
       
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#calculating-charging-amperage" class="md-nav__link">
+    Calculating charging amperage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parallel-charging-reminder" class="md-nav__link">
+    Parallel charging reminder
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lipo_performance_database/" class="md-nav__link">
+        LiPo database
+      </a>
     </li>
   
 
@@ -4053,9 +4101,40 @@
                   </a>
                 
                 
-                <h1 id="comparision-sheet">Comparision sheet<a class="headerlink" href="#comparision-sheet" title="Permanent link">&para;</a></h1>
+                <h1 id="batteries-notes">Batteries notes<a class="headerlink" href="#batteries-notes" title="Permanent link">&para;</a></h1>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>LiPo batteries are <strong>dangerous</strong> and can catch fire when they are damaged
+or badly maintained. What is written here is meant as a quick reminder and
+does not replace a fully comprehensive guide on battery management.</p>
+</div>
+<h2 id="calculating-charging-amperage">Calculating charging amperage<a class="headerlink" href="#calculating-charging-amperage" title="Permanent link">&para;</a></h2>
+<p>The safest amperage to charge a battery pack is <code>1C</code> that we calculate by
+taking its mAh rating divided by 1000.</p>
+<p>Quick examples of <code>1C</code> calculation:</p>
 <ul>
-<li><a href="https://docs.google.com/spreadsheets/d/10-0JsOiuIFB6GCJF4rX_foSdA9Cx5UnjYR3UlZa7gA4/edit#gid=1469545087">Joshua Bardwell's Lipo Performance Database</a></li>
+<li>1500 mAh battery = 1500 / 1000 = 1.5A charge</li>
+<li>850 mAh battery = 850 / 1000 = 0.8A or 0.9A charge</li>
+</ul>
+<p>If you're in a hurry, you can charge at <code>2C</code> which is basically twice the
+amperage you calculated above but do not do it too often.</p>
+<h2 id="parallel-charging-reminder">Parallel charging reminder<a class="headerlink" href="#parallel-charging-reminder" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>All batteries charged in parallel <strong>should have the same cell count</strong>!</p>
+</div>
+<ul>
+<li>Preferably parallel charge batteries of the same brand and model.</li>
+<li>Batteries cells voltage should not diverge from more than 0.1V per cell.
+  This means that the <strong>sum of the cell voltage difference should not exceed
+  0.1 x (cell count)</strong>.</li>
+<li><strong>Plug in the XT60 plug first on the parallel charging board</strong>, then the
+  balance lead.</li>
+<li>After you plug your batteries in the parallel charging board, allow a few
+  minutes for them to settle as some current will naturally distribute over
+  them.</li>
+<li>The calculation of charging amperage should be multiplied by the number of
+  batteries being charged in parallel but should not exceed 1C per battery.</li>
 </ul>
                 
               
@@ -4091,13 +4170,13 @@
           </a>
         
         
-          <a href="skyrc-q200/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="lipo_performance_database/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                     Next on <b>FPV Handbook</b>:
                 </span>
-                SkyRC Q200 Charger
+                LiPo database
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
