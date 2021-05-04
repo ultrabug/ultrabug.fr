@@ -4202,12 +4202,12 @@ VIDEO_CARDS="intel i965"</p>
 <li><strong>/etc/security/pam_mount.conf.xml</strong> (only line added is the <em>volume</em> one)</li>
 </ul>
 <?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE pam\_mount SYSTEM "pam\_mount.conf.xml.dtd">
+<!DOCTYPE pam_mount SYSTEM "pam_mount.conf.xml.dtd">
 <!--
-    See pam\_mount.conf(5) for a description.
+    See pam_mount.conf(5) for a description.
 -->
 
-<p><pam\_mount></p>
+<p><pam_mount></p>
 <pre><code>    &lt;!-- debug should come before everything else,
     since this file is still processed in a single pass
     from top-to-bottom --&gt;
@@ -4216,16 +4216,16 @@ VIDEO_CARDS="intel i965"</p>
 <pre><code>    &lt;!-- Volume definitions --&gt;
 </code></pre>
 <p><volume user="USERNAME" fstype="auto" path="/dev/nvme0n1p4" mountpoint="/home" options="fsck,noatime" /></p>
-<pre><code>    &lt;!-- pam\_mount parameters: General tunables --&gt;
+<pre><code>    &lt;!-- pam_mount parameters: General tunables --&gt;
 </code></pre>
 <!--
-<luserconf name=".pam\_mount.conf.xml" />
+<luserconf name=".pam_mount.conf.xml" />
 -->
 
 <!-- Note that commenting out mntoptions will give you the defaults.
      You will need to explicitly initialize it with the empty string
      to reset the defaults to nothing. -->
-<p><mntoptions allow="nosuid,nodev,loop,encryption,fsck,nonempty,allow\_root,allow\_other" /></p>
+<p><mntoptions allow="nosuid,nodev,loop,encryption,fsck,nonempty,allow_root,allow_other" /></p>
 <!--
 <mntoptions deny="suid,dev" />
 <mntoptions allow="\*" />
@@ -4234,10 +4234,10 @@ VIDEO_CARDS="intel i965"</p>
 <p><mntoptions require="nosuid,nodev" /></p>
 <!-- requires ofl from hxtools to be present -->
 <p><logout wait="0" hup="no" term="no" kill="no" /></p>
-<pre><code>    &lt;!-- pam\_mount parameters: Volume-related --&gt;
+<pre><code>    &lt;!-- pam_mount parameters: Volume-related --&gt;
 </code></pre>
 <p><mkmountpoint enable="1" remove="true" /></p>
-<p></pam\_mount></p>
+<p></pam_mount></p>
 <ul>
 <li><strong>/etc/pam.d/system-auth</strong> (only lines added are the ones with <em>pam_mount.so</em>)</li>
 </ul>

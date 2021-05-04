@@ -4089,53 +4089,60 @@
 <li>This method is still quite complex to setup but allows you to use the <a href="https://www.yubico.com/product/fido-u2f-security-key/">cheaper U2F only Yubikeys</a>.</li>
 <li>The <a href="http://www.ultrabug.fr/hardening-ssh-authentication-using-yubikey-22/">second method based on PIV</a> is the solution we chose as it fits better our use cases and ecosystem.</li>
 </ul>
-<blockquote>
-<p><em>ADVISE: keep a root SSH session to your servers while deploying/testing this so you can revert any change you make and avoid to lock yourself out of your servers.</em></p>
-</blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Keep a root SSH session to your servers while deploying/testing this so you can revert any change you make and avoid to lock yourself out of your servers.</p>
+</div>
 <h2 id="setup-pam_ssh">Setup pam_ssh<a class="headerlink" href="#setup-pam_ssh" title="Permanent link">&para;</a></h2>
 <p>Use <strong>pam_ssh on the servers</strong> to force usage of a passphrase on a private key. The idea behind pam_ssh is that the passphrase of your SSH key serves as your SSH password.</p>
 <p>Generate your SSH key pair with a passphrase <strong>on your local machine</strong>.</p>
-<p>ssh-keygen -f identity
+<div class="highlight"><pre><span></span><code>$ ssh-keygen -f identity
 Generating public/private rsa key pair.
-Enter passphrase (empty for no passphrase): 
-Enter same passphrase again: 
-Your identification has been saved in identity.
-Your public key has been saved in identity.pub.
+Enter passphrase <span class="o">(</span>empty <span class="k">for</span> no passphrase<span class="o">)</span>:
+Enter same passphrase again:
+Your identification has been saved <span class="k">in</span> identity.
+Your public key has been saved <span class="k">in</span> identity.pub.
 The key fingerprint is:
 SHA256:a2/HNCe28+bpMZ2dIf9bodnBwnmD7stO5sdBOV6teP8 alexys@yazd
-The key's randomart image is:
-+---[RSA 2048]----+
-|                 |
-|                 |
-|                o|
-|            . ++o|
-|        S    BoOo|
-|         .  B %+O|
-|        o  + %+*=|
-|       . .. @ .*+|
-|         ....%B.E|
-+----[SHA256]-----+</p>
+The key<span class="err">&#39;</span>s randomart image is:
++---<span class="o">[</span>RSA <span class="m">2048</span><span class="o">]</span>----+
+<span class="p">|</span>                 <span class="p">|</span>
+<span class="p">|</span>                 <span class="p">|</span>
+<span class="p">|</span>                o<span class="p">|</span>
+<span class="p">|</span>            . ++o<span class="p">|</span>
+<span class="p">|</span>        S    BoOo<span class="p">|</span>
+<span class="p">|</span>         .  B %+O<span class="p">|</span>
+<span class="p">|</span>        o  + %+<span class="se">\*</span><span class="o">=</span><span class="p">|</span>
+<span class="p">|</span>       . .. @ .<span class="se">\*</span>+<span class="p">|</span>
+<span class="p">|</span>         ....%B.E<span class="p">|</span>
++----<span class="o">[</span>SHA256<span class="o">]</span>-----+
+</code></pre></div>
 <p>You then must copy your <strong>private key</strong> (named <strong>identity</strong> with no extension) <strong>to your servers</strong> under  the <strong>~/.ssh/login-keys.d/</strong> folder.</p>
 <p>In your $HOME on the servers, you will get something like this:</p>
-<p>.ssh/
+<div class="highlight"><pre><span></span><code>.ssh/
 ├── known_hosts
 └── login-keys.d
-    └── identity</p>
+    └── identity
+</code></pre></div>
 <p>Then you can enable the pam_ssh authentication. Gentoo users should enable the <strong>pam_ssh</strong> USE flag for <strong>sys-auth/pambase</strong> and re-install.</p>
 <p>Add this <strong>at the beginning</strong> of the file <strong>/etc/pam.d/ssh</strong></p>
-<p>auth    required    pam_ssh.so debug</p>
+<div class="highlight"><pre><span></span><code>auth    required    pam_ssh.so debug
+</code></pre></div>
 <p>The debug flag can be removed after you tested it correctly.</p>
 <h2 id="disable-public-key-authentication">Disable public key authentication<a class="headerlink" href="#disable-public-key-authentication" title="Permanent link">&para;</a></h2>
 <p>Because it takes precedence over the PAM authentication mechanism, you have to disable OpenSSH PubkeyAuthentication authentication on <strong>/etc/ssh/sshd_config:</strong></p>
-<p>PubkeyAuthentication no</p>
+<div class="highlight"><pre><span></span><code>PubkeyAuthentication no
+</code></pre></div>
 <p>Enable PAM authentication on <strong>/etc/ssh/sshd_config</strong></p>
-<p>ChallengeResponseAuthentication no
+<div class="highlight"><pre><span></span><code>ChallengeResponseAuthentication no
 PasswordAuthentication no
-UsePAM yes</p>
+UsePAM yes
+</code></pre></div>
 <h2 id="test-pam_ssh">Test pam_ssh<a class="headerlink" href="#test-pam_ssh" title="Permanent link">&para;</a></h2>
 <p>Now you should be prompted for your SSH passphrase to login through SSH.</p>
-<p>➜  ~ ssh cheetah
-SSH passphrase:</p>
+<div class="highlight"><pre><span></span><code>$ ssh cheetah
+SSH passphrase:
+</code></pre></div>
 <h2 id="setup-2nd-factor-using-pam_yubico">Setup 2nd factor using pam_yubico<a class="headerlink" href="#setup-2nd-factor-using-pam_yubico" title="Permanent link">&para;</a></h2>
 <p>Now we will make use of our Yubikey security key to add a 2nd factor authentication to login through SSH on our servers.</p>
 <p>Because the Yubikey is not physically plugged on the server, we cannot use an offline Challenge-Response mechanism, so we will have to use a third party to validate the challenge. Yubico gracefully provide an API for this and the <a href="https://github.com/Yubico/yubico-pam">pam_yubico</a> module is meant to use it easily.</p>
@@ -4157,29 +4164,35 @@ SSH passphrase:</p>
 <li>the modhex is listed as <strong>Modhex encoded: xxccccxxuuxx</strong></li>
 </ul>
 <p>Using this modhex, create your mapping file named <strong>authorized_yubikeys</strong> which will be copied to <strong>~/.yubico/authorized_yubikeys</strong> on the servers (replace LOGIN_USERNAME with your actual account login name).</p>
-<p>LOGIN_USERNAME:xxccccxxuuxx</p>
+<div class="highlight"><pre><span></span><code>LOGIN_USERNAME:xxccccxxuuxx
+</code></pre></div>
 <p>NOTE: this mapping file can be a centralized one (in /etc for example) to handle all the users from a server. See the the <a href="https://github.com/Yubico/yubico-pam#configuration">authfile option on the doc</a>.</p>
 <h3 id="setting-up-openssh-on-your-servers">Setting up OpenSSH (on your servers)<a class="headerlink" href="#setting-up-openssh-on-your-servers" title="Permanent link">&para;</a></h3>
 <p><strong>You must install pam_yubico on the servers</strong>. For Gentoo, it's as simple as:</p>
-<p>emerge sys-auth/pam_yubico</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># emerge sys-auth/pam_yubico</span>
+</code></pre></div>
 <p><strong>Copy your authentication mapping file</strong> to your home under the .yubico folder <strong>on all servers</strong>. You should get this:</p>
-<p>.yubico/
-└── authorized_yubikey</p>
+<div class="highlight"><pre><span></span><code>.yubico/
+└── authorized_yubikey
+</code></pre></div>
 <p>Configure pam to use pam_yubico. Add this <strong>after the pam_ssh</strong> on the file <strong>/etc/pam.d/ssh</strong> which should look like this now:</p>
-<p>auth    required    pam_ssh.so
-auth    required    pam_yubico.so id=YOUR_API_ID debug debug_file=/var/log/auth.log</p>
+<div class="highlight"><pre><span></span><code>auth    required    pam_ssh.so
+auth    required    pam_yubico.so id=YOUR_API_ID debug debug_file=/var/log/auth.log
+</code></pre></div>
 <p>The debug and debug_file flags can be removed after you tested it correctly.</p>
 <h2 id="testing-pam_yubico">Testing pam_yubico<a class="headerlink" href="#testing-pam_yubico" title="Permanent link">&para;</a></h2>
 <p>Now you should be prompted for your SSH passphrase and then for your Yubikey OTP to login through SSH.</p>
-<p>➜  ~ ssh cheetah
-SSH passphrase: 
-YubiKey for `ultrabug':</p>
+<div class="highlight"><pre><span></span><code>$ ssh cheetah
+SSH passphrase:
+YubiKey <span class="k">for</span> <span class="se">\`</span>ultrabug<span class="err">&#39;</span>:
+</code></pre></div>
 <h2 id="about-the-yubico-api-dependency">About the Yubico API dependency<a class="headerlink" href="#about-the-yubico-api-dependency" title="Permanent link">&para;</a></h2>
 <p>Careful readers will notice that using pam_yubico introduces a strong dependency on the Yubico API availability. <strong>If the API becomes unreachable or your internet connection goes down then your servers would be unable to authenticate you!</strong></p>
 <p>The solution I found to this problem is to instruct pam to ignore the Yubikey authentication when pam_yubico is unable to contact the API.</p>
 <p>In this case, the module will return a AUTHINFO_UNAVAIL code to PAM which we can act upon using the following syntax. The <strong>/etc/pam.d/ssh</strong> first lines should be changed to this:</p>
-<p>auth    required    pam_ssh.so
-auth    [success=done authinfo_unavail=ignore new_authtok_reqd=done default=die]    pam_yubico.so id=YOUR_API_ID debug debug_file=/var/log/auth.log</p>
+<div class="highlight"><pre><span></span><code>auth    required    pam_ssh.so
+auth    [success=done authinfo_unavail=ignore new_authtok_reqd=done default=die]    pam_yubico.so id=YOUR_API_ID debug debug_file=/var/log/auth.log
+</code></pre></div>
 <p>Now you can be sure to be able to use your Yubikey even if the API is down or unreachable ;)</p>
                 
                   

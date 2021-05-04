@@ -4094,8 +4094,8 @@
     uwsgi_connect_timeout 10;
     uwsgi_read_timeout 10;
     uwsgi_send_timeout 10;</p>
-<pre><code>uwsgi\_intercept\_errors on;
-error\_page 500 504 /px.gif;
+<pre><code>uwsgi_intercept_errors on;
+error_page 500 504 /px.gif;
 </code></pre>
 <p>}</p>
 <p>The <strong>uwsgi_intercept_errors</strong> directive tells nginx to handle errors from uWSGI. Then we just have to use the usual nginx error handling using the <strong>error_page</strong> directive which in our case calls for /px.gif, returning our 1x1 GIF pixel using the <strong>empty_gif</strong> nginx module.</p>
@@ -4122,8 +4122,8 @@ error\_page 500 504 /px.gif;
     uwsgi_connect_timeout 10;
     uwsgi_read_timeout 10;
     uwsgi_send_timeout 10;</p>
-<pre><code>uwsgi\_intercept\_errors on;
-error\_page 500 504 @uwsgi\_errors;
+<pre><code>uwsgi_intercept_errors on;
+error_page 500 504 @uwsgi_errors;
 </code></pre>
 <p>}</p>
 <p>Upon HTTP 500/504 error, the <strong>@uwsgi_errors</strong> location is called by nginx internals. Let's detail its processing :</p>

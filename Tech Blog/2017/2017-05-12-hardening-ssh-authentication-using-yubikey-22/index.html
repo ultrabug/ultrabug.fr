@@ -4130,50 +4130,66 @@
 <h2 id="tools-installation">Tools installation<a class="headerlink" href="#tools-installation" title="Permanent link">&para;</a></h2>
 <p>For this to work, we will need some tools on our local machines to setup our Yubikey correctly.</p>
 <p>Gentoo users should install those packages:</p>
-<p>emerge dev-libs/opensc sys-auth/ykpers sys-auth/yubico-piv-tool sys-apps/pcsc-lite app-crypt/ccid sys-apps/pcsc-tools sys-auth/yubikey-personalization-gui</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># emerge dev-libs/opensc sys-auth/ykpers sys-auth/yubico-piv-tool sys-apps/pcsc-lite app-crypt/ccid sys-apps/pcsc-tools sys-auth/yubikey-personalization-gui</span>
+</code></pre></div>
 <p>Gentoo users should also allow the <strong>pcscd</strong> service to be hotplugged (started automatically upon key insertion) by modifying their <strong>/etc/rc.conf</strong> and having:</p>
-<p>rc_hotplug="pcscd"</p>
+<div class="highlight"><pre><span></span><code>rc_hotplug=&quot;pcscd&quot;
+</code></pre></div>
 <h2 id="yubikey-setup">Yubikey setup<a class="headerlink" href="#yubikey-setup" title="Permanent link">&para;</a></h2>
 <p>The idea behind the Yubikey setup is to generate and store a private key in our Yubikey and to secure it via a PIN code.</p>
 <p>First, insert your Yubikey and let's change its USB operating mode to OTP+CCID.</p>
-<p>ykpersonalize -m2
-Firmware version 4.3.4 Touch level 783 Program sequence 3</p>
-<p>The USB mode will be set to: 0x2</p>
-<p>Commit? (y/n) [n]: y</p>
+<div class="highlight"><pre><span></span><code>$ ykpersonalize -m2
+Firmware version <span class="m">4</span>.3.4 Touch level <span class="m">783</span> Program sequence <span class="m">3</span>
+
+The USB mode will be <span class="nb">set</span> to: 0x2
+
+Commit? <span class="o">(</span>y/n<span class="o">)</span> <span class="o">[</span>n<span class="o">]</span>: y
+</code></pre></div>
 <p>Then, we will create a new management key:</p>
-<p>key=`dd if=/dev/random bs=1 count=24 2&gt;/dev/null | hexdump -v -e '/1 "%02X"'`
-echo $key
-D59E46FE263DDC052A409C68EB71941D8DD0C5915B7C143A</p>
+<div class="highlight"><pre><span></span><code><span class="nv">key</span><span class="o">=</span><span class="sb">`</span>dd <span class="k">if</span><span class="o">=</span>/dev/random <span class="nv">bs</span><span class="o">=</span><span class="m">1</span> <span class="nv">count</span><span class="o">=</span><span class="m">24</span> <span class="m">2</span>&gt;/dev/null <span class="p">|</span> hexdump -v -e <span class="s1">&#39;/1 &quot;%02X&quot;&#39;</span><span class="sb">`</span>
+<span class="nb">echo</span> <span class="nv">$key</span>
+D59E46FE263DDC052A409C68EB71941D8DD0C5915B7C143A
+</code></pre></div>
 <p>Replace the default management key (if prompted, copy/paste the key printed above):</p>
-<p>yubico-piv-tool -a set-mgm-key -n $key --key 010203040506070801020304050607080102030405060708</p>
+<div class="highlight"><pre><span></span><code>$ yubico-piv-tool -a set-mgm-key -n <span class="nv">$key</span> --key <span class="m">010203040506070801020304050607080102030405060708</span>
+</code></pre></div>
 <p>Then change the default PIN code and PUK code of your Yubikey</p>
-<p>yubico-piv-tool -a change-pin -P 123456 -N <NEW PIN></p>
-<p>yubico-piv-tool -a change-puk -P 12345678 -N <NEW PUK></p>
+<div class="highlight"><pre><span></span><code>$ yubico-piv-tool -a change-pin -P <span class="m">123456</span> -N &lt;NEW PIN&gt;
+
+$ yubico-piv-tool -a change-puk -P <span class="m">12345678</span> -N &lt;NEW PUK&gt;
+</code></pre></div>
 <p>Now that your Yubikey is secure, let's proceed with the PCKS#11 certificate generation. You will be prompted for your management key that you generated before.</p>
-<p>yubico-piv-tool -s 9a -a generate -o public.pem -k</p>
+<div class="highlight"><pre><span></span><code>$ yubico-piv-tool -s 9a -a generate -o public.pem -k
+</code></pre></div>
 <p>Then create a self-signed certificate (only used for libpcks11) and import it in the Yubikey:</p>
-<p>yubico-piv-tool -a verify-pin -a selfsign-certificate -s 9a -S "/CN=SSH key/" -i public.pem -o cert.pem
-yubico-piv-tool -a import-certificate -s 9a -i cert.pem</p>
+<div class="highlight"><pre><span></span><code>$ yubico-piv-tool -a verify-pin -a selfsign-certificate -s 9a -S <span class="s2">&quot;/CN=SSH key/&quot;</span> -i public.pem -o cert.pem
+$ yubico-piv-tool -a import-certificate -s 9a -i cert.pem
+</code></pre></div>
 <p>Here you are! You can now export your public key to use with OpenSSH:</p>
-<p>ssh-keygen -D opensc-pkcs11.so -e
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCWtqI37jwxYMJ9XLq9VwHgJlhZViPVAGIUfMm8SAlfs6cka4Cj570lkoGK04r8JAVJFy/iKfhGpL9N9XuartfIoq6Cg/6Qvg3REupuqs51V2cBaC/gnWIQ7qZqlzBulvcOvzNfHFD/lX42J58+E8tWnYg6GzIsImFZQVpmI6SxNfSmVQIqxIufInrbQaI+pKXntdTQC9wyNK5FAA8TXAdff5ZDnmetsOTVble9Ia5m6gqM7MnxNZ56uDpn+6lCxRZSW+Ln2PDE7sivVcST4qpfwY4P4Lrb3vrjCGODFg4xmGNKXsLi2+uZbs5rW7bg4HFO50kKDucPV1M+rBWA9999</p>
+<div class="highlight"><pre><span></span><code>$ ssh-keygen -D opensc-pkcs11.so -e
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCWtqI37jwxYMJ9XLq9VwHgJlhZViPVAGIUfMm8SAlfs6cka4Cj570lkoGK04r8JAVJFy/iKfhGpL9N9XuartfIoq6Cg/6Qvg3REupuqs51V2cBaC/gnWIQ7qZqlzBulvcOvzNfHFD/lX42J58+E8tWnYg6GzIsImFZQVpmI6SxNfSmVQIqxIufInrbQaI+pKXntdTQC9wyNK5FAA8TXAdff5ZDnmetsOTVble9Ia5m6gqM7MnxNZ56uDpn+6lCxRZSW+Ln2PDE7sivVcST4qpfwY4P4Lrb3vrjCGODFg4xmGNKXsLi2+uZbs5rW7bg4HFO50kKDucPV1M+rBWA9999
+</code></pre></div>
 <p><strong>Copy to your servers</strong> your SSH public key to your usual <strong>~/.ssh/authorized_keys</strong> file in your $HOME.</p>
 <h2 id="testing-piv-secured-ssh">Testing PIV secured SSH<a class="headerlink" href="#testing-piv-secured-ssh" title="Permanent link">&para;</a></h2>
 <p>Plug-in your Yubikey, and then SSH to your remote server using the opensc-pkcs11 library. You will be prompted for your PIN and then successfully logged in :)</p>
-<p>ssh -I opensc-pkcs11.so cheetah
-Enter PIN for 'PIV_II (PIV Card Holder pin)':</p>
+<div class="highlight"><pre><span></span><code>$ ssh -I opensc-pkcs11.so cheetah
+Enter PIN <span class="k">for</span> <span class="s1">&#39;PIV_II (PIV Card Holder pin)&#39;</span>:
+</code></pre></div>
 <p>You can then configure SSH to use it by default for all your hosts in your <strong>~/.ssh/config</strong></p>
-<p>Host=*
-PKCS11Provider /usr/lib/opensc-pkcs11.so</p>
+<div class="highlight"><pre><span></span><code>Host=\*
+PKCS11Provider /usr/lib/opensc-pkcs11.so
+</code></pre></div>
 <h2 id="using-piv-with-ssh-agent">Using PIV with ssh-agent<a class="headerlink" href="#using-piv-with-ssh-agent" title="Permanent link">&para;</a></h2>
 <p>You can also use ssh-agent to avoid typing your PIN every time.</p>
 <p>When asked for the passphrase, enter your PIN:</p>
-<p>ssh-add -s /usr/lib/opensc-pkcs11.so
-Enter passphrase for PKCS#11: 
-Card added: /usr/lib/opensc-pkcs11.so</p>
+<div class="highlight"><pre><span></span><code>$ ssh-add -s /usr/lib/opensc-pkcs11.so
+Enter passphrase <span class="k">for</span> PKCS#11:
+Card added: /usr/lib/opensc-pkcs11.so
+</code></pre></div>
 <p>You can verify that it worked by listing the available keys in your ssh agent:</p>
-<p>ssh-add -L
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCWtqI37jwxYMJ9XLq9VwHgJlhZViPVAGIUfMm8SAlfs6cka4Cj570lkoGK04r8JAVJFy/iKfhGpL9N9XuartfIoq6Cg/6Qvg3REupuqs51V2cBaC/gnWIQ7qZqlzBulvcOvzNfHFD/lX42J58+E8tWnYg6GzIsImFZQVpmI6SxNfSmVQIqxIufInrbQaI+pKXntdTQC9wyNK5FAA8TXAdff5ZDnmetsOTVble9Ia5m6gqM7MnxNZ56uDpn+6lCxRZSW+Ln2PDE7sivVcST4qpfwY4P4Lrb3vrjCGODFg4xmGNKXsLi2+uZbs5rW7bg4HFO50kKDucPV1M+rBWA9999 /usr/lib64/opensc-pkcs11.so</p>
+<div class="highlight"><pre><span></span><code>$ ssh-add -L
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCWtqI37jwxYMJ9XLq9VwHgJlhZViPVAGIUfMm8SAlfs6cka4Cj570lkoGK04r8JAVJFy/iKfhGpL9N9XuartfIoq6Cg/6Qvg3REupuqs51V2cBaC/gnWIQ7qZqlzBulvcOvzNfHFD/lX42J58+E8tWnYg6GzIsImFZQVpmI6SxNfSmVQIqxIufInrbQaI+pKXntdTQC9wyNK5FAA8TXAdff5ZDnmetsOTVble9Ia5m6gqM7MnxNZ56uDpn+6lCxRZSW+Ln2PDE7sivVcST4qpfwY4P4Lrb3vrjCGODFg4xmGNKXsLi2+uZbs5rW7bg4HFO50kKDucPV1M+rBWA9999 /usr/lib64/opensc-pkcs11.so
+</code></pre></div>
 <h2 id="enjoy">Enjoy!<a class="headerlink" href="#enjoy" title="Permanent link">&para;</a></h2>
 <p>Now you have a flexible yet robust way to authenticate your users which you can also extend by adding another type of authentication on your servers using PAM.</p>
                 

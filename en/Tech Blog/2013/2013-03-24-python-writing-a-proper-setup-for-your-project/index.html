@@ -4128,7 +4128,7 @@ from setuptools import find_packages, setup</p>
 <p>As you can see those parameters are just fields describing your project but there are of course more parameters you can use to become more specific about it such as which other packages it depends from or special operations to be made upon installation.</p>
 <h2 id="classifiers">classifiers<a class="headerlink" href="#classifiers" title="Permanent link">&para;</a></h2>
 <p>As with a literal description, you must categorize your project so that it will be correctly understood by automatic classifiers for example. The classifiers parameter is a list of those categories which <a href="https://pypi.python.org/pypi?%3Aaction=list_classifiers">you can find a list here</a>.</p>
-<pre><code>classifiers=\[
+<pre><code>classifiers=[
     'License :: OSI Approved :: BSD License',
     'Operating System :: POSIX :: Linux',
     'Programming Language :: Python',
@@ -4139,7 +4139,7 @@ from setuptools import find_packages, setup</p>
     'Programming Language :: Python :: 3.2',
     'Topic :: Software Development :: Libraries :: Python Modules',
     'Topic :: Desktop Environment :: Window Managers :: i3wm',
-    \],
+    ],
 </code></pre>
 <h2 id="getting-an-executable-from-your-python-program">getting an executable from your python program<a class="headerlink" href="#getting-an-executable-from-your-python-program" title="Permanent link">&para;</a></h2>
 <p>As I explained earlier, py3status must be used as an executable available in the users' PATH just like any other binary or commands on the system. I was thrilled to discover that achieving this is a piece of cake using setuptools, you just have to use the <strong>entry_points</strong> parameter and <a href="http://peak.telecommunity.com/DevCenter/setuptools#automatic-script-creation">it will be taken care of for you</a>.</p>
