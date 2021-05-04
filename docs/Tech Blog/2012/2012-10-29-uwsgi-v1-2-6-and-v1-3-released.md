@@ -20,7 +20,7 @@ See the complete [changelog](http://lists.unbit.it/pipermail/uwsgi/2012-Septembe
 
 ## v1.3 highlights :
 
-- New plugin : router\_http (compiled-in by default)
+- New plugin : router_http (compiled-in by default)
 - New feature : --if-env (and --if-opt) can compare values
 - http/https non-blocking writes
 - Busyness cheaper algorithm by Łukasz Mierzwa

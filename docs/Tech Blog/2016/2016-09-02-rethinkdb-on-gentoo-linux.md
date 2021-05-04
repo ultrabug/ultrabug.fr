@@ -57,9 +57,9 @@ As you can see on the stack we chose RethinkDB for its main strength : **real ti
 
 - We're sure that we want to use it in production !
 - The [ReQL query language](https://rethinkdb.com/docs/introduction-to-reql/) is a pipeline so its syntax is quite tricky to get familiar with (even more when coming from mongoDB like us), it is as powerful as it can be disconcerting
-- Realtime changefeeds have limitations which are sometimes not so easy to understand/find out (especially the order\_by / secondary index part)
+- Realtime changefeeds have limitations which are sometimes not so easy to understand/find out (especially the order_by / secondary index part)
 - Changefeeds limitations is a constraint you have to take into account in your data modeling !
-- Changefeeds + order\_by can do the ordering for you when using the **include\_offsets** option, this is amazing
+- Changefeeds + order_by can do the ordering for you when using the **include_offsets** option, this is amazing
 - The administration web UI is awesome
 - The python 3.5 [asyncio proper support is still not merged](https://github.com/rethinkdb/rethinkdb/pull/5354), this is a pain !
 

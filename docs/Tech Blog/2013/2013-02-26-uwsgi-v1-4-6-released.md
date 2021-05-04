@@ -19,10 +19,10 @@ This is quite a big release for its backports and improvements. But there are tw
 
 ## highlights
 
-- fix SERVER\_PORT value in corerouters when using shared sockets
+- fix SERVER_PORT value in corerouters when using shared sockets
 - backported --thunder-lock option to reduce thundering herd problem (use with caution)
 - fixed **pthread robust mutexes in newer glibc**
-- backported improvements for the alarm\_xmpp plugin
+- backported improvements for the alarm_xmpp plugin
 - fixed suspend when harakiri is in place
 - reset sigmask on startup
 - **fixed master+emperor configurations**

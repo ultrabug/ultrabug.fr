@@ -55,7 +55,7 @@ Usual figures are **JOINs between a 10+ Million dataset and 1.5+ Billion ID** ma
 The reference query basically looks like this:
 
 SELECT count(m.partnerid)
-FROM population\_10M\_rows AS p JOIN partner\_id\_match\_400M\_rows AS m
+FROM population_10M_rows AS p JOIN partner_id_match_400M_rows AS m
 ON p.id = m.id
 
 ##  Current implementations
@@ -119,7 +119,7 @@ I ended up using a **test-driven data modelling** strategy using **pytest**. I w
 
 In our case, we ended up with three denormalized tables to answer all the questions we had. To answer the first three questions above, you could use the schema below:
 
-CREATE TABLE IF NOT EXISTS ids\_by\_partnerid(
+CREATE TABLE IF NOT EXISTS ids_by_partnerid(
  partnerid text,
  id text,
  date timestamp,
@@ -153,8 +153,8 @@ I advise you to **lower the Prometheus scrape interval** to have a shorter and f
 
 For this, change the **prometheus/prometheus.yml** file like this:
 
-scrape\_interval: 2s # Scrape targets every 2 seconds (5s default)
-scrape\_timeout: 1s # Timeout before trying to scrape a target again (4s default)
+scrape_interval: 2s # Scrape targets every 2 seconds (5s default)
+scrape_timeout: 1s # Timeout before trying to scrape a target again (4s default)
 
 ## Test your monitoring
 
@@ -234,29 +234,29 @@ Speaking about the results, we will have to differentiate two cases:
 
 Here I used Scala (yes, I did) and DataStax's [**spark-cassandra-connector**](https://github.com/datastax/spark-cassandra-connector) so I could use the magic **joinWithCassandraTable** function.
 
-- spark-cassandra-connector-2.0.1-s\_2.11.jar
+- spark-cassandra-connector-2.0.1-s_2.11.jar
 - Java 7
 
 I had to stick with the 2.0.1 version of the spark-cassandra-connector because newer version (2.0.5 at the time of testing) were performing bad with no apparent reason. The ScyllaDB team couldn't help on this.
 
 You can interact with your test workload using the spark2-shell:
 
-spark2-shell --jars jars/commons-beanutils\_commons-beanutils-1.9.3.jar,jars/com.twitter\_jsr166e-1.1.0.jar,jars/io.netty\_netty-all-4.0.33.Final.jar,jars/org.joda\_joda-convert-1.2.jar,jars/commons-collections\_commons-collections-3.2.2.jar,jars/joda-time\_joda-time-2.3.jar,jars/org.scala-lang\_scala-reflect-2.11.8.jar,jars/spark-cassandra-connector-2.0.1-s\_2.11.jar
+spark2-shell --jars jars/commons-beanutils_commons-beanutils-1.9.3.jar,jars/com.twitter_jsr166e-1.1.0.jar,jars/io.netty_netty-all-4.0.33.Final.jar,jars/org.joda_joda-convert-1.2.jar,jars/commons-collections_commons-collections-3.2.2.jar,jars/joda-time_joda-time-2.3.jar,jars/org.scala-lang_scala-reflect-2.11.8.jar,jars/spark-cassandra-connector-2.0.1-s_2.11.jar
 
 Then use the following Scala imports:
 
 // main connector import
-import com.datastax.spark.connector.\_
+import com.datastax.spark.connector._
 
 // the joinWithCassandraTable failed without this (dunno why, I'm no Scala guy)
-import com.datastax.spark.connector.writer.\_
+import com.datastax.spark.connector.writer._
 implicit val rowWriter = SqlRowWriter.Factory
 
 Finally I could run my test workload to select the data from Hive and JOIN it with Scylla easily:
 
-val df\_population = spark.sql("SELECT id FROM population\_10M\_rows")
-val join\_rdd = df\_population.rdd.repartitionByCassandraReplica("test\_keyspace", "partner\_id\_match\_400M\_rows").joinWithCassandraTable("test\_keyspace", "partner\_id\_match\_400M\_rows")
-val joined\_count = join\_rdd.count()
+val df_population = spark.sql("SELECT id FROM population_10M_rows")
+val join_rdd = df_population.rdd.repartitionByCassandraReplica("test_keyspace", "partner_id_match_400M_rows").joinWithCassandraTable("test_keyspace", "partner_id_match_400M_rows")
+val joined_count = join_rdd.count()
 
 ### Notes on tuning spark-cassandra-connector
 
@@ -278,7 +278,7 @@ spark.yarn.executor.memoryOverhead=1024
 
 Default is 8MB but Scylla uses a split size of 1MB so you'll see a great boost of performance and stability by setting this setting to the right number.
 
-spark.cassandra.input.split.size\_in\_mb=1
+spark.cassandra.input.split.size_in_mb=1
 
 - align **driver timeouts with server timeouts**
 
@@ -286,23 +286,23 @@ It is advised to make sure that your read request timeouts are the same on the d
 
 /etc/scylla/scylla.yaml
 
-read\_request\_timeout\_in\_ms: 150000
+read_request_timeout_in_ms: 150000
 
 spark-defaults.conf
 
-spark.cassandra.connection.timeout\_ms=150000
-spark.cassandra.read.timeout\_ms=150000
+spark.cassandra.connection.timeout_ms=150000
+spark.cassandra.read.timeout_ms=150000
 
 // optional if you want to fail / retry faster for HA scenarios
-spark.cassandra.connection.reconnection\_delay\_ms.max=5000
-spark.cassandra.connection.reconnection\_delay\_ms.min=1000
+spark.cassandra.connection.reconnection_delay_ms.max=5000
+spark.cassandra.connection.reconnection_delay_ms.min=1000
 spark.cassandra.query.retry.count=100
 
 - adjust your **reads per second** rate
 
 Last but surely not least, this setting you will need to try and find out the best value for yourself since it has a direct impact on the load on your Scylla cluster. You will be looking at pushing your POC cluster to almost 100% load.
 
-spark.cassandra.input.reads\_per\_sec=6666
+spark.cassandra.input.reads_per_sec=6666
 
 As I said before, I could only get this to work perfectly using the 2.0.1 version of the spark-cassandra-connector driver. But then it worked very well and with great speed.
 
@@ -377,7 +377,7 @@ The results showed that I could almost get rid of a whole minute in the total pr
 
 Tests using Python showed robust queries experiencing far less failures than the spark-cassandra-connector, even more during the cold start scenario.
 
-- The usage of **execute\_concurrent()** provides a clean and linear interface to submit a large number of queries while providing some level of concurrency control
+- The usage of **execute_concurrent()** provides a clean and linear interface to submit a large number of queries while providing some level of concurrency control
 - Increasing the **concurrency** parameter from 100 to **512** provided additional throughput, but increasing it more looked useless
 - **Protocol version 4** forbids the tuning of connection requests / number to some sort of auto configuration. All tentative to hand tune it (by lowering protocol version to 2) failed to achieve higher throughput
 - Installation of **libev** on the system allows the cassandra-driver to use it to handle concurrency instead of asyncore with a somewhat lower load footprint on the worker node but no noticeable change on the throughput

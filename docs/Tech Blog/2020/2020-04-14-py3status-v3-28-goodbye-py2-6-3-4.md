@@ -19,12 +19,12 @@ Debian buster users might be interested in the installation war story that @[TRS
 ## Changelog since v3.26
 
 - drop support for EOL Python 2.6-3.4 (#1896), by Hugo van Kemenade
-- i3status: support read\_file module (#1909), by @lasers thx to @dohseven
+- i3status: support read_file module (#1909), by @lasers thx to @dohseven
 - clock module: add "locale" config parameter to change time representation (#1910), by inemajo
 - docs: update debian instructions fix #1916
-- mpd\_status module: use currentsong command if possible (#1924), by girst
+- mpd_status module: use currentsong command if possible (#1924), by girst
 - networkmanager module: allow using the currently active AP in formats (#1921), by Benoît Dardenne
-- volume\_status module: change amixer flag ordering fix #1914 (#1920)
+- volume_status module: change amixer flag ordering fix #1914 (#1920)
 
 ## Thank you contributors
 

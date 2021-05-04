@@ -120,8 +120,8 @@ This example is for gentoo-sources-4.3.3, adjust your version accordingly :
 
 When emerging the gentoo-sources package, you should see the patch being applied. Check that it worked by issuing :
 
-(chroot) # grep BRCM\_CC\_4350 /usr/src/linux/drivers/net/wireless/brcm80211/brcmfmac/chip.c
-case BRCM\_CC\_4350\_CHIP\_ID:
+(chroot) # grep BRCM_CC_4350 /usr/src/linux/drivers/net/wireless/brcm80211/brcmfmac/chip.c
+case BRCM_CC_4350_CHIP_ID:
 
 The resulting kernel module will be called **brcmfmac**, make sure to load it on boot by adding it in your **/etc/conf.d/modules** :
 
@@ -144,9 +144,9 @@ I used **genkernel** to build my kernel. I've done a very few adjustments but th
 
 - support for NVME SSD added as builtin
 - it is builtin for ext4 only (other FS are not compiled in)
-- support for DM\_CRYPT and LUKS ciphers for encrypted /home
-- the root partition is hardcoded in the kernel as **/dev/nvme0n1p3** so if yours is different, you'll need to change **CONFIG\_CMDLINE** and compile it yourself
-- the CONFIG\_CMDLINE above is needed because you can't pass kernel parameters using UEFI so you have to hardcode them in the kernel itself
+- support for DM_CRYPT and LUKS ciphers for encrypted /home
+- the root partition is hardcoded in the kernel as **/dev/nvme0n1p3** so if yours is different, you'll need to change **CONFIG_CMDLINE** and compile it yourself
+- the CONFIG_CMDLINE above is needed because you can't pass kernel parameters using UEFI so you have to hardcode them in the kernel itself
 - support for the intel graphic card DRM and framebuffer (there's a kernel bug with skylake CPUs which will spam the logs but it still works good)
 
 Get the kernel config and compile it :
@@ -155,7 +155,7 @@ Get the kernel config and compile it :
 
 (chroot) # mkdir -p /etc/kernels
 (chroot) # cd /etc/kernels
-(chroot) # wget http://ultrabug.fr/gentoo/xps9350/kernel-config-x86\_64-4.4.4-gentoo
+(chroot) # wget http://ultrabug.fr/gentoo/xps9350/kernel-config-x86_64-4.4.4-gentoo
 (chroot) # genkernel kernel
 
 The proposed kernel config here is for gentoo-sources-4.4.4 so **make sure to rename the file for your current version**.
@@ -168,8 +168,8 @@ This kernel is far from perfect but it works very good so far, sound, webcam and
 
 I can recommend using the following on your **/etc/portage/make.conf** :
 
-INPUT\_DRIVERS="evdev synaptics"
-VIDEO\_CARDS="intel i965"
+INPUT_DRIVERS="evdev synaptics"
+VIDEO_CARDS="intel i965"
 
 ## fstab for SSD
 
@@ -189,30 +189,30 @@ I advise adding the **cryptsetup** to your USE variable in **/etc/portage/make.c
 I assume you don't have created your user yet so your unmounted /home is empty. Make sure that :
 
 - your /dev/nvme0n1p4 home partition is **not mounted**
-- you **removed** the corresponding **/home** line from your **/etc/fstab** (we'll configure pam\_mount to get it auto-mounted on login)
+- you **removed** the corresponding **/home** line from your **/etc/fstab** (we'll configure pam_mount to get it auto-mounted on login)
 
 AFAIK, the LUKS password you'll set on the first slot when issuing luksFormat below should be the same as your user's password !
 
 (chroot) # cryptsetup luksFormat -s 512 /dev/nvme0n1p4
-(chroot) # cryptsetup luksOpen /dev/nvme0n1p4 crypt\_home
-(chroot) # mkfs.ext4 /dev/mapper/crypt\_home
-(chroot) # mount /dev/mapper/crypt\_home /home
+(chroot) # cryptsetup luksOpen /dev/nvme0n1p4 crypt_home
+(chroot) # mkfs.ext4 /dev/mapper/crypt_home
+(chroot) # mount /dev/mapper/crypt_home /home
 (chroot) # useradd -m -G wheel,audio,video,plugdev,portage,users USERNAME
 (chroot) # passwd USERNAME
 (chroot) # umount /home
-(chroot) # cryptsetup luksClose crypt\_home
+(chroot) # cryptsetup luksClose crypt_home
 
-We'll use sys-auth/**pam\_mount** to manage the mounting of our /home partition when a user logs in successfully, so make sure you **emerge pam\_mount** first, then configure the following files :
+We'll use sys-auth/**pam_mount** to manage the mounting of our /home partition when a user logs in successfully, so make sure you **emerge pam_mount** first, then configure the following files :
 
-- **/etc/security/pam\_mount.conf.xml** (only line added is the _volume_ one)
+- **/etc/security/pam_mount.conf.xml** (only line added is the _volume_ one)
 
 <?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE pam\_mount SYSTEM "pam\_mount.conf.xml.dtd">
+<!DOCTYPE pam_mount SYSTEM "pam_mount.conf.xml.dtd">
 <!--
-	See pam\_mount.conf(5) for a description.
+	See pam_mount.conf(5) for a description.
 -->
 
-<pam\_mount>
+<pam_mount>
 
 		<!-- debug should come before everything else,
 		since this file is still processed in a single pass
@@ -224,16 +224,16 @@ We'll use sys-auth/**pam\_mount** to manage the mounting of our /home partition 
 
 <volume user="USERNAME" fstype="auto" path="/dev/nvme0n1p4" mountpoint="/home" options="fsck,noatime" />
 
-		<!-- pam\_mount parameters: General tunables -->
+		<!-- pam_mount parameters: General tunables -->
 
 <!--
-<luserconf name=".pam\_mount.conf.xml" />
+<luserconf name=".pam_mount.conf.xml" />
 -->
 
 <!-- Note that commenting out mntoptions will give you the defaults.
      You will need to explicitly initialize it with the empty string
      to reset the defaults to nothing. -->
-<mntoptions allow="nosuid,nodev,loop,encryption,fsck,nonempty,allow\_root,allow\_other" />
+<mntoptions allow="nosuid,nodev,loop,encryption,fsck,nonempty,allow_root,allow_other" />
 <!--
 <mntoptions deny="suid,dev" />
 <mntoptions allow="\*" />
@@ -244,34 +244,34 @@ We'll use sys-auth/**pam\_mount** to manage the mounting of our /home partition 
 <!-- requires ofl from hxtools to be present -->
 <logout wait="0" hup="no" term="no" kill="no" />
 
-		<!-- pam\_mount parameters: Volume-related -->
+		<!-- pam_mount parameters: Volume-related -->
 
 <mkmountpoint enable="1" remove="true" />
 
-</pam\_mount>
+</pam_mount>
 
-- **/etc/pam.d/system-auth** (only lines added are the ones with _pam\_mount.so_)
+- **/etc/pam.d/system-auth** (only lines added are the ones with _pam_mount.so_)
 
-auth		required	pam\_env.so 
-auth		required	pam\_unix.so try\_first\_pass likeauth nullok 
-auth		optional	pam\_mount.so
-auth		optional	pam\_permit.so
+auth		required	pam_env.so 
+auth		required	pam_unix.so try_first_pass likeauth nullok 
+auth		optional	pam_mount.so
+auth		optional	pam_permit.so
 
-account		required	pam\_unix.so 
-account		optional	pam\_permit.so
+account		required	pam_unix.so 
+account		optional	pam_permit.so
 
-password	optional	pam\_mount.so
-password	required	pam\_cracklib.so difok=2 minlen=8 dcredit=2 ocredit=2 retry=3 
-password	required	pam\_unix.so try\_first\_pass use\_authtok nullok sha512 shadow 
-password	optional	pam\_permit.so
+password	optional	pam_mount.so
+password	required	pam_cracklib.so difok=2 minlen=8 dcredit=2 ocredit=2 retry=3 
+password	required	pam_unix.so try_first_pass use_authtok nullok sha512 shadow 
+password	optional	pam_permit.so
 
-session		optional	pam\_mount.so
-session		required	pam\_limits.so 
-session		required	pam\_env.so 
-session		required	pam\_unix.so 
-session		optional	pam\_permit.so
+session		optional	pam_mount.so
+session		required	pam_limits.so 
+session		required	pam_env.so 
+session		required	pam_unix.so 
+session		optional	pam_permit.so
 
-That's it, easy heh ?! When you login as your user, pam\_mount will decrypt your home partition using your user's password and mount it on /home !
+That's it, easy heh ?! When you login as your user, pam_mount will decrypt your home partition using your user's password and mount it on /home !
 
 ## UEFI booting your Gentoo Linux
 

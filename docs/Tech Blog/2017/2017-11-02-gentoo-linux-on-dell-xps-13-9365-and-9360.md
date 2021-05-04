@@ -134,13 +134,13 @@ The only thing to prepare is to format the UEFI boot partition as FAT32. Do not 
 
 I strongly recommend using at least the following on your **/etc/portage/make.conf** :
 
-GRUB\_PLATFORM="efi-64"
-INPUT\_DEVICES="evdev synaptics"
-VIDEO\_CARDS="intel i965"
+GRUB_PLATFORM="efi-64"
+INPUT_DEVICES="evdev synaptics"
+VIDEO_CARDS="intel i965"
 
 USE="bindist cryptsetup"
 
-The **GRUB\_PLATFORM** one is important for later grub setup and the **cryptsetup** USE flag will help you along the way.
+The **GRUB_PLATFORM** one is important for later grub setup and the **cryptsetup** USE flag will help you along the way.
 
 ## fstab for SSD
 
@@ -175,14 +175,14 @@ Now it's time for the grub magic to happen so you can boot your wonderful Gentoo
 - make sure your boot vfat partition is mounted on /boot
 - edit your **/etc/default/grub** configuration file with the following:
 
-GRUB\_CMDLINE\_LINUX="crypt\_root=/dev/nvme0n1p4 keymap=fr"
+GRUB_CMDLINE_LINUX="crypt_root=/dev/nvme0n1p4 keymap=fr"
 
 This will allow your initramfs to know it has to read the encrypted root partition from the given partition and to prompt for its password in the given keyboard layout (french here).
 
 Now let's install the grub UEFI boot files and setup the UEFI BIOS partition.
 
-\# grub-install --efi-directory=/boot --target=x86\_64-efi /dev/nvme0n1
-Installing for x86\_64-efi platform.
+\# grub-install --efi-directory=/boot --target=x86_64-efi /dev/nvme0n1
+Installing for x86_64-efi platform.
 Installation finished. No error reported
 
 It should report no error, then we can generate the grub boot config:

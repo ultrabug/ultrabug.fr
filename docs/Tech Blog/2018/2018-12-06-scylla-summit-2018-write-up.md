@@ -47,7 +47,7 @@ Last but not least, **columnar storage** optimized for time series and analytics
 
 ### Latency is expensive  
 
-If you care for latency, you might be happy to hear that a new polling API (named [IOCB\_CMD\_POLL](https://old.lwn.net/Articles/742978/)) has been contributed by Christoph Hellwig and Avi Kivity to the 4.19 Linux kernel which avoids context switching I/O by using a shared ring between kernel and userspace. Scylla will be using it by default if the kernel supports it.  
+If you care for latency, you might be happy to hear that a new polling API (named [IOCB_CMD_POLL](https://old.lwn.net/Articles/742978/)) has been contributed by Christoph Hellwig and Avi Kivity to the 4.19 Linux kernel which avoids context switching I/O by using a shared ring between kernel and userspace. Scylla will be using it by default if the kernel supports it.  
   
 The iotune utility has been upgraded since 2.3 to generate an [enhanced I/O](https://www.scylladb.com/2018/04/19/scylla-i-o-scheduler-3/) configuration.  
   
@@ -77,7 +77,7 @@ A lot has been [written on it already](https://www.scylladb.com/2018/11/08/overh
 
 - Materialized Views do back fill the whole data set  
     - this job is done by the view building process
-    - you can watch its progress in the **system\_distributed.view\_build\_status** table  
+    - you can watch its progress in the **system_distributed.view_build_status** table  
         
 - Secondary Indexes are Materialized Views under the hood  
     - it's like a reverse pointer to the primary key of the Main Table  

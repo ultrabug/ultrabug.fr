@@ -25,5 +25,5 @@ This one is around since 2.3.2 and will be available as a **new type of index** 
 - Better server stats framework
 - Storage engine improvements to **reduce fragmentation**
 - New operators : $push to sorted and fixed size arrays, $setOnInsert modifier for upserts, $geoNear and $within operators in aggregation framework
-- **\_secondaryThrottle is now on by default** : this adds a write concern support for chunk migration reducing the replication lag caused by chunk moves
+- **_secondaryThrottle is now on by default** : this adds a write concern support for chunk migration reducing the replication lag caused by chunk moves
 - **\--objcheck is now on by default** : the server validates the requests' objects before inserting the data. This used to have a slight performance impact but should be countered by v8 fairly well

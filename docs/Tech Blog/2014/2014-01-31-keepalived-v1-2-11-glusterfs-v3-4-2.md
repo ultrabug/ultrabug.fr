@@ -25,7 +25,7 @@ Quick post for two quick bumps related to clustering.
 - autoconf: better libnl3 detection
 - Fix memory allocation for MD5 digest
 - Quite some nice memory leak fixes on different components
-- vrrp: dont try to load ip\_vs module when not needed
+- vrrp: dont try to load ip_vs module when not needed
 - Pim van den Berg work on libipvs-2.6 to sync with libipvs from ipvsadm 1.27
 - vrrp: extend ip parser to support default and default6
 - vrrp: fix/extend gratuitous ARP handling (multiple people reported issues where MASTER didnt recover properly after outage due to no gratuitous ARP sent)

@@ -17,4 +17,4 @@ Looks like rabbitMQ upstream likes to bump their stuff right after I catch-up wi
 ## highlights
 
 - fix crash in the delegate mechanism leading to various crashes, and intra-cluster incompatibility between RabbitMQ 3.1.4 and other members of the 3.1.x series (since 3.1.4)
-- prevent (harmless) errors being logged when pausing in pause\_minority mode (since 3.1.0)
+- prevent (harmless) errors being logged when pausing in pause_minority mode (since 3.1.0)

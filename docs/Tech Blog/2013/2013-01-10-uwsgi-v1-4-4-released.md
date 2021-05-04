@@ -17,6 +17,6 @@ Bug fix release only, I've just bumped it on portage.
 - backported a couple of fixes for the https router
 - fixed wrong typecasting in yaml and fixed subscription system on 32 bit
 - added and additional error report for the gevent plugin if a read() fails
-- improved apache2 mod\_proxy\_uwsgi
+- improved apache2 mod_proxy_uwsgi
 
 See the full [changelog](http://lists.unbit.it/pipermail/uwsgi/2012-December/005184.html) as usual.

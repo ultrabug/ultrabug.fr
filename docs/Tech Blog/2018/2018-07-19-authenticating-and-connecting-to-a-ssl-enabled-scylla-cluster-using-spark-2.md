@@ -19,34 +19,34 @@ The [authentication part](http://docs.scylladb.com/operating-scylla/security/) i
 # Environment
 
 - (py)spark: 2.1.0.cloudera2
-- spark-cassandra-connector: datastax:spark-cassandra-connector: 2.0.1-s\_2.11
+- spark-cassandra-connector: datastax:spark-cassandra-connector: 2.0.1-s_2.11
 - python: 3.5.5
-- java: 1.8.0\_144
+- java: 1.8.0_144
 - scylladb: 2.1.5
 
 # SSL cipher setup
 
-The Datastax spark cassandra driver uses default the **TLS\_RSA\_WITH\_AES\_256\_CBC\_SHA** cipher that the JVM does not support by default. This raises the following error when connecting to Scylla:
+The Datastax spark cassandra driver uses default the **TLS_RSA_WITH_AES_256_CBC_SHA** cipher that the JVM does not support by default. This raises the following error when connecting to Scylla:
 
-18/07/18 13:13:41 WARN channel.ChannelInitializer: Failed to initialize a channel. Closing: \[id: 0x8d6f78a7\]
-java.lang.IllegalArgumentException: Cannot support TLS\_RSA\_WITH\_AES\_256\_CBC\_SHA with currently installed providers
+18/07/18 13:13:41 WARN channel.ChannelInitializer: Failed to initialize a channel. Closing: [id: 0x8d6f78a7]
+java.lang.IllegalArgumentException: Cannot support TLS_RSA_WITH_AES_256_CBC_SHA with currently installed providers
 
 According to the [ssl documentation](https://github.com/datastax/spark-cassandra-connector/blob/master/doc/reference.md#cassandra-ssl-connection-options) we have two ciphers available:
 
-1. TLS\_RSA\_WITH\_AES\_256\_CBC\_SHA
-2. TLS\_RSA\_WITH\_AES\_128\_CBC\_SHA
+1. TLS_RSA_WITH_AES_256_CBC_SHA
+2. TLS_RSA_WITH_AES_128_CBC_SHA
 
-We can get get rid of the error by lowering the cipher to **TLS\_RSA\_WITH\_AES\_128\_CBC\_SHA** using the following configuration:
+We can get get rid of the error by lowering the cipher to **TLS_RSA_WITH_AES_128_CBC_SHA** using the following configuration:
 
-.config("spark.cassandra.connection.ssl.enabledAlgorithms", "TLS\_RSA\_WITH\_AES\_128\_CBC\_SHA")\\
+.config("spark.cassandra.connection.ssl.enabledAlgorithms", "TLS_RSA_WITH_AES_128_CBC_SHA")\\
 
-However, this is not really a good solution and instead we'd be inclined to **use the TLS\_RSA\_WITH\_AES\_256\_CBC\_SHA** version. For this we need to follow this [Datastax's procedure](https://support.datastax.com/hc/en-us/articles/204226129-Receiving-error-Caused-by-java-lang-IllegalArgumentException-Cannot-support-TLS-RSA-WITH-AES-256-CBC-SHA-with-currently-installed-providers-on-DSE-startup-after-setting-up-client-to-node-encryption).
+However, this is not really a good solution and instead we'd be inclined to **use the TLS_RSA_WITH_AES_256_CBC_SHA** version. For this we need to follow this [Datastax's procedure](https://support.datastax.com/hc/en-us/articles/204226129-Receiving-error-Caused-by-java-lang-IllegalArgumentException-Cannot-support-TLS-RSA-WITH-AES-256-CBC-SHA-with-currently-installed-providers-on-DSE-startup-after-setting-up-client-to-node-encryption).
 
 Then we need to deploy the JCE security jars **on our all client nodes**, if using YARN like us this means that you have to deploy these jars to all your NodeManager nodes.
 
 For example by hand:
 
-\# unzip jce\_policy-8.zip
+\# unzip jce_policy-8.zip
 # cp UnlimitedJCEPolicyJDK8/\*.jar /opt/oracle-jdk-bin-1.8.0.144/jre/lib/security/
 
 # Java trust store
@@ -61,7 +61,7 @@ The [spark-cassandra-connector documentation](https://github.com/datastax/spark-
 
 When we did not use the **trustStore** option, we would get some obscure error when connecting to Scylla:
 
-com.datastax.driver.core.exceptions.TransportException: \[node/1.1.1.1:9042\] Channel has been closed
+com.datastax.driver.core.exceptions.TransportException: [node/1.1.1.1:9042] Channel has been closed
 
 When enabling DEBUG logging, we get a clearer error which indicated a failure in validating the SSL certificate provided by the Scylla server node:
 
@@ -71,7 +71,7 @@ Caused by: sun.security.validator.ValidatorException: PKIX path building failed:
 
 You need to have the self-signed CA public certificate file, then issue the following command:
 
-\# keytool -importcert -file /usr/local/share/ca-certificates/MY\_SELF\_SIGNED\_CA.crt -keystore COMPANY\_TRUSTSTORE.jks -noprompt
+\# keytool -importcert -file /usr/local/share/ca-certificates/MY_SELF_SIGNED_CA.crt -keystore COMPANY_TRUSTSTORE.jks -noprompt
 Enter keystore password:  
 Re-enter new password: 
 Certificate was added to keystore
@@ -81,7 +81,7 @@ Certificate was added to keystore
 Now you need to configure spark to use the trustStore like this:
 
 .config("spark.cassandra.connection.ssl.trustStore.password", "PASSWORD")\\
-.config("spark.cassandra.connection.ssl.trustStore.path", "COMPANY\_TRUSTSTORE.jks")\\
+.config("spark.cassandra.connection.ssl.trustStore.path", "COMPANY_TRUSTSTORE.jks")\\
 
 # Spark SSL configuration example
 
@@ -89,18 +89,18 @@ This wraps up the SSL connection configuration used for spark.
 
 This example uses pyspark2 and reads a table in Scylla from a YARN cluster:
 
-$ pyspark2 --packages datastax:spark-cassandra-connector:2.0.1-s\_2.11 --files COMPANY\_TRUSTSTORE.jks
+$ pyspark2 --packages datastax:spark-cassandra-connector:2.0.1-s_2.11 --files COMPANY_TRUSTSTORE.jks
 
->>> spark = SparkSession.builder.appName("scylla\_app")\\
+>>> spark = SparkSession.builder.appName("scylla_app")\\
 .config("spark.cassandra.auth.password", "test")\\
 .config("spark.cassandra.auth.username", "test")\\
 .config("spark.cassandra.connection.host", "node1,node2,node3")\\
 .config("spark.cassandra.connection.ssl.clientAuth.enabled", True)\\
 .config("spark.cassandra.connection.ssl.enabled", True)\\
 .config("spark.cassandra.connection.ssl.trustStore.password", "PASSWORD")\\
-.config("spark.cassandra.connection.ssl.trustStore.path", "COMPANY\_TRUSTSTORE.jks")\\
-.config("spark.cassandra.input.split.size\_in\_mb", 1)\\
-.config("spark.yarn.queue", "scylla\_queue").getOrCreate()
+.config("spark.cassandra.connection.ssl.trustStore.path", "COMPANY_TRUSTSTORE.jks")\\
+.config("spark.cassandra.input.split.size_in_mb", 1)\\
+.config("spark.yarn.queue", "scylla_queue").getOrCreate()
 
->>> df = spark.read.format("org.apache.spark.sql.cassandra").options(table="my\_table", keyspace="test").load()
+>>> df = spark.read.format("org.apache.spark.sql.cassandra").options(table="my_table", keyspace="test").load()
 >>> df.show()

@@ -47,7 +47,7 @@ If one of your keys is over represented in your original data set, then the shar
 
 ### tracing queries
 
-The first step was to **trace queries in Scylla** to try to get deeper into the hotspot analysis. So we enabled tracing using the following formula to get about 1 trace per second in the **system\_traces** namespace.
+The first step was to **trace queries in Scylla** to try to get deeper into the hotspot analysis. So we enabled tracing using the following formula to get about 1 trace per second in the **system_traces** namespace.
 
 tracing probability = 1 / expected requests per second throughput
 
@@ -57,7 +57,7 @@ In our case, we were doing between 90K req/s and 150K req/s so we settled for 10
 
 Turns out tracing didn't help very much in our case because the traces do not include the query parameters in Scylla 2.1, it is becoming available in the soon to be released 2.2 version.
 
-**NOTE**: traces expire on the tables, make sure your TRUNCATE the **events** and **sessions** tables while iterating. Else you will have to wait for the next gc\_grace\_period (10 days by default) before they are actually removed. If you do not do that and generate millions of traces like we did, querying the mentioned tables will likely time out because of the "tombstoned" rows even if there is no trace inside any more.
+**NOTE**: traces expire on the tables, make sure your TRUNCATE the **events** and **sessions** tables while iterating. Else you will have to wait for the next gc_grace_period (10 days by default) before they are actually removed. If you do not do that and generate millions of traces like we did, querying the mentioned tables will likely time out because of the "tombstoned" rows even if there is no trace inside any more.
 
 ### looking at cfhistograms
 

@@ -35,6 +35,6 @@ In the mongoDB talks we never hear about safe writes but about write concerns. A
 ###  Highlights
 
 - Cursor can be copied with functions from the copy module
-- The set\_profiling\_level() method now supports a slow\_ms option
+- The set_profiling_level() method now supports a slow_ms option
 
 See the rest in the full [changelog](http://api.mongodb.org/python/2.4/changelog.html).

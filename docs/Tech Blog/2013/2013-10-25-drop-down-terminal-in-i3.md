@@ -29,18 +29,18 @@ The idea is simple, we'll create a special profile in terminator and have it spa
 
 Just edit your terminator configuration in _**~/.config/terminator/conf**_ and add :
 
-\[keybindings\]
-  hide\_window = F1
+[keybindings]
+  hide_window = F1
 
-Then add the _dropdown_ profile under the \[profiles\] section :
+Then add the _dropdown_ profile under the [profiles] section :
 
-\[profiles\]
-\[\[dropdown\]\]
-  exit\_action = close
-  scrollback\_lines = 10000
-  background\_image = None
-  scroll\_on\_output = False
-  show\_titlebar = False
+[profiles]
+[[dropdown]]
+  exit_action = close
+  scrollback_lines = 10000
+  background_image = None
+  scroll_on_output = False
+  show_titlebar = False
 
 That's my minimal config, you can add your own stuff to it as well. Now we only need to configure i3 to spawn this profile at login and have it in floating mode.
 
@@ -48,13 +48,13 @@ Modify your i3 config file, usually **~/.i3/config** :
 
 exec terminator -c dropdown -p dropdown -T "Le Terminator" -H --geometry=1550x800
 
-for\_window \[class="Terminator" instance="dropdown"\] floating enable
+for_window [class="Terminator" instance="dropdown"] floating enable
 
 That's as simple as this.
 
 EDIT: as per Joe's comment, you can also configure i3 to place your floating Terminator window wherever you want (in his case, top off the screen). This still goes into your i3 config from above :
 
-for\_window \[class=”Terminator” instance=”dropdown”\] floating enable move absolute position 0 0
+for_window [class=”Terminator” instance=”dropdown”] floating enable move absolute position 0 0
 
 There's still one limitation which I didn't come across yet :
 

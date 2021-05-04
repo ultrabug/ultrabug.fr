@@ -41,7 +41,7 @@ Et voilà, the client can dynamically detect new/obsolete servers and start work
 
 On Gentoo Linux, you'll just have to run the following commands to get started (other users refer to the [uWSGI documentation](http://uwsgi-docs.readthedocs.org/en/latest/Install.html) or your distro's package manager). The plugin will be built by hand as I'm still not sure how I'll package the uWSGI external plugins...
 
-$ sudo ACCEPT\_KEYWORDS="~amd64" emerge uwsgi
+$ sudo ACCEPT_KEYWORDS="~amd64" emerge uwsgi
 $ cd /usr/lib/uwsgi/
 $ sudo uwsgi --build-plugin https://github.com/unbit/uwsgi-consul
 $ cd -
@@ -50,8 +50,8 @@ $ cd -
 
 You'll have installed the [uwsgi-consul](https://github.com/unbit/uwsgi-consul) plugin which you should see here :
 
-$ ls /usr/lib/uwsgi/consul\_plugin.so
-/usr/lib/uwsgi/consul\_plugin.so
+$ ls /usr/lib/uwsgi/consul_plugin.so
+/usr/lib/uwsgi/consul_plugin.so
 
  
 
@@ -62,7 +62,7 @@ That's all we need to have uWSGI working with Consul.
 Gentoo users will need to add the _ultrabug_ overlay (use layman) and then install consul (other users refer to the [Consul documentation](http://www.consul.io/downloads.html) or your distro's package manager).
 
 $ sudo layman -a ultrabug
-$ sudo ACCEPT\_KEYWORDS="~amd64" USE="web" emerge consul
+$ sudo ACCEPT_KEYWORDS="~amd64" USE="web" emerge consul
 
  
 
@@ -82,7 +82,7 @@ To get this example running, we'll use the [uwsgi-consul-demo](https://github.co
 
 First of all we'll need the [consulate](https://github.com/gmr/consulate) python library (available on pypi via pip). Gentoo users can just install it (also from the ultrabug overlay added before) :
 
-$ sudo ACCEPT\_KEYWORDS="~amd64" emerge consulate
+$ sudo ACCEPT_KEYWORDS="~amd64" emerge consulate
 
  
 
@@ -97,7 +97,7 @@ First, we'll run the **client** which should report that no server is available
 
 $ python client.py 
 no consul-demo-server available
-\[...\]
+[...]
 no consul-demo-server available
 
  
@@ -105,15 +105,15 @@ no consul-demo-server available
 Open a new terminal and get inside the project's directory. Let's have uWSGI load the two **servers** and register them in Consul :
 
 $ uwsgi --ini uwsgi-consul-demo.ini --ini uwsgi-consul-demo.ini:server1 --ini uwsgi-consul-demo.ini:server2
-\[...\]
+[...]
 \* server #1 is up on port 2001
 
 \* server #2 is up on port 2002
 
-\[consul\] workers ready, let's register the service to the agent
-\[consul\] service consul-demo-server registered succesfully
-\[consul\] workers ready, let's register the service to the agent
-\[consul\] service consul-demo-server registered succesfully
+[consul] workers ready, let's register the service to the agent
+[consul] service consul-demo-server registered succesfully
+[consul] workers ready, let's register the service to the agent
+[consul] service consul-demo-server registered succesfully
 
  
 

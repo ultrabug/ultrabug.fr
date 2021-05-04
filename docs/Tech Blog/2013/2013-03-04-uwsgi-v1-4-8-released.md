@@ -40,7 +40,7 @@ See the full and detailed list [here](https://github.com/unbit/uwsgi-docs/blob/m
 - fixed a corner-case bug with the caching subsystem (Laurent Luce)
 - fixed ipcsem on Linux
 - backported --not-log-alarm (negative version of --log-alarm)
-- backported add\_timer and add\_rb\_timer api functions for the perl/psgi plugin
+- backported add_timer and add_rb_timer api functions for the perl/psgi plugin
 - backported --for-glob, this is like --for but with glob expansion (Guido Berhoerster)
 - avoid gateways crash on master shutdown
 - backported https re-handshake management

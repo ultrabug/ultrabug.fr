@@ -22,5 +22,5 @@ Quick post for a quick bugfix release of the rabbitMQ server. Please note that I
 - fix queue crash in mirrored queue handling of messages during promotion (since 2.6.0)
 - fix mirrored queue sync failure in the presence of un-acked messages not at the head of the queue (since 3.1.0)
 - allow hipe compilation on Erlang R16B01
-- make \`rabbitmqctl join\_cluster' idempotent (since 3.0.0)
-- improve \`rabbitmqctl cluster\_status' handling of partition info when cluster nodes are in the process of stopping (since 3.1.0)
+- make \`rabbitmqctl join_cluster' idempotent (since 3.0.0)
+- improve \`rabbitmqctl cluster_status' handling of partition info when cluster nodes are in the process of stopping (since 3.1.0)

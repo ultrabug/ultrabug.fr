@@ -9,7 +9,7 @@ tags:
   - "nosql"
 ---
 
-I needed to export a set of data from a **mongoDB** collection based on their **objectIDs' (\_id) timestamp** using **mongoexport**. The [mongoexport documentation](http://www.mongodb.org/display/DOCS/mongoexport) is everything but helpful on the subject so I had to find a workaround to answer this simple question : **_"export  all documents inserted yesterday on this collection in a CSV format"_**.
+I needed to export a set of data from a **mongoDB** collection based on their **objectIDs' (_id) timestamp** using **mongoexport**. The [mongoexport documentation](http://www.mongodb.org/display/DOCS/mongoexport) is everything but helpful on the subject so I had to find a workaround to answer this simple question : **_"export  all documents inserted yesterday on this collection in a CSV format"_**.
 
 # Relevant mongoexport options
 
@@ -33,16 +33,16 @@ import datetime
 
 now = datetime.datetime.now()
 yesterday = now - datetime.timedelta(days=1)
-start\_date = datetime.datetime(yesterday.year, yesterday.month, yesterday.day, 0, 0, 0)
-end\_date = datetime.datetime(now.year, now.month, now.day, 0, 0, 0)
-oid\_start = ObjectId.from\_datetime(start\_date)
-oid\_stop = ObjectId.from\_datetime(end\_date)
+start_date = datetime.datetime(yesterday.year, yesterday.month, yesterday.day, 0, 0, 0)
+end_date = datetime.datetime(now.year, now.month, now.day, 0, 0, 0)
+oid_start = ObjectId.from_datetime(start_date)
+oid_stop = ObjectId.from_datetime(end_date)
 
-print '{ "\_id" : { "$gte" : { "$oid": "%s" }, "$lt" : { "$oid": "%s" } } }' % ( str(oid\_start), str(oid\_stop) )
+print '{ "_id" : { "$gte" : { "$oid": "%s" }, "$lt" : { "$oid": "%s" } } }' % ( str(oid_start), str(oid_stop) )
 
 This script just prints out a command line compliant representation of the **objectIDs** for yesterday and today. So this query will select exactly what I wanted : _**all yesterday's objectIDs.**_ Example :
 
-__{ "\_id" : { "$gte" : { "$oid": "4fd535000000000000000000" } , "$lt" : { "$oid": "4fd686800000000000000000" } } }__
+__{ "_id" : { "$gte" : { "$oid": "4fd535000000000000000000" } , "$lt" : { "$oid": "4fd686800000000000000000" } } }__
 
 # Using mongoexport
 

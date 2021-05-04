@@ -10,7 +10,7 @@ tags:
   - "yubikey"
 ---
 
-In my previous blog post, I demonstrated [how to use a Yubikey to add a 2nd factor (2FA) authentication to SSH using pam\_ssh and pam\_yubico](http://www.ultrabug.fr/hardening-ssh-authentication-using-yubikey-12/).
+In my previous blog post, I demonstrated [how to use a Yubikey to add a 2nd factor (2FA) authentication to SSH using pam_ssh and pam_yubico](http://www.ultrabug.fr/hardening-ssh-authentication-using-yubikey-12/).
 
 In this article, I will go further and demonstrate another method using **Yubikey's Personal Identity Verification (PIV) capability**.
 
@@ -30,7 +30,7 @@ emerge dev-libs/opensc sys-auth/ykpers sys-auth/yubico-piv-tool sys-apps/pcsc-li
 
 Gentoo users should also allow the **pcscd** service to be hotplugged (started automatically upon key insertion) by modifying their **/etc/rc.conf** and having:
 
-rc\_hotplug="pcscd"
+rc_hotplug="pcscd"
 
 ## Yubikey setup
 
@@ -43,7 +43,7 @@ Firmware version 4.3.4 Touch level 783 Program sequence 3
 
 The USB mode will be set to: 0x2
 
-Commit? (y/n) \[n\]: y
+Commit? (y/n) [n]: y
 
 Then, we will create a new management key:
 
@@ -75,14 +75,14 @@ Here you are! You can now export your public key to use with OpenSSH:
 ssh-keygen -D opensc-pkcs11.so -e
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCWtqI37jwxYMJ9XLq9VwHgJlhZViPVAGIUfMm8SAlfs6cka4Cj570lkoGK04r8JAVJFy/iKfhGpL9N9XuartfIoq6Cg/6Qvg3REupuqs51V2cBaC/gnWIQ7qZqlzBulvcOvzNfHFD/lX42J58+E8tWnYg6GzIsImFZQVpmI6SxNfSmVQIqxIufInrbQaI+pKXntdTQC9wyNK5FAA8TXAdff5ZDnmetsOTVble9Ia5m6gqM7MnxNZ56uDpn+6lCxRZSW+Ln2PDE7sivVcST4qpfwY4P4Lrb3vrjCGODFg4xmGNKXsLi2+uZbs5rW7bg4HFO50kKDucPV1M+rBWA9999
 
-**Copy to your servers** your SSH public key to your usual **~/.ssh/authorized\_keys** file in your $HOME.
+**Copy to your servers** your SSH public key to your usual **~/.ssh/authorized_keys** file in your $HOME.
 
 ## Testing PIV secured SSH
 
 Plug-in your Yubikey, and then SSH to your remote server using the opensc-pkcs11 library. You will be prompted for your PIN and then successfully logged in :)
 
 ssh -I opensc-pkcs11.so cheetah
-Enter PIN for 'PIV\_II (PIV Card Holder pin)':
+Enter PIN for 'PIV_II (PIV Card Holder pin)':
 
 You can then configure SSH to use it by default for all your hosts in your **~/.ssh/config**
 

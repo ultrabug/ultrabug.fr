@@ -11,12 +11,12 @@ I came across a recurrent problem at work which was to convert special character
 
 I wanted to avoid having to use an external library such as [Unidecode](https://pypi.python.org/pypi/Unidecode/) (which is great obviously) so I ended up wandering around the **unicodedata** built-in library. Before I had to get too deep in the matter I found this [StackOverflow topic](http://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-in-a-python-unicode-string) which gives an interesting method to do so and works fine for me.
 
-def strip\_accents(s):
+def strip_accents(s):
     """
     Sanitarize the given unicode string and remove all special/localized
     characters from it.
 
-    Category "Mn" stands for Nonspacing\_Mark
+    Category "Mn" stands for Nonspacing_Mark
     """
     try:
         return ''.join(

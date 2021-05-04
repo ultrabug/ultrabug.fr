@@ -18,7 +18,7 @@ This one is very interesting to me because the code from the mighty [gevent-zero
 Migrating is as easy as :
 
 \# gevent-zeromq previous way
-from gevent\_zeromq import zmq
+from gevent_zeromq import zmq
 
 # pyzmq new way
 from pyzmq.green import zmq

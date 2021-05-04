@@ -33,7 +33,7 @@ So I decided this was time for a major cleanup of the mongoDB ebuilds in portage
   21 Aug 2013; Ultrabug <ultrabug@gentoo.org> -mongodb-2.0.7-r1.ebuild,
   -mongodb-2.0.7-r2.ebuild, -mongodb-2.0.8-r1.ebuild, -mongodb-2.0.8-r2.ebuild,
   -mongodb-2.2.0-r1.ebuild, -mongodb-2.2.0-r2.ebuild, -mongodb-2.2.4.ebuild,
-  +mongodb-2.2.6.ebuild, -mongodb-2.4.5.ebuild, -mongodb-2.4.6\_rc1.ebuild,
+  +mongodb-2.2.6.ebuild, -mongodb-2.4.5.ebuild, -mongodb-2.4.6_rc1.ebuild,
   +mongodb-2.4.6.ebuild, -files/mongodb-1.8.5-fix-smokepy.patch,
   -files/mongodb-1.8-fix-scons.patch, -files/mongodb-2.2-fix-scons.patch,
   -files/mongodb-2.2-fix-sconscript.patch,
@@ -57,7 +57,7 @@ This one is quite interesting as it brings both new and improved features as wel
 
 ### highlights / explanations
 
-- The **max\_pool\_size** option actually means what it says now. Pymongo will open at most this number of sockets to your servers. Do remember that if you share a connection between threads, then your (**max\_pool\_size**+1) thread will wait for a socket to be freed before being able to process your command.
+- The **max_pool_size** option actually means what it says now. Pymongo will open at most this number of sockets to your servers. Do remember that if you share a connection between threads, then your (**max_pool_size**+1) thread will wait for a socket to be freed before being able to process your command.
 - waitQueueMultiple and waitQueueTimeoutMS options will help you define how much and how long you want a process to wait for a socket to be available before raising an exception.
 - Pymongo automatically splits batch inserts into 48MB chunks so you don't have to worry about pushing a huge list of documents for insertion.
 - Support for aggregation cursors (for use with dev version 2.5.1, not used on production now)

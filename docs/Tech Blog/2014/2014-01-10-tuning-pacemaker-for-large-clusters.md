@@ -18,7 +18,7 @@ I thought I'd share how to tune your cluster to handle such a bunch of resources
 
 When running a large cluster you may hit the following problem :
 
-error: crm\_ipc\_prepare: Could not compress the message into less than the configured ipc limit (51200 bytes).Set PCMK\_ipc\_buffer to a higher value (2071644 bytes suggested)
+error: crm_ipc_prepare: Could not compress the message into less than the configured ipc limit (51200 bytes).Set PCMK_ipc_buffer to a higher value (2071644 bytes suggested)
 
 ## Evaluating the buffer size
 
@@ -29,26 +29,26 @@ Have a look at the size of your current CIB :
 # bzip2 cib.xml
 # ls -l cib.xml.bz2
 
-The CIB is compressed on the wire using bzip2 so you have to **compare the compressed cib.xml.bz2 with the IPC default buffer size of 51200** and you'll find the sufficient PCMK\_ipc\_buffer value for you (take more just to be safe).
+The CIB is compressed on the wire using bzip2 so you have to **compare the compressed cib.xml.bz2 with the IPC default buffer size of 51200** and you'll find the sufficient PCMK_ipc_buffer value for you (take more just to be safe).
 
 ## Setting the environment variables
 
 On Gentoo Linux, you'll have to create the **/etc/env.d/90pacemaker** file containing :
 
-PCMK\_ipc\_type=shared-mem
-PCMK\_ipc\_buffer=2071644
+PCMK_ipc_type=shared-mem
+PCMK_ipc_buffer=2071644
 
-- **PCMK\_ipc\_buffer** : you may need to increase this depending on your cluster size and needs
-- **PCMK\_ipc\_type** : the shared-mem one is the default now, other values are socket|posix|sysv
+- **PCMK_ipc_buffer** : you may need to increase this depending on your cluster size and needs
+- **PCMK_ipc_type** : the shared-mem one is the default now, other values are socket|posix|sysv
 
 You will also need to set these env. vars in your **.bashrc** so that the crm CLI doesn't break :
 
-export PCMK\_ipc\_type=shared-mem
-export PCMK\_ipc\_buffer=2071644
+export PCMK_ipc_type=shared-mem
+export PCMK_ipc_buffer=2071644
 
 ## Future
 
-Finally, I wanted to let you know that the upcoming Pacemaker v1.1.11 should come with a feature which will allow the IPC layer to adjust the PCMK\_ipc\_buffer automagically !
+Finally, I wanted to let you know that the upcoming Pacemaker v1.1.11 should come with a feature which will allow the IPC layer to adjust the PCMK_ipc_buffer automagically !
 
 Hopefully you shouldn't need this blog post anymore pretty soon :)
 

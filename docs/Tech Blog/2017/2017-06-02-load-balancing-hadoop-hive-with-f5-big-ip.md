@@ -28,13 +28,13 @@ Anyway, using Cloudera Manager to set up HS2 HA is not hard but there are a few 
 
 Example beeline connection string before HA:
 
-!connect jdbc:hive2://hive-server:10000/default;principal=hive/\_HOST@REALM.COM
+!connect jdbc:hive2://hive-server:10000/default;principal=hive/_HOST@REALM.COM
 
-and with HA (notice we changed also the \_HOST):
+and with HA (notice we changed also the _HOST):
 
 !connect jdbc:hive2://ha-hive-fqdn:10000/default;principal=hive/ha-hive-fqdn@REALM.COM
 
-We found out the kerberos principal gotcha the hard way... The reason behind this is that the **\_HOST** is basically a macro that will get resolved to the client host name which will then be used to validate the kerberos ticket. When running in load balanced/HA mode , the actual source IP will be replaced by the load balancer's IP (SNAT) and the kerberos reverse DNS lookup will then fail!
+We found out the kerberos principal gotcha the hard way... The reason behind this is that the **_HOST** is basically a macro that will get resolved to the client host name which will then be used to validate the kerberos ticket. When running in load balanced/HA mode , the actual source IP will be replaced by the load balancer's IP (SNAT) and the kerberos reverse DNS lookup will then fail!
 
 So if you do not use the HS2 HA URL in the kerberos principal string, you will get Kerberos GSSAPI errors when the load balanding SNAT will be used (see next chapter).
 
@@ -46,7 +46,7 @@ Our pals at Cloudera have brought a good doc for [Impala HA with F5](http://www.
 
 ## Kerberos GSSAPI problem
 
-When we applied it the first time and tried to switch to using the F5, all our jobs failed because of the kerberos \_HOST principal problem mentioned on the previous chapter. This one is not that hard to find out and debug with a google search and explained on Cloudera community forums.
+When we applied it the first time and tried to switch to using the F5, all our jobs failed because of the kerberos _HOST principal problem mentioned on the previous chapter. This one is not that hard to find out and debug with a google search and explained on Cloudera community forums.
 
 We then migrated (again) all our jobs to update the principal connection strings before migrating again to the F5 load balancers.
 

@@ -23,8 +23,8 @@ I also fixed a long awaiting bug to bump the [rabbitMQ C client to v0.5.0](https
 
 Johan Bergström is as always doing a great and helpful job and is [actively working on redis](https://bugs.gentoo.org/show_bug.cgi?id=508456), thanks mate !
 
-- \[NEW\] The HyperLogLog data structure. You can [read more about it](http://antirez.com/news/75) [ in this blog post](http://antirez.com/news/75)
-- \[NEW\] The Sorted Set data type has now support for lexicographic range queries, check the new commands ZRANGEBYLEX, ZLEXCOUNT and ZREMRANGEBYLEX, which are documented at http://redis.io
+- [NEW] The HyperLogLog data structure. You can [read more about it](http://antirez.com/news/75) [ in this blog post](http://antirez.com/news/75)
+- [NEW] The Sorted Set data type has now support for lexicographic range queries, check the new commands ZRANGEBYLEX, ZLEXCOUNT and ZREMRANGEBYLEX, which are documented at http://redis.io
 
 ## py3status v1.5
 

@@ -50,21 +50,21 @@ Almost all the tricky part lies in what needs to be done in order to solve the p
 
 The solution is to have the VIP configured on the loopback interface (lo) with a **host scope** on the keepalived BACKUP servers while it is configured on the main interface (bond0) on the keepalived MASTER server. This is what is usually done when you use pacemaker and ldirectord with IPAddr2 but keepalived does not handle this kind of configuration natively.
 
-We'll use the notify\_master and notify\_backup directives of keepalived.conf to handle this :
+We'll use the notify_master and notify_backup directives of keepalived.conf to handle this :
 
-notify\_master /etc/keepalived/to\_master.sh
-notify\_backup /etc/keepalived/to\_backup.sh
+notify_master /etc/keepalived/to_master.sh
+notify_backup /etc/keepalived/to_backup.sh
 
 We'll discuss a few problems to fix before detailing those scripts.
 
 ## The ARP problem
 
-Now some of you wise readers will wonder about the ARP cache corruptions which will happen when multiple hosts claim to own the same IP address on the same subnet. Let's fix this problem now then as the kernel does have a way of handling this properly. Basically we'll ask the kernel not to advert the server's MAC address for the VIP on certain conditions using the **arp\_ignore** and **arp\_announce** sysctl.
+Now some of you wise readers will wonder about the ARP cache corruptions which will happen when multiple hosts claim to own the same IP address on the same subnet. Let's fix this problem now then as the kernel does have a way of handling this properly. Basically we'll ask the kernel not to advert the server's MAC address for the VIP on certain conditions using the **arp_ignore** and **arp_announce** sysctl.
 
 Add those lines on the sysctl.conf of your servers :
 
-net.ipv4.conf.all.arp\_ignore = 3
-net.ipv4.conf.all.arp\_announce = 2
+net.ipv4.conf.all.arp_ignore = 3
+net.ipv4.conf.all.arp_announce = 2
 
 [Read more](http://kb.linuxvirtualserver.org/wiki/Using_arp_announce/arp_ignore_to_disable_ARP) about those parameters for the detailed explanation of those values.
 
@@ -74,7 +74,7 @@ This is another problem arising from the fact that the load balancers are also a
 
 ## Final configuration
 
-**to\_master.sh**
+**to_master.sh**
 
 #!/bin/bash
 
@@ -84,7 +84,7 @@ ipvsadm --restore < /tmp/keepalived.ipvs
 1. drop the VIP from the loopback interface (it will be setup by keepalived on the master interface)
 2. restore the IPVS configuration
 
-**to\_backup.sh**
+**to_backup.sh**
 
 #!/bin/bash
 

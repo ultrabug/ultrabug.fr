@@ -41,7 +41,7 @@ To illustrate this, I'll take a sample of 100,000 rows of a simple and naive sch
 
 _Note: all those operations were done using Scylla 3.0.3 on Gentoo Linux._
 
-CREATE TABLE IF NOT EXISTS test.not\_optimized  
+CREATE TABLE IF NOT EXISTS test.not_optimized  
 (  
     uid text,  
     readings list<int>,  
@@ -50,11 +50,11 @@ CREATE TABLE IF NOT EXISTS test.not\_optimized
 
 Once inserted on disk, this takes about **250MB** of disk space:
 
-250M    not\_optimized-00cf1500520b11e9ae38000000000004
+250M    not_optimized-00cf1500520b11e9ae38000000000004
 
 Now depending on your use case, if those readings at not meant to be updated for example you could use a **frozen list** instead, which will allow a huge storage optimization:
 
-CREATE TABLE IF NOT EXISTS test.mid\_optimized  
+CREATE TABLE IF NOT EXISTS test.mid_optimized  
  (  
      uid text,  
      readings frozen<list<int>>,  
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS test.mid\_optimized
 
 With this frozen list we now consume **54MB** of disk space **for the same data**!
 
-54M     mid\_optimized-011bae60520b11e9ae38000000000004
+54M     mid_optimized-011bae60520b11e9ae38000000000004
 
 There's another optimization that we could do since our user ID are UUIDs. Let's switch to the **uuid type instead of text**:
 
@@ -84,14 +84,14 @@ All those examples were not using compression. If your workload latencies allows
 
 Let's see its impact on our tables:
 
-ALTER TABLE test.not\_optimized WITH compression = {'sstable\_compression': 'org.apache.cassandra.io.compress.LZ4Compressor'};  
-ALTER TABLE test.mid\_optimized WITH compression = {'sstable\_compression': 'org.apache.cassandra.io.compress.LZ4Compressor'};  
-ALTER TABLE test.optimized WITH compression = {'sstable\_compression': 'org.apache.cassandra.io.compress.LZ4Compressor'};
+ALTER TABLE test.not_optimized WITH compression = {'sstable_compression': 'org.apache.cassandra.io.compress.LZ4Compressor'};  
+ALTER TABLE test.mid_optimized WITH compression = {'sstable_compression': 'org.apache.cassandra.io.compress.LZ4Compressor'};  
+ALTER TABLE test.optimized WITH compression = {'sstable_compression': 'org.apache.cassandra.io.compress.LZ4Compressor'};
 
 Then we run a **nodetool compact test** to force a (re)compaction of all the sstables and we get:
 
-63M     not\_optimized-00cf1500520b11e9ae38000000000004  
-28M     mid\_optimized-011bae60520b11e9ae38000000000004  
+63M     not_optimized-00cf1500520b11e9ae38000000000004  
+28M     mid_optimized-011bae60520b11e9ae38000000000004  
 24M     optimized-01f74150520b11e9ae38000000000004
 
 Compression is really a great gain here allowing another **50% reduced disk space usage reduction on our optimized table**!
@@ -100,7 +100,7 @@ Compression is really a great gain here allowing another **50% reduced disk spac
 
 Since the Scylla 3.0 release you can use the latest "mc" sstable storage format on your scylla clusters. It promises a greater efficiency for [usually a way more reduced disk space](https://www.scylladb.com/2019/01/24/scylla-sstable-3-0-can-decrease-file-sizes-50-or-more/) consumption!
 
-It is **not** enabled by default, you have to add the **enable\_sstables\_mc\_format: true** parameter to your scylla.yaml for it to be taken into account.
+It is **not** enabled by default, you have to add the **enable_sstables_mc_format: true** parameter to your scylla.yaml for it to be taken into account.
 
 Since it's backward compatible, you have nothing else to do as new compactions will start being made using the "mc" storage format and the scylla server will seamlessly read from old sstables as well.
 
@@ -108,8 +108,8 @@ But in our case of immediate disk space outage, we switched to the new format on
 
 Let's demonstrate its impact on our test tables: we add the option to the **scylla.yaml** file, restart scylla-server and run n**odetool compact test** again:
 
-49M     not\_optimized-00cf1500520b11e9ae38000000000004  
-26M     mid\_optimized-011bae60520b11e9ae38000000000004  
+49M     not_optimized-00cf1500520b11e9ae38000000000004  
+26M     mid_optimized-011bae60520b11e9ae38000000000004  
 22M     optimized-01f74150520b11e9ae38000000000004
 
 That's a pretty cool gain of disk space, even more for the not optimized version of our schema!
@@ -135,4 +135,4 @@ This should only be considered as a sort of emergency procedure or for cost effi
 
 While this is possible even if the disk is not formatted using XFS, it not advised to separate the commitlog from data on modern SSD/NVMe disks but... you technically can do it (as we did) **on non production clusters**.
 
-Switching is simple, you just need to change the **commitlog\_directory** parameter in your scylla.yaml file.
+Switching is simple, you just need to change the **commitlog_directory** parameter in your scylla.yaml file.

@@ -75,32 +75,32 @@ We can relate it like this to our example :
 
 - key = car's plate number
 - hash function = md5
-- array of values = \[factory 1, factory 2, factory 3, factory 4\]
+- array of values = [factory 1, factory 2, factory 3, factory 4]
 
 To find out where we send a car we just could do:
 
 hash = md5(car plate number)
-index = int(hash) % size\_of(array)
-index = 0 if index > size\_of(array)
-factory = array\[index\]
+index = int(hash) % size_of(array)
+index = 0 if index > size_of(array)
+factory = array[index]
 
 In python ? okay !
 
 import md5
 
-factories = \[1, 2, 3, 4\]
+factories = [1, 2, 3, 4]
 
-def get\_factory(plate):
+def get_factory(plate):
     hash = int(md5.new(plate).hexdigest(), 16)
     index = hash % len(factories)
     if index > len(factories):
         index = 0
-    return factories\[index\]
+    return factories[index]
 
-get\_factory('ah-993-xx')
+get_factory('ah-993-xx')
 >> 3
 
-get\_factory('zz-6793-kh')
+get_factory('zz-6793-kh')
 >> 3
 
 Wow it's amazingly simple right ? :)
@@ -115,12 +115,12 @@ Our algorithm is based on the number of available factories so **removing a fact
 
 Keep in mind that the more values (factories) you have in your array the worse this problem gets. In our case, given a car's plate number we are sure that we wouldn't be able to figure out where a vast majority of them were sent any more.
 
-factories = \[1, 2, 4\]
+factories = [1, 2, 4]
 
-get\_factory('ah-993-xx')
+get_factory('ah-993-xx')
 >> 2 (was 3 before)
 
-get\_factory('zz-6793-kh')
+get_factory('zz-6793-kh')
 >> 1 (was 3 before)
 
 Even worse is that when factory 3 gets repaired and back in my hash table, I will once again loose track of all my dispatched cars... What we need is a more **consistent** way of sorting this out.

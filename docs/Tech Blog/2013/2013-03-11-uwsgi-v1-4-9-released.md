@@ -15,9 +15,9 @@ Yet another version bump for this very active package.
 ## highlights
 
 - avoid crashing carbon on master shutdown
-- call ERR\_clear\_error after each https session close
+- call ERR_clear_error after each https session close
 - fixed broodlord mode
 - removed broken JVM and JWSGI plugins (stable versions are in 1.9)
-- backported cache\_update for lua and fixed its lock handling
+- backported cache_update for lua and fixed its lock handling
 
 Full [changelog](http://lists.unbit.it/pipermail/uwsgi/2013-March/005591.html) is here.

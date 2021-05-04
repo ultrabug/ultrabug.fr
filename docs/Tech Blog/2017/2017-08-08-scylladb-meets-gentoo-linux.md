@@ -56,7 +56,7 @@ It pained me a lot to package those (thanks to help of @monsieurp) but they are 
 
 **The scylla packages are located in the [ultrabug overlay](https://gitweb.gentoo.org/dev/ultrabug.git/)** for now until I test them even more and ultimately put them in production. Then they'll surely reach the portage tree with the approval of the Gentoo java team for the app-admin/ packages listed above.
 
-I provide a live ebuild (scylla-9999 with no keywords) and ebuilds for the latest major version (2.0\_rc1 at time of writing).
+I provide a live ebuild (scylla-9999 with no keywords) and ebuilds for the latest major version (2.0_rc1 at time of writing).
 
 It's as simple as:
 
