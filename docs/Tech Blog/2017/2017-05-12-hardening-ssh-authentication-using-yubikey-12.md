@@ -1,9 +1,9 @@
 ---
 title: "Hardening SSH authentication using Yubikey (1/2)"
 date: "2017-05-12"
-categories: 
+categories:
   - "linux"
-tags: 
+tags:
   - "gentoo"
   - "security"
   - "ssh"
@@ -41,7 +41,8 @@ TL;DR: two gotchas before we begin
 - This method is still quite complex to setup but allows you to use the [cheaper U2F only Yubikeys](https://www.yubico.com/product/fido-u2f-security-key/).
 - The [second method based on PIV](http://www.ultrabug.fr/hardening-ssh-authentication-using-yubikey-22/) is the solution we chose as it fits better our use cases and ecosystem.
 
-> _ADVISE: keep a root SSH session to your servers while deploying/testing this so you can revert any change you make and avoid to lock yourself out of your servers._
+!!! note
+    Keep a root SSH session to your servers while deploying/testing this so you can revert any change you make and avoid to lock yourself out of your servers.
 
 ## Setup pam_ssh
 
@@ -49,10 +50,11 @@ Use **pam_ssh on the servers** to force usage of a passphrase on a private key. 
 
 Generate your SSH key pair with a passphrase **on your local machine**.
 
-ssh-keygen -f identity
+```bash
+$ ssh-keygen -f identity
 Generating public/private rsa key pair.
-Enter passphrase (empty for no passphrase): 
-Enter same passphrase again: 
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
 Your identification has been saved in identity.
 Your public key has been saved in identity.pub.
 The key fingerprint is:
@@ -69,21 +71,26 @@ The key's randomart image is:
 |       . .. @ .\*+|
 |         ....%B.E|
 +----[SHA256]-----+
+```
 
 You then must copy your **private key** (named **identity** with no extension) **to your servers** under  the **~/.ssh/login-keys.d/** folder.
 
 In your $HOME on the servers, you will get something like this:
 
+```
 .ssh/
 ├── known_hosts
 └── login-keys.d
     └── identity
+```
 
 Then you can enable the pam_ssh authentication. Gentoo users should enable the **pam_ssh** USE flag for **sys-auth/pambase** and re-install.
 
 Add this **at the beginning** of the file **/etc/pam.d/ssh**
 
+```
 auth    required    pam_ssh.so debug
+```
 
 The debug flag can be removed after you tested it correctly.
 
@@ -91,20 +98,26 @@ The debug flag can be removed after you tested it correctly.
 
 Because it takes precedence over the PAM authentication mechanism, you have to disable OpenSSH PubkeyAuthentication authentication on **/etc/ssh/sshd_config:**
 
+```
 PubkeyAuthentication no
+```
 
 Enable PAM authentication on **/etc/ssh/sshd_config**
 
+```
 ChallengeResponseAuthentication no
 PasswordAuthentication no
 UsePAM yes
+```
 
 ## Test pam_ssh
 
 Now you should be prompted for your SSH passphrase to login through SSH.
 
-➜  ~ ssh cheetah
+```bash
+$ ssh cheetah
 SSH passphrase:
+```
 
 ## Setup 2nd factor using pam_yubico
 
@@ -134,7 +147,9 @@ First, get your modhex:
 
 Using this modhex, create your mapping file named **authorized_yubikeys** which will be copied to **~/.yubico/authorized_yubikeys** on the servers (replace LOGIN_USERNAME with your actual account login name).
 
+```
 LOGIN_USERNAME:xxccccxxuuxx
+```
 
 NOTE: this mapping file can be a centralized one (in /etc for example) to handle all the users from a server. See the the [authfile option on the doc](https://github.com/Yubico/yubico-pam#configuration).
 
@@ -142,17 +157,23 @@ NOTE: this mapping file can be a centralized one (in /etc for example) to handle
 
 **You must install pam_yubico on the servers**. For Gentoo, it's as simple as:
 
-emerge sys-auth/pam_yubico
+```bash
+# emerge sys-auth/pam_yubico
+```
 
 **Copy your authentication mapping file** to your home under the .yubico folder **on all servers**. You should get this:
 
+```
 .yubico/
 └── authorized_yubikey
+```
 
 Configure pam to use pam_yubico. Add this **after the pam_ssh** on the file **/etc/pam.d/ssh** which should look like this now:
 
+```
 auth    required    pam_ssh.so
 auth    required    pam_yubico.so id=YOUR_API_ID debug debug_file=/var/log/auth.log
+```
 
 The debug and debug_file flags can be removed after you tested it correctly.
 
@@ -160,9 +181,11 @@ The debug and debug_file flags can be removed after you tested it correctly.
 
 Now you should be prompted for your SSH passphrase and then for your Yubikey OTP to login through SSH.
 
-➜  ~ ssh cheetah
-SSH passphrase: 
+```bash
+$ ssh cheetah
+SSH passphrase:
 YubiKey for \`ultrabug':
+```
 
 ## About the Yubico API dependency
 
@@ -172,7 +195,9 @@ The solution I found to this problem is to instruct pam to ignore the Yubikey au
 
 In this case, the module will return a AUTHINFO_UNAVAIL code to PAM which we can act upon using the following syntax. The **/etc/pam.d/ssh** first lines should be changed to this:
 
+```
 auth    required    pam_ssh.so
 auth    [success=done authinfo_unavail=ignore new_authtok_reqd=done default=die]    pam_yubico.so id=YOUR_API_ID debug debug_file=/var/log/auth.log
+```
 
 Now you can be sure to be able to use your Yubikey even if the API is down or unreachable ;)
