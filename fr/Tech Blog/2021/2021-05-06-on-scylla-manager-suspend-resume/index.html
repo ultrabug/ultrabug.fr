@@ -4146,21 +4146,21 @@ topic during Scylla Summit 2019.</p>
 <p>Scylla Manager 2.3 <a href="https://www.scylladb.com/2021/05/05/scylla-manager-2-3-suspend-resume/">released a way to suspend maintenance operations</a> such as
 backups and repairs and resume them using <code>sctool</code> commands or API calls. This
 allows Scylla users to make sure that they can preserve their precious
-CPU resources to their needs during high demand hours (usually during the day).</p>
-<p>It is interesting to note the feature is actually not a schedule per se but
-rather offers the possibility to manually suspend and resume scheduled tasks in
-scylla-manager. You'll have a setup a contrab to use it.</p>
+CPU resources for their needs during high demand hours (usually during the day).</p>
+<p>It is interesting to note that the feature is actually not a schedule per se
+but rather offers the possibility to manually suspend and resume scheduled
+tasks in scylla-manager. You'll have a setup a contrab to use it!</p>
 <p>On paper this is great as it comes as a nice addition to the 2.1 and 2.2
-releases of <a href="https://www.scylladb.com/product/release-notes/scylla-manager-2-2/">repair parallelism and intensity controls</a>. There surely are
-plenty of users out there that were expecting this news so thank you for this
-but...</p>
+releases featuring <a href="https://www.scylladb.com/product/release-notes/scylla-manager-2-2/">repair parallelism and intensity controls</a>. There surely
+are plenty of users out there that were expecting this news so thank you for
+this but...</p>
 <p><strong>Will I use it? yes. Am I happy to use it? no.</strong></p>
 <h2 id="i-made-fun-of-mongodb-for-doing-it">I made fun of MongoDB for doing it<a class="headerlink" href="#i-made-fun-of-mongodb-for-doing-it" title="Permanent link">&para;</a></h2>
 <p>Taking a step back, scylla-manager just implemented what is called a
 <a href="https://docs.mongodb.com/manual/tutorial/manage-sharded-cluster-balancer/#schedule-the-balancing-window">balancing window schedule</a> in MongoDB sharded clusters.</p>
 <p><strong>Back in <a href="https://www.scylladb.com/2019/11/18/overheard-at-scylla-summit-2019/">Scylla Summit 2019</a> I said on stage that this kind of feature felt
 like a patch</strong> in MongoDB because such kind of database should be smart enough
-to cope with background operations that it generated itself.</p>
+to cope with the background operations that it generated itself.</p>
 <p><img alt="avoid mongodb clusters" src="../../../../Tech%20Blog/2021/images/2021-05-06-avoid_mongodb.png" />
 <img alt="balancing window is a patch" src="../../../../Tech%20Blog/2021/images/2021-05-06-balancing_patch.png" /></p>
 <p>Since MongoDB is not built on an architectural design fit for scheduling and
@@ -4174,17 +4174,18 @@ repairs as well.</p>
 <h2 id="now-scylla-is-doing-it">Now Scylla is doing it<a class="headerlink" href="#now-scylla-is-doing-it" title="Permanent link">&para;</a></h2>
 <p>So today I'm unsure how to welcome this news.</p>
 <p><img alt="scylla twitter announcement" src="../../../../Tech%20Blog/2021/images/2021-05-06-twitter_manager.png" /></p>
-<p>On one hand there are valid use cases and I'm sure most users will gladly
-welcome this because they know it will help their cluster on a daily basis.
-(and I am one of them).</p>
+<p>On one hand there are valid use cases where you want to make sure that you
+get all the performance that you can from your hardware and I'm sure most
+users will gladly welcome this because they know it will help their cluster
+on a daily basis. (and I am one of them).</p>
 <p>On the other hand I can't get rid of the deceptive feeling that Scylla is
 still not smart enough to handle the impacts of background maintenance
-operationsrepairs and deliver to be the promised boring database.</p>
-<p>For some time I hoped that <a href="https://www.scylladb.com/2019/05/23/workload-prioritization-running-oltp-and-olap-traffic-on-the-same-superhighway/">workload prioritization</a> could be used better to
-diminish repair impacts on performance but it's never been released to us Open
-Source users anyway so I never had the chance to build a realy opinion on that
-(and I like to remind that we are also paying customers at Numberly: we do not
-run enterprise because we choose not to).</p>
+operations and deliver to be the promised boring database.</p>
+<p>For some time I even hoped that <a href="https://www.scylladb.com/2019/05/23/workload-prioritization-running-oltp-and-olap-traffic-on-the-same-superhighway/">workload prioritization</a> could be used better
+to diminish repair impacts on performance but it's never been released to us
+Open Source users anyway so I never had the chance to build a realy opinion on
+that (and I like to remind that we are also paying customers at Numberly: we
+do not run enterprise because we choose not to).</p>
 <p>I also want to acknowledge that a lot of efforts have been and still are
 invested in optimizing Scylla maintenance operations: <a href="https://www.scylladb.com/presentations/how-we-made-scylla-maintenance-easier-safer-and-faster/">Asias He is notoriously
 smart and prolific on that topic</a> and this is not an easy task indeed!</p>
