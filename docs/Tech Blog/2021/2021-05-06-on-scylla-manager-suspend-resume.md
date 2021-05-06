@@ -23,7 +23,7 @@ releases featuring [repair parallelism and intensity controls]. There surely
 are plenty of users out there that were expecting this news so thank you for
 this but...
 
-**Will I use it? yes. Am I happy to use it? no.**
+**Will I use it? yes. Am I happy that I have to? no.**
 
 [released a way to suspend maintenance operations]: https://www.scylladb.com/2021/05/05/scylla-manager-2-3-suspend-resume/
 [repair parallelism and intensity controls]: https://www.scylladb.com/product/release-notes/scylla-manager-2-2/
