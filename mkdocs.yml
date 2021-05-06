@@ -57,6 +57,7 @@ plugins:
   # https://github.com/datarobot/mkdocs-redirects
   - redirects:
       redirect_maps:
+        "on-scylla-manager-suspend-resume.md": "Tech Blog/2021/2021-05-06-on-scylla-manager-suspend-resume.md"
         "from-wordpress-to-mkdocs.md": "Tech Blog/2021/2021-03-12-from-wordpress-to-mkdocs.md"
         "renaming-and-reshaping-scylla-tables-using-scylla-migrator.md": "Tech Blog/2020/2020-11-06-renaming-and-reshaping-scylla-tables-using-scylla-migrator.md"
         "py3status-v3-29.md": "Tech Blog/2020/2020-09-07-py3status-v3-29.md"
