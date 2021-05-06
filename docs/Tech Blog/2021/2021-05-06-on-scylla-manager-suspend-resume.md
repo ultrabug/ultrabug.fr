@@ -30,8 +30,8 @@ but...
 
 ## I made fun of MongoDB for doing it
 
-Taking a step back, scylla-manager just implemented what is called a [scheduled
-balancing window] in MongoDB sharded clusters.
+Taking a step back, scylla-manager just implemented what is called a
+[balancing window schedule] in MongoDB sharded clusters.
 
 **Back in [Scylla Summit 2019] I said on stage that this kind of feature felt
 like a patch** in MongoDB because such kind of database should be smart enough
@@ -50,7 +50,7 @@ its smarter per-core IO scheduler could handle OLTP and OLAP workloads** at
 the same time. I was living by it and believed this could be applied to
 repairs as well.
 
-[scheduled balancing window]: https://docs.mongodb.com/manual/tutorial/manage-sharded-cluster-balancer/#schedule-the-balancing-window
+[balancing window schedule]: https://docs.mongodb.com/manual/tutorial/manage-sharded-cluster-balancer/#schedule-the-balancing-window
 [Scylla Summit 2019]: https://www.scylladb.com/2019/11/18/overheard-at-scylla-summit-2019/
 
 ## Now Scylla is doing it
