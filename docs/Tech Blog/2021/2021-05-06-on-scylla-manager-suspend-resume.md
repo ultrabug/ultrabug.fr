@@ -12,16 +12,16 @@
 Scylla Manager 2.3 [released a way to suspend maintenance operations] such as
 backups and repairs and resume them using `sctool` commands or API calls. This
 allows Scylla users to make sure that they can preserve their precious
-CPU resources to their needs during high demand hours (usually during the day).
+CPU resources for their needs during high demand hours (usually during the day).
 
-It is interesting to note the feature is actually not a schedule per se but
-rather offers the possibility to manually suspend and resume scheduled tasks in
-scylla-manager. You'll have a setup a contrab to use it.
+It is interesting to note that the feature is actually not a schedule per se
+but rather offers the possibility to manually suspend and resume scheduled
+tasks in scylla-manager. You'll have a setup a contrab to use it!
 
 On paper this is great as it comes as a nice addition to the 2.1 and 2.2
-releases of [repair parallelism and intensity controls]. There surely are
-plenty of users out there that were expecting this news so thank you for this
-but...
+releases featuring [repair parallelism and intensity controls]. There surely
+are plenty of users out there that were expecting this news so thank you for
+this but...
 
 **Will I use it? yes. Am I happy to use it? no.**
 
@@ -35,7 +35,7 @@ Taking a step back, scylla-manager just implemented what is called a
 
 **Back in [Scylla Summit 2019] I said on stage that this kind of feature felt
 like a patch** in MongoDB because such kind of database should be smart enough
-to cope with background operations that it generated itself.
+to cope with the background operations that it generated itself.
 
 ![avoid mongodb clusters](images/2021-05-06-avoid_mongodb.png)
 ![balancing window is a patch](images/2021-05-06-balancing_patch.png)
@@ -59,19 +59,20 @@ So today I'm unsure how to welcome this news.
 
 ![scylla twitter announcement](images/2021-05-06-twitter_manager.png)
 
-On one hand there are valid use cases and I'm sure most users will gladly
-welcome this because they know it will help their cluster on a daily basis.
-(and I am one of them).
+On one hand there are valid use cases where you want to make sure that you
+get all the performance that you can from your hardware and I'm sure most
+users will gladly welcome this because they know it will help their cluster
+on a daily basis. (and I am one of them).
 
 On the other hand I can't get rid of the deceptive feeling that Scylla is
 still not smart enough to handle the impacts of background maintenance
-operationsrepairs and deliver to be the promised boring database.
+operations and deliver to be the promised boring database.
 
-For some time I hoped that [workload prioritization] could be used better to
-diminish repair impacts on performance but it's never been released to us Open
-Source users anyway so I never had the chance to build a realy opinion on that
-(and I like to remind that we are also paying customers at Numberly: we do not
-run enterprise because we choose not to).
+For some time I even hoped that [workload prioritization] could be used better
+to diminish repair impacts on performance but it's never been released to us
+Open Source users anyway so I never had the chance to build a realy opinion on
+that (and I like to remind that we are also paying customers at Numberly: we
+do not run enterprise because we choose not to).
 
 I also want to acknowledge that a lot of efforts have been and still are
 invested in optimizing Scylla maintenance operations: [Asias He is notoriously
