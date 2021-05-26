@@ -6,8 +6,6 @@
 
 ## Open Source community service
 
-<iframe src="https://github.com/sponsors/ultrabug/button" title="Sponsor ultrabug" height="35" width="116" style="border: 0;"></iframe>
-
 ### Gentoo Linux developer
 
 I've been a [Gentoo Linux](https://gentoo.org) developer for more than 10 years now. I mainly focus on [packaging](https://packages.gentoo.org/maintainer/ultrabug@gentoo.org) distributed databases ecosystems and cluster related projects. I'm also part of the team who provides [gentoo linux docker containers](https://hub.docker.com/orgs/gentoo).
@@ -20,10 +18,12 @@ I am the author of several Open Source projects, for instance:
 
 - [py3status](https://github.com/ultrabug/py3status): an [i3wm](https://i3wm.org/) i3status wrapper written in Python
 - [uhashring](https://github.com/ultrabug/uhashring): a full featured consistent hashing Python library compatible with ketama
+- [mkdocs-static-i18n](https://github.com/ultrabug/mkdocs-static-i18n): a MkDocs plugin that allows you to create localized versions of your documentation (or even websites such as mine)
 - [matterhook](https://github.com/numberly/matterhook): a Python library to interact with Mattermost Webhooks
 
 This is a quick list of projects I have contributed to:
 
+- [MkDocs](https://github.com/mkdocs/mkdocs)
 - [Apache Airflow](https://github.com/apache/airflow)
 - [MongoDB](https://github.com/mongodb/mongo) / [PyMongo](https://github.com/mongodb/mongo-python-driver)
 - [Python asyncio Kafka library](https://github.com/aio-libs/aiokafka)
@@ -47,7 +47,15 @@ When I'm not hacking computers and code I like to hack quadcopters and to fly th
 
 I share my modest experience on this hobby through my [FPV Handbook](/FPV Handbook/) and [FPV Builds](/FPV Builds/) guides.
 
+## Support me
+
+If my work impacts you and make you happy you can say thank you by starring
+:star: my repositories, considering making a
+[single donation](https://paypal.me/alexysjacob1) or becoming a Github Sponsor:
+
+<iframe src="https://github.com/sponsors/ultrabug/button" title="Sponsor ultrabug" height="35" width="116" style="border: 0;"></iframe>
+
 ## Contact me
 
 - On [Twitter](https://twitter.com/ultrabug)
-- On [IRC freenode](https://webchat.freenode.net/) #gentoo-dev or #py3status
+- On [IRC Libera.Chat](https://libera.chat/) #gentoo-containers or [IRC OFTC](https://www.oftc.net/) #py3status
