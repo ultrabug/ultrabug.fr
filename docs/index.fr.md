@@ -51,9 +51,12 @@ Je partage aussi ma modeste expérience de cette discipline dans mon [FPV Handbo
 
 Si mon travail vous impacte positivement, vous pouvez dire merci en donnant une
 étoile :star: aux projets en question, me remercier avec un
-[don libre](https://paypal.me/alexysjacob1) ou via Github Sponsor:
+[don libre sur Paypal](https://paypal.me/alexysjacob1), via Github Sponsor ou Tipeee:
 
 <iframe src="https://github.com/sponsors/ultrabug/button" title="Sponsor ultrabug" height="35" width="116" style="border: 0;"></iframe>
+
+<a href="https://fr.tipeee.com/ultrabug" class="tipeee-project-small">Dire merci à Ultrabug sur Tipeee</a>
+<script async src="https://plugin.tipeee.com/widget.js" charset="utf-8"></script>
 
 ## Contact me
 

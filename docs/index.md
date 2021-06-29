@@ -51,9 +51,12 @@ I share my modest experience on this hobby through my [FPV Handbook](/FPV Handbo
 
 If my work impacts you and make you happy you can say thank you by starring
 :star: my repositories, considering making a
-[single donation](https://paypal.me/alexysjacob1) or becoming a Github Sponsor:
+[single donation on Paypal](https://paypal.me/alexysjacob1), becoming a Github Sponsor or using Tipeee:
 
 <iframe src="https://github.com/sponsors/ultrabug/button" title="Sponsor ultrabug" height="35" width="116" style="border: 0;"></iframe>
+
+<a href="https://en.tipeee.com/ultrabug" class="tipeee-project-small">Say thanks to Ultrabug on Tipeee</a>
+<script async src="https://plugin.tipeee.com/widget.js" charset="utf-8"></script>
 
 ## Contact me
 
