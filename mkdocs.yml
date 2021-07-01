@@ -51,9 +51,10 @@ plugins:
   - search
   - i18n:
       default_language: en
+      default_language_only: !ENV [DEFAULT_LANGUAGE_ONLY, false]
       languages:
-        en: '<img style="height: 15px;" alt="🇬🇧" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f1ec-1f1e7.svg" title="english" />'
-        fr: '<img style="height: 15px;" alt="🇫🇷" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f1eb-1f1f7.svg" title="français" />'
+        en: '<img style="height: 10px; border: 0px;" alt="en" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f1ec-1f1e7.svg" title="english" /> English'
+        fr: '<img style="height: 10px; border: 0px;" alt="fr" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f1eb-1f1f7.svg" title="français" /> Français'
   # https://github.com/datarobot/mkdocs-redirects
   - redirects:
       redirect_maps:
