@@ -25,4 +25,5 @@ jobs:
 
       - name: MkDocs gh-deploy
         run: |
+          git pull
           mkdocs gh-deploy
