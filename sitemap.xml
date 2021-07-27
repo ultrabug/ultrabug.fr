@@ -2,1137 +2,1142 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://ultrabug.fr/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/FPV%20Builds/ImpulseRC%20Apex/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/FPV%20Handbook/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/FPV%20Handbook/Batteries/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/FPV%20Handbook/Batteries/lipo_performance_database/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/FPV%20Handbook/Batteries/skyrc-q200/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/FPV%20Handbook/Betaflight/osd-dji-fpv/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/FPV%20Handbook/Betaflight/uav-tech-presets/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/FPV%20Handbook/Build%20Tips/antennas/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/FPV%20Handbook/FC%20%26%20ESC/blheli32/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/FPV%20Handbook/FC%20%26%20ESC/mamba-f405-mini-3/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/FPV%20Handbook/FC%20%26%20ESC/t-motor-f7/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/FPV%20Handbook/Frames/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/FPV%20Handbook/Legal%20documents/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/FPV%20Handbook/Prints/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/FPV%20Handbook/RX/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/FPV%20Handbook/TX/tbs_agent_lite/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/FPV%20Handbook/TX/tx16s/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/FPV%20Handbook/VTX/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-01-11-portage-basics/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-01-13-portage-internals/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-02-27-nginx-conditional-uwsgi-error-handling/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-03-19-uwsgi-network-spooling-of-messages-between-applications/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-05-11-mongodb-v2-0-5-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-05-11-pymongo-v2-2-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-05-15-uwsgi-new-ebuild-in-portage/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-05-16-clustering-corosync-v1-4-3-pacemaker-v1-1-7-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-05-25-state-of-the-event-log-architecture-enhancements/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-06-01-rsyslog-new-v6-branch-in-portage/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-06-06-mongodb-v2-0-6-release/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-06-12-mongodb-export-based-on-objectids-timestamp/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-06-15-rsyslog-v6-2-2-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-06-18-flask-pymongo-new-ebuild-in-portage/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-07-09-pymongo-v2-2-1-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-07-09-uwsgi-v1-2-4-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-07-23-clustering-glue-v1-0-10-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-08-03-httping/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-08-07-rabbitmq-v2-8-5-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-08-14-uwsgi-v1-2-5-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-08-20-mongodb-v2-0-7-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-08-27-les-vosges/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-08-30-the-mongodb-2-2-era/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-09-03-rabbitmq-2-8-6-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-09-11-gentoo-make-conf-et-make-profile-demenagent/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-10-29-uwsgi-v1-2-6-and-v1-3-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-11-02-my-views-on-python/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-11-04-mongodb-ebuilds-cleanup-and-v2-2-1-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-11-05-portugal-tavira/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-11-09-clustering-corosync-v2-1-0-pacemaker-v1-1-8/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-11-19-uwsgi-v1-4-1-lts-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-11-20-rsyslog-new-v7-branch-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-11-28-mongodb-v2-2-2-and-pymongo-v2-4-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-11-28-uwsgi-v1-4-2-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-12-05-python-appnexus/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-12-13-uwsgi-v1-4-3-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2012/2012-12-16-portugal-algarve/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-01-10-uwsgi-v1-4-4-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-01-11-rabbitmq-2-8-7-3-0-1-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-01-15-coming-soon-on-mongodb/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-01-18-clustering-corosync-v2-3-0-resource-agents-3-9-4/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-01-20-portugal-villa-extramuros/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-01-25-python-new-zeromq-and-mongodb-drivers/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-01-27-turkey-istanbul/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-02-02-mongodb-v2-2-3-uwsgi-v1-4-5/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-02-12-rabbitmq-v3-0-2-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-02-13-moosefs-v1-6-26-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-02-15-clustering-resource-agents-v3-9-5-crmsh-v1-2-5/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-02-16-postfix-2-10-0/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-02-18-mongodb-2-4-0-rc/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-02-21-meet-py3status/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-02-23-packaging-py3status/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-02-26-uwsgi-mono-asp-net-support/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-02-26-uwsgi-v1-4-6-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-03-04-uwsgi-v1-4-8-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-03-05-switching-from-xchat-to-hexchat/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-03-11-uwsgi-v1-4-9-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-03-13-pacemaker-vulnerability-and-v1-1-9-release/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-03-15-follow-up-on-pacemaker-v1-1-9-and-updated-pacemaker-gui/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-03-16-rabbitmq-v3-0-4-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-03-19-py3status-v0-5/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-03-20-mongodb-v2-4-0-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-03-24-python-writing-a-proper-setup-for-your-project/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-03-25-mongodb-v2-4-1-and-pymongo-2-5-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-03-30-tokyo-mont-fuji/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-04-06-py3status-v0-7/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-04-14-py3status-v0-8/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-04-16-san-francisco-chinatown/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-04-18-mongodb-v2-4-2-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-04-18-py3status-v0-9/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-04-18-san-francisco-streets/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-04-24-hello-gentoo-planet/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-04-26-mongodb-and-pacemaker-recent-bumps/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-05-16-fujifilm-gf670w/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-05-17-squid-proxy-blocking-download-of-some-file-extensions/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-05-21-rabbitmq-v3-1-0-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-05-25-san-francisco-street-art/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-05-31-using-keepalived-for-a-self-balancing-cluster/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-06-02-roadtrip-3600/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-06-05-mongodb-latest-releases/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-06-13-vertigo/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-06-15-hp-moonshot/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-06-20-py3status-v0-12/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-06-24-py3status-v0-13/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-07-10-mongodb-v2-4-5-rabbitmq-v3-1-3/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-07-11-paris-siege-du-pcf/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-08-02-rsyslog-v7-4-3-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-08-13-rabbitmq-v3-1-4-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-08-16-rabbitmq-v3-1-5-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-08-21-mongodb-v2-4-6-pymongo-v2-6/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-08-30-py3status-v1-0/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-09-03-pacemaker-v1-1-10-corosync-v2-3-1/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-09-10-rsyslog-v7-4-4-released/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-10-15-wonderlands-roadtrip/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-10-17-latest-cluster-releases/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-10-20-usa-roadtrip-facts-start/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-10-22-mongodb-v2-4-7-pymongo-v2-6-3/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-10-25-drop-down-terminal-in-i3/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-10-27-death-valley/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-10-29-bryce-canyon/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-11-03-north-rim-grand-canyon-the-navajo-indians/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-11-07-monument-valley/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-11-09-mongodb-v2-4-8-rabbitmq-v3-2-1-rsyslog-v-7-4-6/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-11-15-keepalived-v1-2-9/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-11-27-rip-stabber/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-12-05-arcosanti/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-12-15-py3status-v1-1/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2013/2013-12-24-rsyslog-v7-4-7/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-01-03-aircraft-boneyard/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-01-10-tuning-pacemaker-for-large-clusters/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-01-12-py3status-v1-2/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-01-17-uwsgi-v2-0/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-01-31-keepalived-v1-2-11-glusterfs-v3-4-2/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-02-18-mongodb-v2-4-9v2-2-7-rabbitmq-v3-2-3/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-02-23-py3status-v1-3/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-03-07-couchbase-on-gentoo-linux/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-03-17-nightster-bw/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-04-04-convert-special-characters-to-ascii-in-python/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-04-08-mongodb-2-4-10-pymongo-2-7/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-04-16-py3status-v1-4/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-05-04-after-vacation-bug-hunting/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-05-06-uwsgi-v2-0-4/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-05-14-mongodb-v2-6-1/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-05-20-iran-tehran/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-05-23-rsyslog-v7-6-3/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-05-25-iran-shiraz/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-06-02-uwsgi-v2-0-5-1/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-06-04-consul-on-gentoo-linux/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-06-15-iran-yazd/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-08-01-europython-2014/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-08-12-hd-daymaker-led-headlamp/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-08-14-using-uwsgi-and-consul-to-design-a-distributed-application/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-10-08-py3status-v1-6/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-10-14-one-month-in-turkey/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-11-20-rip-ns2/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2014/2014-12-20-gentoo-linux-pxe-builder/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2015/2015-01-04-py3status-v2-0/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2015/2015-02-27-mongodb-2-6-8-2-4-13-the-upcoming-3-0-0/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2015/2015-03-17-mongodb-3-0-1/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2015/2015-03-31-py3status-v2-4/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2015/2015-05-07-mongodb-3-0-upgrade-in-production-first-steps/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2015/2015-05-13-uwsgi-gevent-and-pymongo-3-threads-mayhem/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2015/2015-05-23-gevent-ssl-support-fixed-for-python-2-7-9/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2015/2015-05-26-mongodb-3-0-upgrade-in-production-step-2-failed/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2015/2015-07-09-mongodb-3-0-upgrade-in-production-step-3-hope/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2015/2015-07-22-designing-a-scalable-and-distributed-application/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2015/2015-08-17-py3status-v2-5/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2015/2015-08-27-py3status-v2-6/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2015/2015-09-14-mongodb-3-0-upgrade-in-production-step-4-victory/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2015/2015-10-19-consistent-hashing-101/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2015/2015-10-20-uhashring-consistent-hashing-in-python/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2015/2015-11-26-py3status-v2-7/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2015/2015-12-31-uwsgi-v2-0-12/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2016/2016-01-02-gentoo-linux-on-dell-xps-13-9350/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2016/2016-03-02-py3status-v2-9/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2016/2016-06-25-py3status-v3-0/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2016/2016-09-02-rethinkdb-on-gentoo-linux/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2016/2016-11-21-py3status-v3-3/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2017/2017-01-27-py3status-v3-4/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2017/2017-04-10-py3status-v3-5/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2017/2017-05-12-hardening-ssh-authentication-using-yubikey-12/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2017/2017-05-12-hardening-ssh-authentication-using-yubikey-22/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2017/2017-05-16-hardening-ssh-authentication-using-yubikey-32/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2017/2017-06-02-load-balancing-hadoop-hive-with-f5-big-ip/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2017/2017-08-08-scylladb-meets-gentoo-linux/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2017/2017-08-22-py3status-v3-6/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2017/2017-10-13-gentoo-linux-listed-rethinkdbs-website/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2017/2017-11-02-gentoo-linux-on-dell-xps-13-9365-and-9360/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2017/2017-12-12-py3status-v3-7/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2017/2017-12-22-talks-page/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2018/2018-01-23-evaluating-scylladb-for-production-1-2/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2018/2018-02-28-evaluating-scylladb-for-production-2-2/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2018/2018-04-03-py3status-v3-8/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2018/2018-07-06-a-botspot-story/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2018/2018-07-19-authenticating-and-connecting-to-a-ssl-enabled-scylla-cluster-using-spark-2/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2018/2018-09-28-py3status-v3-13/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2018/2018-11-10-py3status-v3-14/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2018/2018-12-06-scylla-summit-2018-write-up/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2019/2019-01-20-py3status-v3-16/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2019/2019-03-01-bye-bye-google-analytics/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2019/2019-03-25-py3status-v3-17/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2019/2019-03-29-scylla-four-ways-to-optimize-your-disk-space-consumption/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2019/2019-04-17-meet-the-py3status-logo/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2019/2019-09-22-py3status-v3-20-europython-2019-edition/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2019/2019-12-28-scylla-summit-2019/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2020/2020-04-14-py3status-v3-28-goodbye-py2-6-3-4/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2020/2020-08-24-python-scylla-driver-how-we-unleashed-the-scylla-monsters-performance/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2020/2020-09-07-py3status-v3-29/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2020/2020-11-06-renaming-and-reshaping-scylla-tables-using-scylla-migrator/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2021/2021-03-12-from-wordpress-to-mkdocs/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Blog/2021/2021-05-06-on-scylla-manager-suspend-resume/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ultrabug.fr/Tech%20Blog/2021/2021-07-28-create-beautiful-and-localized-documentations-and-websites-using-mkdocs-github/</loc>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Talks/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Talks/2013/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Talks/2014/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Talks/2015/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Talks/2016/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Talks/2017/europython2017/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Talks/2017/scaling-python/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Talks/2018/europython-2018/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Talks/2018/pyconfr-2018/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Talks/2018/scylla-summit-2018/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Talks/2019/europython-2019/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Talks/2019/scylla-summit-2019/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Talks/2020/europython-2020/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Talks/2020/pycon-india-2020/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Talks/2020/scylla-university/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Talks/2021/scylla-confluent-webinar-2021/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ultrabug.fr/Tech%20Talks/2021/scylla-summit-2021/</loc>
-         <lastmod>2021-07-22</lastmod>
+         <lastmod>2021-07-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
