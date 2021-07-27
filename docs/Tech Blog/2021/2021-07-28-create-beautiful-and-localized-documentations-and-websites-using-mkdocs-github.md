@@ -353,6 +353,53 @@ website of this repository.
 
 ![mkdocs + github talk website](images/mkdocsgh-website.png)
 
+### Automatic mkdocs gh-deploy
+
+Let’s use **Github Actions** to run mkdocs `gh-deploy` for us **automatically when we push** new commits!
+
+Create the file `.github/workflows/gh-deploy.yml`:
+
+```yaml
+name: gh-deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: MkDocs Github Pages automatic deployment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: MkDocs gh-deploy
+        run: |
+          git pull
+          mkdocs gh-deploy
+```
+
+Now every time we push new commits to the `main` branch, our website will be automatically deployed and refreshed on Github Pages!
+
+!!! tip
+    If you cloned my repository or use your own fork, you can get to this step
+    by checking out the `actions` branch.
+    ```bash
+    git checkout actions
+    ```
+
 ## Resources
 
 ### Some useful and awesome MkDocs plugins
