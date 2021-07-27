@@ -657,6 +657,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#automatic-mkdocs-gh-deploy" class="md-nav__link">
+    Automatic mkdocs gh-deploy
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4629,6 +4636,47 @@ git push
 <p>Check out your own URL or the <a href="https://ultrabug.github.io/ep2021/">https://ultrabug.github.io/ep2021/</a>
 website of this repository.</p>
 <p><img alt="mkdocs + github talk website" src="../images/mkdocsgh-website.png" /></p>
+<h3 id="automatic-mkdocs-gh-deploy">Automatic mkdocs gh-deploy<a class="headerlink" href="#automatic-mkdocs-gh-deploy" title="Permanent link">&para;</a></h3>
+<p>Let’s use <strong>Github Actions</strong> to run mkdocs <code>gh-deploy</code> for us <strong>automatically when we push</strong> new commits!</p>
+<p>Create the file <code>.github/workflows/gh-deploy.yml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gh-deploy</span>
+
+<span class="nt">on</span><span class="p">:</span>
+  <span class="nt">push</span><span class="p">:</span>
+    <span class="nt">branches</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">main</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="nt">build</span><span class="p">:</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MkDocs Github Pages automatic deployment</span>
+    <span class="nt">runs-on</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+    <span class="nt">steps</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Checkout main</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span>
+
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Set up Python 3.9</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v2</span>
+        <span class="nt">with</span><span class="p">:</span>
+          <span class="nt">python-version</span><span class="p">:</span> <span class="s">&#39;3.9&#39;</span>
+
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install requirements</span>
+        <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+          <span class="no">python -m pip install --upgrade pip</span>
+          <span class="no">pip install -r requirements.txt</span>
+
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MkDocs gh-deploy</span>
+        <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+          <span class="no">git pull</span>
+          <span class="no">mkdocs gh-deploy</span>
+</code></pre></div>
+<p>Now every time we push new commits to the <code>main</code> branch, our website will be automatically deployed and refreshed on Github Pages!</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you cloned my repository or use your own fork, you can get to this step
+by checking out the <code>actions</code> branch.
+<div class="highlight"><pre><span></span><code>git checkout actions
+</code></pre></div></p>
+</div>
 <h2 id="resources">Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h2>
 <h3 id="some-useful-and-awesome-mkdocs-plugins">Some useful and awesome MkDocs plugins<a class="headerlink" href="#some-useful-and-awesome-mkdocs-plugins" title="Permanent link">&para;</a></h3>
 <ul>
