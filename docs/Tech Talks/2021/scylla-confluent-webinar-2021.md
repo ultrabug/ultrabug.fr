@@ -9,3 +9,5 @@ I had the privilege to share the stage with Confluent's [Tim Berglund](https://t
 This was a particular day as Tim's daughter happened to be in the middle of her labor and was about to give birth to his first grandson while we were live on stage. And at the same time Confluent announced they were going public!
 
 [Peter Corless of ScyllaDB did a great write-up of the webinar](https://www.scylladb.com/2021/06/24/building-event-streaming-architectures-on-scylla-and-confluent-with-kafka/) where we shared on how we combine the powers of Scylla and Confluent Kafka at Numberly.
+
+<iframe width="737" height="415" src="https://www.youtube-nocookie.com/embed/U6wB7kd_BOY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
