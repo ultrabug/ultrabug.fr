@@ -4020,6 +4020,20 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#setup-msp-for-dji-fpv-vista-air-unit" class="md-nav__link">
+    Setup MSP for DJI FPV Vista / Air Unit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-tell-if-a-vista-or-air-unit-is-damaged" class="md-nav__link">
+    How to tell if a Vista or Air Unit is damaged
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-to-switch-to-fcc-700mw-output" class="md-nav__link">
     How to switch to FCC 700mW output
   </a>
@@ -4149,6 +4163,20 @@
                 
                 
                 <h1 id="caddx-vista">Caddx Vista<a class="headerlink" href="#caddx-vista" title="Permanent link">&para;</a></h1>
+<h2 id="setup-msp-for-dji-fpv-vista-air-unit">Setup MSP for DJI FPV Vista / Air Unit<a class="headerlink" href="#setup-msp-for-dji-fpv-vista-air-unit" title="Permanent link">&para;</a></h2>
+<p>Take away:</p>
+<ul>
+<li>When MSP is working, you get the quad voltage instead of <code>N/A</code> and the <code>low power mode</code> message when you plugin, then as soon as you arm the quad the <code>unlocked</code> message and <code>frame rate</code> message appear</li>
+<li>Temperature protection set to <strong>Off</strong> will make the unit output its full power as soon as you plug in the quad (requested to get the video out via USB)</li>
+<li>Vista and Air Unit have protections against over heating, they will not allow themselves to be damaged because they over heat</li>
+</ul>
+<p>Joshua Bardwell made a good <a href="https://www.youtube.com/watch?v=t6CBYsfmBsk">video about DJI FPV short range because of MSP</a> misconfiguration.</p>
+<h2 id="how-to-tell-if-a-vista-or-air-unit-is-damaged">How to tell if a Vista or Air Unit is damaged<a class="headerlink" href="#how-to-tell-if-a-vista-or-air-unit-is-damaged" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Take a multimeter</li>
+<li>Check the continuity between Ground and TX, then RX : <strong>there should be none</strong></li>
+<li>Check the resistance between Ground and TX, then RX : <strong>it should be mega ohms worth</strong></li>
+</ul>
 <h2 id="how-to-switch-to-fcc-700mw-output">How to switch to FCC 700mW output<a class="headerlink" href="#how-to-switch-to-fcc-700mw-output" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://oscarliang.com/dji-fpv-system-fcc-700mw/">Oscar Liang's guide on FCC mode</a></li>
