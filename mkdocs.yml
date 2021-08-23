@@ -30,6 +30,9 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/ultrabug
       name: ultrabug on Github
+    - icon: fontawesome/solid/rss-square
+      link: https://ultrabug.fr/feed_rss_created.xml
+      name: ultrabug RSS feed
 copyright: Copyright &copy; 2011-2021 Alexys Jacob
 
 # https://facelessuser.github.io/pymdown-extensions/
@@ -49,6 +52,10 @@ plugins:
   - awesome-pages:
       strict: false
   - search
+  - rss:
+      pretty_print: !ENV [PRETTY_RSS, false]
+      length: 30
+      match_path: "Tech (Blog|Talks)/.*"
   - i18n:
       default_language: en
       default_language_only: !ENV [DEFAULT_LANGUAGE_ONLY, false]
