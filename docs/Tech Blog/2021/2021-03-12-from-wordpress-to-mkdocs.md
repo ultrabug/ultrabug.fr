@@ -1,6 +1,6 @@
 ---
 title: "Migrating from Wordpress to Mkdocs"
-date: "2020-03-12"
+date: "2021-03-12"
 categories:
   - "linux"
 tags:

@@ -1,6 +1,6 @@
 ---
 title: "Create beautiful and localized documentations and websites using MkDocs + Github"
-date: "2020-07-28"
+date: "2021-07-28"
 categories:
   - "linux"
 tags:
