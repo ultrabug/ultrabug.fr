@@ -1,3 +1,14 @@
+---
+title: "On Scylla Manager Suspend & Resume feature"
+date: "2021-05-06"
+categories:
+  - "linux"
+tags:
+  - "gentoo"
+  - "scylla"
+  - "manager"
+---
+
 # On Scylla Manager Suspend & Resume feature
 
 !!! warning "Disclaimer"

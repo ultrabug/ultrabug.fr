@@ -1,3 +1,16 @@
+---
+title: "Create beautiful and localized documentations and websites using MkDocs + Github"
+date: "2020-07-28"
+categories:
+  - "linux"
+tags:
+  - "mkdocs"
+  - "mkdocs-static-i18n"
+  - "localization"
+  - "internationalization"
+  - "europython"
+---
+
 # Create beautiful and localized documentations and websites using MkDocs + Github
 
 This is the web version of the talk I gave at [EuroPython 2021](https://ep2021.europython.eu/talks/8FcL3BL-create-beautiful-and-localized-documentations-and-websites-using-mkdocs-github/).

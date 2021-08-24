@@ -57,9 +57,13 @@ plugins:
       hooks:
         on_config: "hooks.on_config:deploy_hooks"
   - rss:
+      date_from_meta:
+        as_creation: "date"
+        as_update: false
+        datetime_format: "%Y-%m-%d"
       pretty_print: !ENV [PRETTY_RSS, false]
       length: 30
-      match_path: "Tech (Blog|Talks)/.*"
+      match_path: "Tech Blog/.*"
   - i18n:
       default_language: en
       default_language_only: !ENV [DEFAULT_LANGUAGE_ONLY, false]

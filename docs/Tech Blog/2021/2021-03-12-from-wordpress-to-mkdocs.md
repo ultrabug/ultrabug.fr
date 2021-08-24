@@ -1,3 +1,13 @@
+---
+title: "Migrating from Wordpress to Mkdocs"
+date: "2020-03-12"
+categories:
+  - "linux"
+tags:
+  - "mkdocs"
+  - "wordpress"
+---
+
 # From Wordpress to MkDocs
 
 The idea of a statically built website has been in my mind for a while but I
