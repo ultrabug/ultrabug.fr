@@ -8,4 +8,4 @@ In this talk I walk you through all the steps needed to create and host feature 
 
 - [Click here to access the live version of this talk on my blog!](../../Tech Blog/2021/2021-07-28-create-beautiful-and-localized-documentations-and-websites-using-mkdocs-github.md)
 - [Github repository for the talk](https://github.com/ultrabug/ep2021)
-- [Watch the video]() - not available yet
+- [Watch the video](https://mail.google.com/mail/u/0/?zx=hxrvlcmae3qu#inbox/FMfcgzGkZsvxBwKCzsCdVjvHFRtQVRhQ?projector=1)

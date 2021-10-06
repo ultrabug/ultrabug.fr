@@ -13,7 +13,7 @@ tags:
 
 # Create beautiful and localized documentations and websites using MkDocs + Github
 
-This is the web version of the talk I gave at [EuroPython 2021](https://ep2021.europython.eu/talks/8FcL3BL-create-beautiful-and-localized-documentations-and-websites-using-mkdocs-github/).
+This is the web version of the talk I gave at [EuroPython 2021](https://ep2021.europython.eu/talks/8FcL3BL-create-beautiful-and-localized-documentations-and-websites-using-mkdocs-github/). If you prefer the [video format, it is available here](https://mail.google.com/mail/u/0/?zx=hxrvlcmae3qu#inbox/FMfcgzGkZsvxBwKCzsCdVjvHFRtQVRhQ?projector=1).
 
 ![mkdocs + github talk logo](images/mkdocsgh-logo.png)
 
