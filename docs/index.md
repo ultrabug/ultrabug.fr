@@ -25,6 +25,7 @@ This is a quick list of projects I have contributed to:
 
 - [MkDocs](https://github.com/mkdocs/mkdocs)
 - [Apache Airflow](https://github.com/apache/airflow)
+- [Apache Avro (Rust)](https://github.com/apache/avro)
 - [MongoDB](https://github.com/mongodb/mongo) / [PyMongo](https://github.com/mongodb/mongo-python-driver)
 - [Python asyncio Kafka library](https://github.com/aio-libs/aiokafka)
 - [Scylla](https://github.com/scylladb/scylla) / [Scylla Python Driver](https://github.com/scylladb/python-driver)
