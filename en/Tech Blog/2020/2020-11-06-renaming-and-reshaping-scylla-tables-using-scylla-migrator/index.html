@@ -30,11 +30,6 @@
     
     
       
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700%7CUbuntu+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Ubuntu";--md-code-font-family:"Ubuntu Mono"}</style>
-      
     
     
     
@@ -4938,7 +4933,7 @@ PRIMARY KEY ((partnerid), id)
 <li>do it as fast as possible since we will need to stop our feeding pipeline and most of our applications during the process...</li>
 </ul>
 <p><strong>STOP: it's not possible to rename a table in CQL!</strong></p>
-<p><a href="https://www.ultrabug.fr/wordpress/wp-content/uploads/2020/11/news-workload-cop.png"><img alt="" src="../../../../Tech%20Blog/2020/images/news-workload-cop.png" /></a></p>
+<p><a href="https://www.ultrabug.fr/wordpress/wp-content/uploads/2020/11/news-workload-cop.png"><img alt="" src="../images/news-workload-cop.png" /></a></p>
 <h2 id="scylla-migrator-to-the-rescue">Scylla-migrator to the rescue<a class="headerlink" href="#scylla-migrator-to-the-rescue" title="Permanent link">&para;</a></h2>
 <p>We decided to abuse the <strong><a href="https://github.com/scylladb/scylla-migrator">scylla-migrator</a></strong> to perform this perilous migration.</p>
 <p>As it was originally designed to <a href="https://www.scylladb.com/2019/02/07/moving-from-cassandra-to-scylla-via-apache-spark-scylla-migrator/">help users migrate from Cassandra to Scylla</a> by leveraging Spark it seemed like a good fit for the task since we happen to own Spark clusters powered by Hadoop YARN.</p>

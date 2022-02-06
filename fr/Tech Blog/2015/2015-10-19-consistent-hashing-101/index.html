@@ -30,11 +30,6 @@
     
     
       
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700%7CUbuntu+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Ubuntu";--md-code-font-family:"Ubuntu Mono"}</style>
-      
     
     
     
@@ -222,7 +217,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../Tech Blog/" class="md-tabs__link md-tabs__link--active">
+      <a href="../../" class="md-tabs__link md-tabs__link--active">
         Tech Blog
       </a>
     </li>
@@ -238,7 +233,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../Tech Talks/" class="md-tabs__link">
+      <a href="../../../Tech%20Talks/" class="md-tabs__link">
         Tech Talks
       </a>
     </li>
@@ -254,7 +249,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../FPV Handbook/" class="md-tabs__link">
+      <a href="../../../FPV%20Handbook/" class="md-tabs__link">
         FPV Handbook
       </a>
     </li>
@@ -275,7 +270,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../FPV Builds/ImpulseRC Apex/" class="md-tabs__link">
+      <a href="../../../FPV%20Builds/ImpulseRC%20Apex/" class="md-tabs__link">
         FPV Builds
       </a>
     </li>
@@ -384,7 +379,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Tech Blog/" class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         Articles techniques
       </a>
     </li>
@@ -3512,7 +3507,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Tech Talks/" class="md-nav__link">
+      <a href="../../../Tech%20Talks/" class="md-nav__link">
         Community talks and awards
       </a>
     </li>
@@ -4113,7 +4108,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../FPV Handbook/" class="md-nav__link">
+      <a href="../../../FPV%20Handbook/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -4826,7 +4821,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../FPV Builds/ImpulseRC Apex/" class="md-nav__link">
+      <a href="../../../FPV%20Builds/ImpulseRC%20Apex/" class="md-nav__link">
         Apex 5" HD on base frame kit
       </a>
     </li>
@@ -4881,7 +4876,7 @@
 <li>I have to implement a way to figure out where to send each car to get it fixed</li>
 <li>I want to ensure that an even number of cars will get fixed on each factory</li>
 </ul>
-<h2 id="_1"><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/10/hashing.png"><img alt="hashing" src="../../../../Tech%20Blog/2015/images/hashing.png" /></a><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="_1"><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/10/hashing.png"><img alt="hashing" src="../images/hashing.png" /></a><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>This gets down to two major questions to solve:</p>
 <ul>
 <li>what is my <strong>selection criteria</strong> ? this will be my <strong>key</strong>.</li>
@@ -4907,7 +4902,7 @@
 <ul>
 <li>I would end up sending all of them to the factory 1 and <strong>the other factories would remain almost empty</strong> !</li>
 </ul>
-<p><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/10/hashing_static.png"><img alt="hashing_static" src="../../../../Tech%20Blog/2015/images/hashing_static-300x264.png" /></a></p>
+<p><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/10/hashing_static.png"><img alt="hashing_static" src="../images/hashing_static-300x264.png" /></a></p>
 <p>This is a serious limitation. We need a dynamic way to calculate the car distribution between the factories, for this we will use a <strong>hash algorithm</strong> !</p>
 <h1 id="hash-tables">Hash tables<a class="headerlink" href="#hash-tables" title="Permanent link">&para;</a></h1>
 <p>A hash table is a data structure where we apply a hash function (algorithm) on the <strong>key</strong> to compute an <strong>index</strong> (pointer) into an array of <strong>buckets</strong> (values) from which we get the <strong>value</strong>.</p>
@@ -4947,7 +4942,7 @@ factory = array[index]</p>
 <p>Wow it's amazingly simple right ? :)</p>
 <p>Now we have a way better car repair distribution !... until something bad happens:</p>
 <p><strong>What if a factory burns ?</strong></p>
-<p><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/10/hashing_fire.png"><img alt="hashing_fire" src="../../../../Tech%20Blog/2015/images/hashing_fire-300x274.png" /></a></p>
+<p><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/10/hashing_fire.png"><img alt="hashing_fire" src="../images/hashing_fire-300x274.png" /></a></p>
 <p>Our algorithm is based on the number of available factories so <strong>removing a factory from our array means that we will redistribute a vast majority of the key mappings from our hash table</strong> !</p>
 <p>Keep in mind that the more values (factories) you have in your array the worse this problem gets. In our case, given a car's plate number we are sure that we wouldn't be able to figure out where a vast majority of them were sent any more.</p>
 <p>factories = [1, 2, 4]</p>
@@ -4967,7 +4962,7 @@ factory = array[index]</p>
 <h1 id="consistent-hashing">Consistent hashing<a class="headerlink" href="#consistent-hashing" title="Permanent link">&para;</a></h1>
 <p>The response to this kind of problem is to implement a consistent hashing algorithm. <strong>The goal of this technique is to limit the number of remapped keys when the hash table is resized</strong>.</p>
 <p>This is possible by imagining our factories as a circle (ring) and the hash of our keys as points on the same circle. We would then select the next factory (value) by going through the circle, always on the same way, until we find a factory.</p>
-<p><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/10/hashing_ring.png"><img alt="hashing_ring" src="../../../../Tech%20Blog/2015/images/hashing_ring.png" /></a></p>
+<p><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/10/hashing_ring.png"><img alt="hashing_ring" src="../images/hashing_ring.png" /></a></p>
 <ul>
 <li>Red hashed plate number would go to factory 1</li>
 <li>Blue hashed plate number would go to factory 3</li>

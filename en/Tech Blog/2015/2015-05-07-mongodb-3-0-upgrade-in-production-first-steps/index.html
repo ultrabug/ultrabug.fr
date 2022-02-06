@@ -30,11 +30,6 @@
     
     
       
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700%7CUbuntu+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Ubuntu";--md-code-font-family:"Ubuntu Mono"}</style>
-      
     
     
     
@@ -4963,14 +4958,14 @@
 <p>To make this comparison accurate, we resynchronized this node totally before migrating to WiredTiger so we could compare a non fragmented MMAPv1 disk usage with the WiredTiger compressed one.</p>
 <p>While I can't disclose the actual values, compression worked like a charm for us with a <strong>gain ratio of 3,2 on disk usage</strong> (data + indexes) which is way beyond our expectations !</p>
 <p>This is the DB Storage graph from MMS, showing a gain ratio of 4 surely due to indexes being in a separate disk now.</p>
-<p><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/05/2015-05-07-115324_461x184_scrot.png"><img alt="2015-05-07-115324_461x184_scrot" src="../../../../Tech%20Blog/2015/images/2015-05-07-115324_461x184_scrot.png" /></a></p>
+<p><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/05/2015-05-07-115324_461x184_scrot.png"><img alt="2015-05-07-115324_461x184_scrot" src="../images/2015-05-07-115324_461x184_scrot.png" /></a></p>
 <h4 id="memory-usage">memory usage<a class="headerlink" href="#memory-usage" title="Permanent link">&para;</a></h4>
 <p>As with the disk usage, the node had been running hot on MMAPv1 before the actual migration so we can compare memory allocation/consumption of both engines.</p>
 <p>There again the memory management of WiredTiger and its cache shows great improvement. For now, we left the default setting which has WiredTiger limit its cache to half the available memory of the system. We'll experiment with this setting later on.</p>
-<p><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/05/2015-05-07-115347_459x177_scrot.png"><img alt="2015-05-07-115347_459x177_scrot" src="../../../../Tech%20Blog/2015/images/2015-05-07-115347_459x177_scrot.png" /></a></p>
+<p><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/05/2015-05-07-115347_459x177_scrot.png"><img alt="2015-05-07-115347_459x177_scrot" src="../images/2015-05-07-115347_459x177_scrot.png" /></a></p>
 <h4 id="connections">connections<a class="headerlink" href="#connections" title="Permanent link">&para;</a></h4>
 <p>This I'm still not sure of the actual cause yet but the connections count is higher and more steady than before on this node.</p>
-<p><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/05/2015-05-07-123449_454x183_scrot.png"><img alt="2015-05-07-123449_454x183_scrot" src="../../../../Tech%20Blog/2015/images/2015-05-07-123449_454x183_scrot.png" /></a></p>
+<p><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/05/2015-05-07-123449_454x183_scrot.png"><img alt="2015-05-07-123449_454x183_scrot" src="../images/2015-05-07-123449_454x183_scrot.png" /></a></p>
 <h2 id="first-impressions">First impressions<a class="headerlink" href="#first-impressions" title="Permanent link">&para;</a></h2>
 <p>The node is running smooth for several hours now. We are getting acquainted to the new metrics and statistics from WiredTiger. The overall node and I/O load is better than before !</p>
 <p>While all the above graphs show huge improvements there is no major change from our applications point of view. We didn't expect any since this is only one node in a whole cluster and that the main benefits will also come from master node migrations.</p>

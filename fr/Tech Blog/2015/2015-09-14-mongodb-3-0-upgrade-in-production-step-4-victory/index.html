@@ -30,11 +30,6 @@
     
     
       
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700%7CUbuntu+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Ubuntu";--md-code-font-family:"Ubuntu Mono"}</style>
-      
     
     
     
@@ -222,7 +217,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../Tech Blog/" class="md-tabs__link md-tabs__link--active">
+      <a href="../../" class="md-tabs__link md-tabs__link--active">
         Tech Blog
       </a>
     </li>
@@ -238,7 +233,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../Tech Talks/" class="md-tabs__link">
+      <a href="../../../Tech%20Talks/" class="md-tabs__link">
         Tech Talks
       </a>
     </li>
@@ -254,7 +249,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../FPV Handbook/" class="md-tabs__link">
+      <a href="../../../FPV%20Handbook/" class="md-tabs__link">
         FPV Handbook
       </a>
     </li>
@@ -275,7 +270,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../FPV Builds/ImpulseRC Apex/" class="md-tabs__link">
+      <a href="../../../FPV%20Builds/ImpulseRC%20Apex/" class="md-tabs__link">
         FPV Builds
       </a>
     </li>
@@ -384,7 +379,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Tech Blog/" class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         Articles techniques
       </a>
     </li>
@@ -3522,7 +3517,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Tech Talks/" class="md-nav__link">
+      <a href="../../../Tech%20Talks/" class="md-nav__link">
         Community talks and awards
       </a>
     </li>
@@ -4123,7 +4118,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../FPV Handbook/" class="md-nav__link">
+      <a href="../../../FPV%20Handbook/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -4836,7 +4831,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../FPV Builds/ImpulseRC Apex/" class="md-nav__link">
+      <a href="../../../FPV%20Builds/ImpulseRC%20Apex/" class="md-nav__link">
         Apex 5" HD on base frame kit
       </a>
     </li>
@@ -4890,13 +4885,13 @@
 <h2 id="the-results">The results<a class="headerlink" href="#the-results" title="Permanent link">&para;</a></h2>
 <p>Nothing speaks better than metrics, so I'll just comment them quickly as they speak by themselves. I obviously can't disclose the scales sorry.</p>
 <p><strong>Insert-only operations gained 25x performance</strong></p>
-<p><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/09/2015-09-14-173545_531x276_scrot.png"><img alt="2015-09-14-173545_531x276_scrot" src="../../../../Tech%20Blog/2015/images/2015-09-14-173545_531x276_scrot.png" /></a></p>
+<p><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/09/2015-09-14-173545_531x276_scrot.png"><img alt="2015-09-14-173545_531x276_scrot" src="../images/2015-09-14-173545_531x276_scrot.png" /></a></p>
 <p><strong>Upsert-heavy operations gained 5x performance</strong></p>
-<p><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/09/2015-09-14-173748_530x275_scrot.png"><img alt="2015-09-14-173748_530x275_scrot" src="../../../../Tech%20Blog/2015/images/2015-09-14-173748_530x275_scrot.png" /></a></p>
+<p><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/09/2015-09-14-173748_530x275_scrot.png"><img alt="2015-09-14-173748_530x275_scrot" src="../images/2015-09-14-173748_530x275_scrot.png" /></a></p>
 <p><strong>Disk I/O also showed mercy to the disk overall usage.</strong> This is due to WiredTiger superior caching and disk flushing mechanisms.</p>
-<p><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/09/2015-09-14-173954_409x254_scrot.png"><img alt="2015-09-14-173954_409x254_scrot" src="../../../../Tech%20Blog/2015/images/2015-09-14-173954_409x254_scrot.png" /></a></p>
+<p><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/09/2015-09-14-173954_409x254_scrot.png"><img alt="2015-09-14-173954_409x254_scrot" src="../images/2015-09-14-173954_409x254_scrot.png" /></a></p>
 <p><strong>Disk usage decreased dramatically thanks to WiredTiger compression</strong></p>
-<p><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/09/2015-09-14-174137_317x180_scrot.png"><img alt="2015-09-14-174137_317x180_scrot" src="../../../../Tech%20Blog/2015/images/2015-09-14-174137_317x180_scrot.png" /></a></p>
+<p><a href="http://www.ultrabug.fr/wordpress/wp-content/uploads/2015/09/2015-09-14-174137_317x180_scrot.png"><img alt="2015-09-14-174137_317x180_scrot" src="../images/2015-09-14-174137_317x180_scrot.png" /></a></p>
 <h2 id="the-last-and-next-step">The last and next step<a class="headerlink" href="#the-last-and-next-step" title="Permanent link">&para;</a></h2>
 <p>As of today, <strong>we still run our secondaries with the MMapv1</strong> engine and are waiting a few weeks to see if anything goes wrong in the long run. Shall we need to roll back, we'd be able to do so very easily.</p>
 <p>Then when we get enough uptime using WiredTiger, we will make the final switch to a full Roarring production cluster !</p>

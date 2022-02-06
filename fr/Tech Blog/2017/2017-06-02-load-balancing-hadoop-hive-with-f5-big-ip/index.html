@@ -30,11 +30,6 @@
     
     
       
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700%7CUbuntu+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Ubuntu";--md-code-font-family:"Ubuntu Mono"}</style>
-      
     
     
     
@@ -222,7 +217,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../Tech Blog/" class="md-tabs__link md-tabs__link--active">
+      <a href="../../" class="md-tabs__link md-tabs__link--active">
         Tech Blog
       </a>
     </li>
@@ -238,7 +233,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../Tech Talks/" class="md-tabs__link">
+      <a href="../../../Tech%20Talks/" class="md-tabs__link">
         Tech Talks
       </a>
     </li>
@@ -254,7 +249,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../FPV Handbook/" class="md-tabs__link">
+      <a href="../../../FPV%20Handbook/" class="md-tabs__link">
         FPV Handbook
       </a>
     </li>
@@ -275,7 +270,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../FPV Builds/ImpulseRC Apex/" class="md-tabs__link">
+      <a href="../../../FPV%20Builds/ImpulseRC%20Apex/" class="md-tabs__link">
         FPV Builds
       </a>
     </li>
@@ -384,7 +379,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Tech Blog/" class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         Articles techniques
       </a>
     </li>
@@ -3482,7 +3477,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Tech Talks/" class="md-nav__link">
+      <a href="../../../Tech%20Talks/" class="md-nav__link">
         Community talks and awards
       </a>
     </li>
@@ -4083,7 +4078,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../FPV Handbook/" class="md-nav__link">
+      <a href="../../../FPV%20Handbook/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -4796,7 +4791,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../FPV Builds/ImpulseRC Apex/" class="md-nav__link">
+      <a href="../../../FPV%20Builds/ImpulseRC%20Apex/" class="md-nav__link">
         Apex 5" HD on base frame kit
       </a>
     </li>
@@ -4864,21 +4859,21 @@
 <p>java.sql.SQLException: org.apache.thrift.transport.TTransportException: java.net.SocketException: Connection reset</p>
 <p>After some debugging and traffic analysis we found out that the F5 were actually responsible for those connection reset but we struggled to understand why.</p>
 <p>It turned out that the <strong>Protocol Profile</strong> set up on the Virtual Server was the root cause of the problem and specifically its <strong>idle timeout setting default of 300s</strong>:</p>
-<p><a href="http://www.ultrabug.fr/load-balancing-hadoop-hive-with-f5-big-ip/2017-06-02-141618_437x284_scrot/"><img alt="" src="../../../../Tech%20Blog/2017/images/2017-06-02-141618_437x284_scrot.png" /></a>Note the <em>Reset on Timeout</em> setting as well which is responsible for the actual Reset packet sent by the F5 to the client.</p>
+<p><a href="http://www.ultrabug.fr/load-balancing-hadoop-hive-with-f5-big-ip/2017-06-02-141618_437x284_scrot/"><img alt="" src="../images/2017-06-02-141618_437x284_scrot.png" /></a>Note the <em>Reset on Timeout</em> setting as well which is responsible for the actual Reset packet sent by the F5 to the client.</p>
 <p>This could also be proven by the Virtual Server statistics showing an <strong>increasing Connection Expires count</strong>.</p>
 <p><strong>The solution is to create a new Protocol Profile</strong> based on the <em>fastL4</em> with a higher Idle Timeout setting <strong>and update our Virtual Server to use this profile instead</strong> of the default one.</p>
 <p>It seemed sensible in our case to increase the 5 minutes expiration to 1 day, so let's call our new profile <strong>fastL4-24h-idle-timeout:</strong></p>
-<p><a href="http://www.ultrabug.fr/load-balancing-hadoop-hive-with-f5-big-ip/2017-06-02-142054_437x305_scrot/"><img alt="" src="../../../../Tech%20Blog/2017/images/2017-06-02-142054_437x305_scrot.png" /></a>Then change the Hive Virtual Server configuration to use this Protocol Profile:</p>
-<p><a href="http://www.ultrabug.fr/load-balancing-hadoop-hive-with-f5-big-ip/2017-06-02-142415_349x81_scrot/"><img alt="" src="../../../../Tech%20Blog/2017/images/2017-06-02-142415_349x81_scrot.png" /></a>You will see no more expired connections on the Virtual Server statistics!</p>
+<p><a href="http://www.ultrabug.fr/load-balancing-hadoop-hive-with-f5-big-ip/2017-06-02-142054_437x305_scrot/"><img alt="" src="../images/2017-06-02-142054_437x305_scrot.png" /></a>Then change the Hive Virtual Server configuration to use this Protocol Profile:</p>
+<p><a href="http://www.ultrabug.fr/load-balancing-hadoop-hive-with-f5-big-ip/2017-06-02-142415_349x81_scrot/"><img alt="" src="../images/2017-06-02-142415_349x81_scrot.png" /></a>You will see no more expired connections on the Virtual Server statistics!</p>
 <h2 id="connection-mirroring">Connection mirroring<a class="headerlink" href="#connection-mirroring" title="Permanent link">&para;</a></h2>
 <p>When creating a Virtual Server, there is a hidden but critical option to enable named <strong>Connection Mirroring</strong> under the <strong>Configuration:</strong> <strong>Advanced</strong> drop-down.</p>
 <p>Make sure you enable this feature so that your Hive queries and applications can survive a failover of your F5 load balancers. If you do not <strong>enable</strong> this, you will experience stalled connections and jobs which could take up to multiple hours before failing!</p>
-<p><img alt="" src="../../../../Tech%20Blog/2017/images/2018-02-22-172501_559x81_scrot.png" /></p>
+<p><img alt="" src="../images/2018-02-22-172501_559x81_scrot.png" /></p>
 <h2 id="job-design-consideration">Job design consideration<a class="headerlink" href="#job-design-consideration" title="Permanent link">&para;</a></h2>
 <p>We could argue whether or not a default 5 minutes idle timeout is reasonable or not for Hive or any other Hadoop component but it is important to point out that the jobs which were affected also had sub-optimal design pattern in the first place. This also explains why most of our jobs (including also long running ones) were not affected.</p>
 <p>The affected jobs allowed were Talend jobs where the Hive connection was established at the beginning of the job, used at that time and then the job went on doing other things before using the Hive connection again.</p>
 <p>When those in between computation took more than 300s, the remaining of the job failed because the initial Hive connection got reset by the F5:</p>
-<p><a href="http://www.ultrabug.fr/load-balancing-hadoop-hive-with-f5-big-ip/job_design/"><img alt="" src="../../../../Tech%20Blog/2017/images/job_design.png" /></a>This is clearly not a good job design for long processing jobs and you should refrain from doing it. Instead open a connection to Hive when you need it, use it and close it properly. Shall you need it later in your job, open a new connection to Hive and use that one.</p>
+<p><a href="http://www.ultrabug.fr/load-balancing-hadoop-hive-with-f5-big-ip/job_design/"><img alt="" src="../images/job_design.png" /></a>This is clearly not a good job design for long processing jobs and you should refrain from doing it. Instead open a connection to Hive when you need it, use it and close it properly. Shall you need it later in your job, open a new connection to Hive and use that one.</p>
 <p>This will also have the benefit of not keeping open idle connections to Hive itself and favour resources allocation fairness across your jobs.</p>
 <p>I hope this will be of help to anyone facing these kind of issues.</p>
                 

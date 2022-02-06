@@ -30,11 +30,6 @@
     
     
       
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700%7CUbuntu+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Ubuntu";--md-code-font-family:"Ubuntu Mono"}</style>
-      
     
     
     
@@ -222,7 +217,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../Tech Blog/" class="md-tabs__link md-tabs__link--active">
+      <a href="../../" class="md-tabs__link md-tabs__link--active">
         Tech Blog
       </a>
     </li>
@@ -238,7 +233,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../Tech Talks/" class="md-tabs__link">
+      <a href="../../../Tech%20Talks/" class="md-tabs__link">
         Tech Talks
       </a>
     </li>
@@ -254,7 +249,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../FPV Handbook/" class="md-tabs__link">
+      <a href="../../../FPV%20Handbook/" class="md-tabs__link">
         FPV Handbook
       </a>
     </li>
@@ -275,7 +270,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../FPV Builds/ImpulseRC Apex/" class="md-tabs__link">
+      <a href="../../../FPV%20Builds/ImpulseRC%20Apex/" class="md-tabs__link">
         FPV Builds
       </a>
     </li>
@@ -384,7 +379,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Tech Blog/" class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         Articles techniques
       </a>
     </li>
@@ -3482,7 +3477,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Tech Talks/" class="md-nav__link">
+      <a href="../../../Tech%20Talks/" class="md-nav__link">
         Community talks and awards
       </a>
     </li>
@@ -4083,7 +4078,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../FPV Handbook/" class="md-nav__link">
+      <a href="../../../FPV%20Handbook/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -4796,7 +4791,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../FPV Builds/ImpulseRC Apex/" class="md-nav__link">
+      <a href="../../../FPV%20Builds/ImpulseRC%20Apex/" class="md-nav__link">
         Apex 5" HD on base frame kit
       </a>
     </li>
@@ -4835,10 +4830,10 @@
                 
                 
                 <p>I felt like sharing a recent story that allowed us identify a bot in a haystack thanks to Scylla.</p>
-<p><img alt="" src="../../../../Tech%20Blog/2018/images/2018-07-06-102727_852x920_scrot-278x300.png" /></p>
+<p><img alt="" src="../images/2018-07-06-102727_852x920_scrot-278x300.png" /></p>
 <h1 id="the-scenario">The scenario<a class="headerlink" href="#the-scenario" title="Permanent link">&para;</a></h1>
 <p>While working on loading up 2B+ of rows into Scylla from Hive (using Spark), we noticed a strange behaviour in the performances of one of our nodes:</p>
-<p><img alt="" src="../../../../Tech%20Blog/2018/images/2018-07-06-103256_970x258_scrot.png" /></p>
+<p><img alt="" src="../images/2018-07-06-103256_970x258_scrot.png" /></p>
 <p>So we started wondering why that server in blue was having those peaks of load and was clearly diverging from the two others... As we obviously <strong>expect the three nodes to behave the same</strong>, there were two options on the table:</p>
 <ol>
 <li><strong>hardware problem</strong> on the node</li>
@@ -4848,7 +4843,7 @@
 <h1 id="the-investigation">The investigation<a class="headerlink" href="#the-investigation" title="Permanent link">&para;</a></h1>
 <h2 id="hardware">Hardware?<a class="headerlink" href="#hardware" title="Permanent link">&para;</a></h2>
 <p>Hardware problem was pretty quickly evicted, nothing showed up on the monitoring and on the kernel logs. I/O queues and throughput were good:</p>
-<p><img alt="" src="../../../../Tech%20Blog/2018/images/2018-07-06-163923_983x255_scrot.png" /></p>
+<p><img alt="" src="../images/2018-07-06-163923_983x255_scrot.png" /></p>
 <h2 id="data-distribution">Data distribution?<a class="headerlink" href="#data-distribution" title="Permanent link">&para;</a></h2>
 <p>Avi Kivity (ScyllaDB's CTO) quickly got the feeling that something was wrong with the data distribution and that we could be facing a <strong>hotspot situation</strong>. He quickly nailed it down to shard 44 thanks to the scylla-grafana-monitoring platform.</p>
 <p>Data is distributed between shards that are stored on nodes (consistent hash ring). This distribution is done by hashing the primary key of your data which dictates the shard it belongs to (and thus the node(s) where the shard is stored).</p>
@@ -4880,10 +4875,10 @@ Max             0,00          45359,00              0,00          14530764      
 <p>So we modified our pipeline to detect this bot and discard its events so that it stops polluting our databases with fake data. Then we cleaned up the million of events worth of mess and traces we stored about the bot.</p>
 <h1 id="the-aftermath">The aftermath<a class="headerlink" href="#the-aftermath" title="Permanent link">&para;</a></h1>
 <p>Finally, we cleared out the data in Scylla and tried again from scratch. Needless to say that the curves got way better and are exactly <strong>what we should expect from a well balanced cluster</strong>:</p>
-<p><img alt="" src="../../../../Tech%20Blog/2018/images/2018-07-06-163356_781x256_scrot.png" /></p>
+<p><img alt="" src="../images/2018-07-06-163356_781x256_scrot.png" /></p>
 <p><strong>Thanks a lot to the ScyllaDB team</strong> for their thorough help and high spirited support!</p>
 <p>I'll quote them conclude this quick blog post:</p>
-<p><img alt="" src="../../../../Tech%20Blog/2018/images/2018-07-06-163628_387x211_scrot.png" /></p>
+<p><img alt="" src="../images/2018-07-06-163628_387x211_scrot.png" /></p>
                 
                   
                 

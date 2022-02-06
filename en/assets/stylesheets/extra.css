@@ -1,0 +1,12 @@
+:root {
+  --md-primary-fg-color: #002b36;
+  --md-primary-bg-color: #fdf6e3;
+}
+a {
+  --md-typeset-color: #6c71c4;
+  --md-typeset-a-color: #6c71c4;
+}
+.md-footer {
+  --md-footer-bg-color: #002b36;
+  --md-footer-fg-color: #fdf6e3;
+}

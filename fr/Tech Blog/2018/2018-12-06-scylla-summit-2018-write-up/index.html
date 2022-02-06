@@ -30,11 +30,6 @@
     
     
       
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700%7CUbuntu+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Ubuntu";--md-code-font-family:"Ubuntu Mono"}</style>
-      
     
     
     
@@ -222,7 +217,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../Tech Blog/" class="md-tabs__link md-tabs__link--active">
+      <a href="../../" class="md-tabs__link md-tabs__link--active">
         Tech Blog
       </a>
     </li>
@@ -238,7 +233,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../Tech Talks/" class="md-tabs__link">
+      <a href="../../../Tech%20Talks/" class="md-tabs__link">
         Tech Talks
       </a>
     </li>
@@ -254,7 +249,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../FPV Handbook/" class="md-tabs__link">
+      <a href="../../../FPV%20Handbook/" class="md-tabs__link">
         FPV Handbook
       </a>
     </li>
@@ -275,7 +270,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../FPV Builds/ImpulseRC Apex/" class="md-tabs__link">
+      <a href="../../../FPV%20Builds/ImpulseRC%20Apex/" class="md-tabs__link">
         FPV Builds
       </a>
     </li>
@@ -384,7 +379,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Tech Blog/" class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         Articles techniques
       </a>
     </li>
@@ -3563,7 +3558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Tech Talks/" class="md-nav__link">
+      <a href="../../../Tech%20Talks/" class="md-nav__link">
         Community talks and awards
       </a>
     </li>
@@ -4164,7 +4159,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../FPV Handbook/" class="md-nav__link">
+      <a href="../../../FPV%20Handbook/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -4877,7 +4872,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../FPV Builds/ImpulseRC Apex/" class="md-nav__link">
+      <a href="../../../FPV%20Builds/ImpulseRC%20Apex/" class="md-nav__link">
         Apex 5" HD on base frame kit
       </a>
     </li>
@@ -4918,7 +4913,7 @@
                   <h1>Scylla Summit 2018 write-up</h1>
                 
                 <p>It's been almost one month since I had the chance to attend and speak at <strong><a href="https://www.scylladb.com/scylla-summit-2018/">Scylla Summit 2018</a></strong> so I'm relieved to finally publish a short write-up on the key things I wanted to share about this wonderful event!</p>
-<p><img alt="" src="../../../../Tech%20Blog/2018/images/DrQOptgXgAAcWIX.jpg" /></p>
+<p><img alt="" src="../images/DrQOptgXgAAcWIX.jpg" /></p>
 <h2 id="make-scylla-boring">Make Scylla boring<a class="headerlink" href="#make-scylla-boring" title="Permanent link">&para;</a></h2>
 <p>This statement of Glauber Costa sums up what looked to me to be the main driver of the engineering efforts put into Scylla lately: making it work so consistently well on any kind of workload that it's boring to operate :)  </p>
 <p>I will follow up on this statement to highlight the things I heard and (hopefully) understood during the summit. I hope you'll find it insightful.  </p>
@@ -4948,7 +4943,7 @@ I also noticed that the current version was not supporting SSL enabled clusters 
 <p>The ScyllaDB guys of course couldn't avoid the Kubernetes frenzy so Moreno Garcia gave a lot of <a href="https://www.scylladb.com/2018/08/09/cost-containerization-scylla/">feedback and tips</a> on how to operate Scylla on docker with minimal performance degradation.  </p>
 <p>Kubernetes has been designed for stateless applications, not stateful ones and Docker does some automatic magic that have rather big performance hits on Scylla. You will basically have to play with affinities to dedicate one Scylla instance to run on one server with a "retain" reclaim policy.  </p>
 <p>Remember that the official Scylla docker image runs with dev-mode enabled by default which turns off all performance checks on start. So start by disabling that and look at all the tips and literature that Moreno has put online!  </p>
-<p><img alt="" src="../../../../Tech%20Blog/2018/images/DrVXLqWXQAAJnmS-1024x329.jpg" /></p>
+<p><img alt="" src="../images/DrVXLqWXQAAJnmS-1024x329.jpg" /></p>
 <h2 id="scylla-30">Scylla 3.0<a class="headerlink" href="#scylla-30" title="Permanent link">&para;</a></h2>
 <p>A lot has been <a href="https://www.scylladb.com/2018/11/08/overheard-at-scylla-summit-2018/">written on it already</a> so I will just be short on things that important to understand in my point of view.</p>
 <ul>
@@ -4981,7 +4976,7 @@ I also noticed that the current version was not supporting SSL enabled clusters 
 </ul>
 </li>
 </ul>
-<p><img alt="" src="../../../../Tech%20Blog/2018/images/DrcOcTSUUAAJSVi-1024x248.jpg" /></p>
+<p><img alt="" src="../images/DrcOcTSUUAAJSVi-1024x248.jpg" /></p>
 <h2 id="random-notes">Random notes<a class="headerlink" href="#random-notes" title="Permanent link">&para;</a></h2>
 <p>Support for <strong>LWT</strong> (lightweight transactions) will be relying on a future implementation of the Raft consensus algorithm inside Scylla. This work will also benefits Materialized Views consistency. Duarte Nunes will be the one working on this and I envy him very much!  </p>
 <p>Support for <strong>search</strong> workloads is high in the ScyllaDB devs priorities so we should definitely hear about it in the coming months.</p>

@@ -30,11 +30,6 @@
     
     
       
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700%7CUbuntu+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Ubuntu";--md-code-font-family:"Ubuntu Mono"}</style>
-      
     
     
     
@@ -4919,8 +4914,8 @@ this but...</p>
 <p><strong>Back in <a href="https://www.scylladb.com/2019/11/18/overheard-at-scylla-summit-2019/">Scylla Summit 2019</a> I said on stage that this kind of feature felt
 like a patch</strong> in MongoDB because such kind of database should be smart enough
 to cope with the background operations that it generated itself.</p>
-<p><img alt="avoid mongodb clusters" src="../../../../Tech%20Blog/2021/images/2021-05-06-avoid_mongodb.png" />
-<img alt="balancing window is a patch" src="../../../../Tech%20Blog/2021/images/2021-05-06-balancing_patch.png" /></p>
+<p><img alt="avoid mongodb clusters" src="../images/2021-05-06-avoid_mongodb.png" />
+<img alt="balancing window is a patch" src="../images/2021-05-06-balancing_patch.png" /></p>
 <p>Since MongoDB is not built on an architectural design fit for scheduling and
 optimizing certain operations per CPU, <strong>the impact of its internal shard
 balancer is bad on performance</strong> and the balancing window strategy allows
@@ -4931,7 +4926,7 @@ the same time. I was living by it and believed this could be applied to
 repairs as well.</p>
 <h2 id="now-scylla-is-doing-it">Now Scylla is doing it<a class="headerlink" href="#now-scylla-is-doing-it" title="Permanent link">&para;</a></h2>
 <p>So today I'm unsure how to welcome this news.</p>
-<p><img alt="scylla twitter announcement" src="../../../../Tech%20Blog/2021/images/2021-05-06-twitter_manager.png" /></p>
+<p><img alt="scylla twitter announcement" src="../images/2021-05-06-twitter_manager.png" /></p>
 <p>On one hand there are valid use cases where you want to make sure that you
 get all the performance that you can from your hardware and I'm sure most
 users will gladly welcome this because they know it will help their cluster

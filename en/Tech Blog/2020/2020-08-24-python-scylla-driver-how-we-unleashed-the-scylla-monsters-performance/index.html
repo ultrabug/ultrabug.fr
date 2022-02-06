@@ -30,11 +30,6 @@
     
     
       
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700%7CUbuntu+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Ubuntu";--md-code-font-family:"Ubuntu Mono"}</style>
-      
     
     
     
@@ -4832,7 +4827,7 @@
                 <p>At <a href="https://www.ultrabug.fr/scylla-summit-2019/">Scylla summit 2019</a> I had the chance to meet <strong>Israel Fruchter</strong> and we dreamed of working on adding <strong>shard-awareness</strong> support to the Python cassandra-driver which would be known as <strong>scylla-driver</strong>.</p>
 <p>A few months later, when Israel reached out to me on the Scylla-Users #pythonistas Slack channel with the <a href="https://github.com/scylladb/python-driver/pull/6">first draft PR</a> I was so excited that I jumped in the wagon to help!</p>
 <p>The efforts we put into the scylla-driver paid off and significantly improved the performance of the production applications that I had the chance to switch to using it by 15 to 25%!</p>
-<p><img alt="" src="../../../../Tech%20Blog/2020/images/2020-07-23-174931_1276x731_scrot-1024x587.png" /></p>
+<p><img alt="" src="../images/2020-07-23-174931_1276x731_scrot-1024x587.png" /></p>
 <p>Before we reached those numbers and even released the scylla-driver to PyPi, EuroPython 2020 RFP was open and <a href="https://ep2020.europython.eu/talks/a-deep-dive-and-comparison-of-python-drivers-for-cassandra-and-scylla/">I submitted a talk proposal which was luckily accepted</a> by the community.</p>
 <p>So I had the chance to deep-dive into Cassandra vs Scylla architecture differences, explain the rationale behind creating the scylla-driver and give Python code details on how we implemented it and the challenges we faced doing so. Check my talk spage for</p>
 <p>I also explained that I wrote an <a href="https://groups.google.com/g/scylladb-dev/c/SUx0OBlY7iw">RFC on the scylla-dev mailing list</a> which lead the developers of Scylla to implement a new connection-to-shard algorithm that will allow clients connecting to a new listening port to select the actual shard they want a connection to.</p>

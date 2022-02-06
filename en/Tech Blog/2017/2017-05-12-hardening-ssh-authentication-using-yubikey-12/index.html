@@ -30,11 +30,6 @@
     
     
       
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700%7CUbuntu+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Ubuntu";--md-code-font-family:"Ubuntu Mono"}</style>
-      
     
     
     
@@ -4951,7 +4946,7 @@
 <li>GPG</li>
 <li>PIV</li>
 </ul>
-<p><img alt="" src="../../../../Tech%20Blog/2017/images/YubiKey-4-1000-2016.png" /></p>
+<p><img alt="" src="../images/YubiKey-4-1000-2016.png" /></p>
 <h1 id="method-1-ssh-using-pam_ssh-pam_yubico">Method 1 - SSH using pam_ssh + pam_yubico<a class="headerlink" href="#method-1-ssh-using-pam_ssh-pam_yubico" title="Permanent link">&para;</a></h1>
 <p>The first method I found satisfactory was to combine <strong>pam_ssh</strong> authentication module along with <strong>pam_yubico</strong> as a 2nd factor. This allows server side passphrase enforcement on SSH and the usage of the security key to login.</p>
 <p>TL;DR: two gotchas before we begin</p>

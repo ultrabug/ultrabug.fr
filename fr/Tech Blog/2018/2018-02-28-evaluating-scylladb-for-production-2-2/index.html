@@ -30,11 +30,6 @@
     
     
       
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700%7CUbuntu+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Ubuntu";--md-code-font-family:"Ubuntu Mono"}</style>
-      
     
     
     
@@ -222,7 +217,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../Tech Blog/" class="md-tabs__link md-tabs__link--active">
+      <a href="../../" class="md-tabs__link md-tabs__link--active">
         Tech Blog
       </a>
     </li>
@@ -238,7 +233,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../Tech Talks/" class="md-tabs__link">
+      <a href="../../../Tech%20Talks/" class="md-tabs__link">
         Tech Talks
       </a>
     </li>
@@ -254,7 +249,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../FPV Handbook/" class="md-tabs__link">
+      <a href="../../../FPV%20Handbook/" class="md-tabs__link">
         FPV Handbook
       </a>
     </li>
@@ -275,7 +270,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../FPV Builds/ImpulseRC Apex/" class="md-tabs__link">
+      <a href="../../../FPV%20Builds/ImpulseRC%20Apex/" class="md-tabs__link">
         FPV Builds
       </a>
     </li>
@@ -384,7 +379,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Tech Blog/" class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         Articles techniques
       </a>
     </li>
@@ -3482,7 +3477,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Tech Talks/" class="md-nav__link">
+      <a href="../../../Tech%20Talks/" class="md-nav__link">
         Community talks and awards
       </a>
     </li>
@@ -4083,7 +4078,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../FPV Handbook/" class="md-nav__link">
+      <a href="../../../FPV%20Handbook/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -4796,7 +4791,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../FPV Builds/ImpulseRC Apex/" class="md-nav__link">
+      <a href="../../../FPV%20Builds/ImpulseRC%20Apex/" class="md-nav__link">
         Apex 5" HD on base frame kit
       </a>
     </li>
@@ -4834,7 +4829,7 @@
                   </a>
                 
                 
-                <p><img alt="" src="../../../../Tech%20Blog/2018/images/800x300-blog-SLA-Trumps-IOPS-1.jpg" /></p>
+                <p><img alt="" src="../images/800x300-blog-SLA-Trumps-IOPS-1.jpg" /></p>
 <p>In my previous blog post, I shared <a href="https://www.ultrabug.fr/evaluating-scylladb-for-production-1-2/">7 lessons on our experience in evaluating Scylla</a> for production.</p>
 <p>Those lessons were focused on the setup and execution of the POC and I promised a more technical blog post with technical details and lessons learned from the POC, here it is!</p>
 <p>Before you read on, be mindful that <strong>our POC was set up to test workloads</strong> and workflows, <strong>not to benchmark</strong> technologies. So even if the Scylla figures are great, they have not been the main drivers of the actual conclusion of the POC.</p>
@@ -4861,7 +4856,7 @@
 <li>You JOIN it with the corresponding ID matching table</li>
 <li>You get a matched population that your partner can recognize and interact with</li>
 </ul>
-<p><img alt="" src="../../../../Tech%20Blog/2018/images/matching_ids-1024x617.png" /></p>
+<p><img alt="" src="../images/matching_ids-1024x617.png" /></p>
 <p>Those ID matching tables have a <strong>pretty high read AND write throughput</strong> because they're updated and queried all the time.</p>
 <p>Usual figures are <strong>JOINs between a 10+ Million dataset and 1.5+ Billion ID</strong> matching tables.</p>
 <p>The reference query basically looks like this:</p>
@@ -4937,7 +4932,7 @@ ON p.id = m.id</p>
 <p>This is the kind of learning you can only get from experts like Glauber and that can justify the whole POC on its own!</p>
 <h1 id="step-2-set-up-scylla-grafana-monitoring">Step 2: Set up scylla-grafana-monitoring<a class="headerlink" href="#step-2-set-up-scylla-grafana-monitoring" title="Permanent link">&para;</a></h1>
 <p>As I said before, make sure to set up and run the <a href="https://github.com/scylladb/scylla-grafana-monitoring">scylla-grafana-monitoring</a> project before running your test workloads. This easy to run solution will be of great help to <strong>understand the performance</strong> of your cluster and to <strong>tune your workload for optimal performances</strong>.</p>
-<p><img alt="" src="../../../../Tech%20Blog/2018/images/2018-02-25-140230_532x319_scrot-300x180.png" /></p>
+<p><img alt="" src="../images/2018-02-25-140230_532x319_scrot-300x180.png" /></p>
 <p>If you can, also discuss with the ScyllaDB team to allow them to access the Grafana dashboard. This will be very valuable since they know where to look better than we usually do... I gained a lot of understandings thanks to this!</p>
 <h2 id="note-on-scrape-interval">Note on scrape interval<a class="headerlink" href="#note-on-scrape-interval" title="Permanent link">&para;</a></h2>
 <p>I advise you to <strong>lower the Prometheus scrape interval</strong> to have a shorter and finer sampling of your metrics. This will allow your dashboard to be more reactive when you start your test workloads.</p>
@@ -5148,7 +5143,7 @@ iptables -t filter -vnL</p>
 <li>developer friendliness</li>
 <li>costs</li>
 </ul>
-<p><img alt="" src="../../../../Tech%20Blog/2018/images/mascot-linux-love-1-150x150.png" /></p>
+<p><img alt="" src="../images/mascot-linux-love-1-150x150.png" /></p>
 <p>On the side, I tried Scylla on two other different use cases which proved interesting to follow later on to displace MongoDB again...</p>
 <h1 id="moving-to-production">Moving to production<a class="headerlink" href="#moving-to-production" title="Permanent link">&para;</a></h1>
 <p>Since our relationship was great <strong>we also decided to partner with ScyllaDB and support them by subscribing to their enterprise offerings</strong>. They also accepted to support us using <strong>Gentoo Linux</strong>!</p>

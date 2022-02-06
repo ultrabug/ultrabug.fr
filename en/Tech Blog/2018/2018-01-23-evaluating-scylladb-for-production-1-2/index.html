@@ -30,11 +30,6 @@
     
     
       
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700%7CUbuntu+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Ubuntu";--md-code-font-family:"Ubuntu Mono"}</style>
-      
     
     
     
@@ -4844,7 +4839,7 @@
 <hr />
 <h1 id="selecting-scylladb">Selecting ScyllaDB<a class="headerlink" href="#selecting-scylladb" title="Permanent link">&para;</a></h1>
 <p><a href="https://www.ultrabug.fr/scylladb-meets-gentoo-linux/">I got interested in ScyllaDB because of its philosophy and engagement</a> and I quickly got into it by being a modest contributor and its Gentoo Linux packager (not in portage yet).</p>
-<p><img alt="" src="../../../../Tech%20Blog/2018/images/mascot.png" /></p>
+<p><img alt="" src="../images/mascot.png" /></p>
 <p>Of course, I didn't pick an interest in that technology by chance:</p>
 <p>We've been using MongoDB in (mass) production at work for a very very long time now. I can easily say we were early MongoDB adopters. But there's no wisdom in saying that MongoDB is not suited for every use case and the Hadoop stack has come very strong in our data centers since then, with a predominance of Hive for the heavy duty and data hungry workflows.</p>
 <p>One thing I was never satisfied with MongoDB was its primary/secondary architecture which makes you lose write throughput and is even more horrible when you want to set up what they call a "cluster" which is in fact some mediocre abstraction they add on top of replica-sets. To say the least, it is inefficient and cumbersome to operate and maintain.</p>
@@ -4867,7 +4862,7 @@
 <li>hardware <strong>sizing help and validation</strong></li>
 <li>funny comments and French jokes (ok, not suitable for everyone)</li>
 </ul>
-<p><img alt="" src="../../../../Tech%20Blog/2018/images/2018-01-22-181625_402x309_scrot.png" /></p>
+<p><img alt="" src="../images/2018-01-22-181625_402x309_scrot.png" /></p>
 <hr />
 <h1 id="lessons-for-a-successful-poc">Lessons for a successful POC<a class="headerlink" href="#lessons-for-a-successful-poc" title="Permanent link">&para;</a></h1>
 <p>As I said before, you've got to be serious in your approach to make sure your POC will be efficient and will lead to an unbiased and fair conclusion.</p>
@@ -4875,7 +4870,7 @@
 <h2 id="have-some-background">Have some background<a class="headerlink" href="#have-some-background" title="Permanent link">&para;</a></h2>
 <p>Make sure to read some literature to have the key concepts and words in mind before you go. It is even more important if like me you do not come from the Cassandra world.</p>
 <p>I found that the <a href="http://shop.oreilly.com/product/0636920010852.do">Cassandra: The Definitive Guide</a> book at O'Reilly is a great read. Also, make sure to go around <a href="http://docs.scylladb.com/">ScyllaDB's documentation</a>.</p>
-<p><img alt="" src="../../../../Tech%20Blog/2018/images/lrg-150x150.jpg" /></p>
+<p><img alt="" src="../images/lrg-150x150.jpg" /></p>
 <h2 id="work-with-a-shared-reference-document">Work with a shared reference document<a class="headerlink" href="#work-with-a-shared-reference-document" title="Permanent link">&para;</a></h2>
 <p>Make sure you share with the ScyllaDB guys <strong>a clear and detailed document explaining exactly what you're trying to achieve and how you are doing it today</strong> (if you plan on migrating like we did).</p>
 <p>I made a google document for this because it felt the easiest. This document will be updated as you go and will serve as a <strong>reference</strong> for everyone participating in the POC.</p>

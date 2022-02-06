@@ -30,11 +30,6 @@
     
     
       
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700%7CUbuntu+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Ubuntu";--md-code-font-family:"Ubuntu Mono"}</style>
-      
     
     
     
@@ -5127,7 +5122,7 @@
                 
                 <h1 id="create-beautiful-and-localized-documentations-and-websites-using-mkdocs-github">Create beautiful and localized documentations and websites using MkDocs + Github<a class="headerlink" href="#create-beautiful-and-localized-documentations-and-websites-using-mkdocs-github" title="Permanent link">&para;</a></h1>
 <p>This is the web version of the talk I gave at <a href="https://ep2021.europython.eu/talks/8FcL3BL-create-beautiful-and-localized-documentations-and-websites-using-mkdocs-github/">EuroPython 2021</a>. If you prefer the <a href="https://mail.google.com/mail/u/0/?zx=hxrvlcmae3qu#inbox/FMfcgzGkZsvxBwKCzsCdVjvHFRtQVRhQ?projector=1">video format, it is available here</a>.</p>
-<p><img alt="mkdocs + github talk logo" src="../../../../Tech%20Blog/2021/images/mkdocsgh-logo.png" /></p>
+<p><img alt="mkdocs + github talk logo" src="../images/mkdocsgh-logo.png" /></p>
 <h2 id="introductions">Introductions<a class="headerlink" href="#introductions" title="Permanent link">&para;</a></h2>
 <h3 id="mkdocs">MkDocs<a class="headerlink" href="#mkdocs" title="Permanent link">&para;</a></h3>
 <p><a href="https://mkdocs.org">MkDocs</a> is a <strong>fast, simple</strong> and downright gorgeous <strong>static site generator</strong> that's geared towards building project documentation.</p>
@@ -5139,7 +5134,7 @@
 <p>The mkdocs-material theme is by far the most popular theme of MkDocs as it is based on applying the Material Design principles to MkDocs generated sites.</p>
 <p>It is <strong>customizable, searchable, mobile-friendly and supports 40+ languages</strong>.</p>
 <h3 id="i18n-or-l10n">i18n or l10n?!<a class="headerlink" href="#i18n-or-l10n" title="Permanent link">&para;</a></h3>
-<p><img alt="i18n vs l10n" src="../../../../Tech%20Blog/2021/images/mkdocsgh-i18n-vs-l10n.png" /></p>
+<p><img alt="i18n vs l10n" src="../images/mkdocsgh-i18n-vs-l10n.png" /></p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Defining i18n vs l10n is controversial so this is the rationale we adopted at MkDocs.</p>
@@ -5171,10 +5166,10 @@ by adding localized versions of your files to your existing documentation pages.
 <li>A fork of <a href="https://github.com/ultrabug/ep2021">https://github.com/ultrabug/ep2021</a></li>
 <li>A Python3 virtual environment:</li>
 </ul>
-<p><img alt="mkdocs + github talk venv" src="../../../../Tech%20Blog/2021/images/mkdocs_venv.png" /></p>
+<p><img alt="mkdocs + github talk venv" src="../images/mkdocs_venv.png" /></p>
 <h3 id="requirementstxt">requirements.txt<a class="headerlink" href="#requirementstxt" title="Permanent link">&para;</a></h3>
 <p>Let's see what's inside our <code>requirements.txt</code> file and why.</p>
-<p><img alt="mkdocs + github talk requirements" src="../../../../Tech%20Blog/2021/images/mkdocs_requirements.png" /></p>
+<p><img alt="mkdocs + github talk requirements" src="../images/mkdocs_requirements.png" /></p>
 <h4 id="mkdocs-122">mkdocs &gt;= 1.2.2<a class="headerlink" href="#mkdocs-122" title="Permanent link">&para;</a></h4>
 <p>We do not need <code>mkdocs[i18n]</code> which adds support for built-in themes localization since mkdocs-material supports localization on its own.</p>
 <h4 id="mkdocs-material-7111">mkdocs-material &gt;= 7.1.11<a class="headerlink" href="#mkdocs-material-7111" title="Permanent link">&para;</a></h4>
@@ -5215,7 +5210,7 @@ by adding localized versions of your files to your existing documentation pages.
 <li>an initial <strong><code>mkdocs.yml</code></strong> configuration file</li>
 <li>a <strong><code>docs/index.md</code></strong> documentation home page</li>
 </ul>
-<p><img alt="mkdocs + github talk requirements" src="../../../../Tech%20Blog/2021/images/mkdocs_new.png" /></p>
+<p><img alt="mkdocs + github talk requirements" src="../images/mkdocs_new.png" /></p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If you cloned my repository or use your own fork, you can get to this step
@@ -5229,13 +5224,13 @@ by checking out the <code>new</code> branch.
 <p>The above command will <strong>build</strong> our website and <strong>run a local web server</strong> so
 we can preview it directly on our browser.</p>
 <p>Open this URL on your browser: <a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a></p>
-<p><img alt="mkdocs + github talk preview" src="../../../../Tech%20Blog/2021/images/mkdocsgh-preview.png" /></p>
+<p><img alt="mkdocs + github talk preview" src="../images/mkdocsgh-preview.png" /></p>
 <h3 id="changes-trigger-a-refresh">Changes trigger a refresh<a class="headerlink" href="#changes-trigger-a-refresh" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>mkdocs serve
 </code></pre></div>
 <p><strong>Any change we make</strong> will trigger a rebuild and <strong>refresh our page</strong> in our
 browser!</p>
-<p><a href="../../../../Tech%20Blog/2021/images/record_change.gif"><img alt="mkdocs + github talk refresh" src="../../../../Tech%20Blog/2021/images/record_change.gif" /></a></p>
+<p><a href="../images/record_change.gif"><img alt="mkdocs + github talk refresh" src="../images/record_change.gif" /></a></p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If you cloned my repository or use your own fork, you can get to this step
@@ -5249,7 +5244,7 @@ by checking out the <code>change</code> branch.
 </code></pre></div>
 <p>Instantaneous switch from the default <code>mkdocs</code> theme to the beautiful and
 feature rich <code>material</code> theme.</p>
-<p><a href="../../../../Tech%20Blog/2021/images/record_theme.gif"><img alt="mkdocs + github talk material" src="../../../../Tech%20Blog/2021/images/record_theme.gif" /></a></p>
+<p><a href="../images/record_theme.gif"><img alt="mkdocs + github talk material" src="../images/record_theme.gif" /></a></p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If you cloned my repository or use your own fork, you can get to this step
@@ -5264,7 +5259,7 @@ by checking out the <code>material</code> branch.
 <span class="w">    </span><span class="nt">primary</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">green</span><span class="w"></span>
 </code></pre></div>
 <p>The material theme is highly customizable, let's use EuroPython's green color palette.</p>
-<p><a href="../../../../Tech%20Blog/2021/images/record_palette.gif"><img alt="mkdocs + github talk material" src="../../../../Tech%20Blog/2021/images/record_palette.gif" /></a></p>
+<p><a href="../images/record_palette.gif"><img alt="mkdocs + github talk material" src="../images/record_palette.gif" /></a></p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If you cloned my repository or use your own fork, you can get to this step
@@ -5275,7 +5270,7 @@ by checking out the <code>palette</code> branch.
 <h3 id="add-imagesassets">Add images/assets<a class="headerlink" href="#add-imagesassets" title="Permanent link">&para;</a></h3>
 <p>The <strong><code>docs/</code></strong> folder is where we organize our content pages and assets.
 Let's modify the home page and add the EuroPython logo.</p>
-<p><a href="../../../../Tech%20Blog/2021/images/record_logo.gif"><img alt="mkdocs + github talk logo" src="../../../../Tech%20Blog/2021/images/record_logo.gif" /></a></p>
+<p><a href="../images/record_logo.gif"><img alt="mkdocs + github talk logo" src="../images/record_logo.gif" /></a></p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If you cloned my repository or use your own fork, you can get to this step
@@ -5321,7 +5316,7 @@ by checking out the <code>logo</code> branch.
 <p>Let's <strong>translate and localize</strong> our website!</p>
 <p>We localize the versions of our pages and assets by
 <strong>suffixing them with `.<language>.<extension>``</strong></p>
-<p><img alt="mkdocs + github talk translate" src="../../../../Tech%20Blog/2021/images/mkdocsgh-translate.png" /></p>
+<p><img alt="mkdocs + github talk translate" src="../images/mkdocsgh-translate.png" /></p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If you cloned my repository or use your own fork, you can get to this step
@@ -5331,11 +5326,11 @@ by checking out the <code>translation</code> branch.
 </div>
 <p>Let's see the content of the translated files:</p>
 <h4 id="indexenmd">index.en.md<a class="headerlink" href="#indexenmd" title="Permanent link">&para;</a></h4>
-<p><img alt="mkdocs + github talk index.en.md" src="../../../../Tech%20Blog/2021/images/index.en.md.png" /></p>
+<p><img alt="mkdocs + github talk index.en.md" src="../images/index.en.md.png" /></p>
 <h4 id="indexfrmd">index.fr.md<a class="headerlink" href="#indexfrmd" title="Permanent link">&para;</a></h4>
-<p><img alt="mkdocs + github talk index.fr.md" src="../../../../Tech%20Blog/2021/images/index.fr.md.png" /></p>
+<p><img alt="mkdocs + github talk index.fr.md" src="../images/index.fr.md.png" /></p>
 <h3 id="mkdocs-static-i18n-demo">mkdocs-static-i18n demo<a class="headerlink" href="#mkdocs-static-i18n-demo" title="Permanent link">&para;</a></h3>
-<p><a href="../../../../Tech%20Blog/2021/images/record_translation_2.gif"><img alt="mkdocs + github talk mkdocs-static-i18n" src="../../../../Tech%20Blog/2021/images/record_translation_2.gif" /></a></p>
+<p><a href="../images/record_translation_2.gif"><img alt="mkdocs + github talk mkdocs-static-i18n" src="../images/record_translation_2.gif" /></a></p>
 <h3 id="automatic-markdown-localization">Automatic Markdown localization<a class="headerlink" href="#automatic-markdown-localization" title="Permanent link">&para;</a></h3>
 <p>Focus on translating, not referencing localized
 versions of your pages and assets!</p>
@@ -5343,7 +5338,7 @@ versions of your pages and assets!</p>
 Markdown source:</p>
 <div class="highlight"><pre><span></span><code>![<span class="nt">europython 2021 logo</span>](<span class="na">assets/ep2021-logo.png</span>)
 </code></pre></div>
-<p><img alt="mkdocs + github talk automatic localization" src="../../../../Tech%20Blog/2021/images/mkdocsgh-auto-localized.png" /></p>
+<p><img alt="mkdocs + github talk automatic localization" src="../images/mkdocsgh-auto-localized.png" /></p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If you cloned my repository or use your own fork, you can get to this step
@@ -5353,14 +5348,14 @@ by checking out the <code>localized</code> branch.
 </div>
 <p>This means that <strong>the Markdown reference to the image will be localized
 automatically</strong> by the plugin!</p>
-<p><a href="../../../../Tech%20Blog/2021/images/record_localized.gif"><img alt="mkdocs + github talk mkdocs-static-i18n localized" src="../../../../Tech%20Blog/2021/images/record_localized.gif" /></a></p>
+<p><a href="../images/record_localized.gif"><img alt="mkdocs + github talk mkdocs-static-i18n localized" src="../images/record_localized.gif" /></a></p>
 <h3 id="push-our-work-to-github">Push our work to Github<a class="headerlink" href="#push-our-work-to-github" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>git add
 git commit
 git push
 </code></pre></div>
 <p>We're done, let's commit and push our content to our Github repository.</p>
-<p><img alt="mkdocs + github talk push" src="../../../../Tech%20Blog/2021/images/mkdocs_push.png" /></p>
+<p><img alt="mkdocs + github talk push" src="../images/mkdocs_push.png" /></p>
 <h3 id="build-and-deploy-to-github">Build and deploy to Github<a class="headerlink" href="#build-and-deploy-to-github" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>mkdocs gh-deploy
 </code></pre></div>
@@ -5370,14 +5365,14 @@ git push
 <li>Copy <code>site/</code> dir to the <code>gh-pages</code> branch</li>
 <li>Push the <code>gh-pages</code> branch to Github</li>
 </ol>
-<p><img alt="mkdocs + github talk deploy" src="../../../../Tech%20Blog/2021/images/mkdocs_deploy.png" /></p>
+<p><img alt="mkdocs + github talk deploy" src="../images/mkdocs_deploy.png" /></p>
 <h3 id="github-pages-is-automatically-configured">Github Pages is automatically configured<a class="headerlink" href="#github-pages-is-automatically-configured" title="Permanent link">&para;</a></h3>
 <p>No configuration needed on your Github repository, it's done automatically.</p>
-<p><img alt="mkdocs + github talk github pages" src="../../../../Tech%20Blog/2021/images/github-pages.png" /></p>
+<p><img alt="mkdocs + github talk github pages" src="../images/github-pages.png" /></p>
 <h3 id="our-multi-language-mkdocs-website-is-online">Our multi-language MkDocs website is online!<a class="headerlink" href="#our-multi-language-mkdocs-website-is-online" title="Permanent link">&para;</a></h3>
 <p>Check out your own URL or the <a href="https://ultrabug.github.io/ep2021/">https://ultrabug.github.io/ep2021/</a>
 website of this repository.</p>
-<p><img alt="mkdocs + github talk website" src="../../../../Tech%20Blog/2021/images/mkdocsgh-website.png" /></p>
+<p><img alt="mkdocs + github talk website" src="../images/mkdocsgh-website.png" /></p>
 <h3 id="automatic-mkdocs-gh-deploy">Automatic mkdocs gh-deploy<a class="headerlink" href="#automatic-mkdocs-gh-deploy" title="Permanent link">&para;</a></h3>
 <p>Let’s use <strong>Github Actions</strong> to run mkdocs <code>gh-deploy</code> for us <strong>automatically when we push</strong> new commits!</p>
 <p>Create the file <code>.github/workflows/gh-deploy.yml</code>:</p>
@@ -5429,8 +5424,8 @@ by checking out the <code>actions</code> branch.
 </ul>
 <h2 id="some-useful-and-awesome-markdown-extensions">Some useful and awesome Markdown extensions<a class="headerlink" href="#some-useful-and-awesome-markdown-extensions" title="Permanent link">&para;</a></h2>
 <p>Check out the sample <code>mkdocs.yml</code> available on the <code>extensions</code> branch!</p>
-<p><img alt="mkdocs + github talk useful extensions" src="../../../../Tech%20Blog/2021/images/mkdocsgh-extensions.png" /></p>
-<p><img alt="mkdocs + github talk extensions" src="../../../../Tech%20Blog/2021/images/md_extensions_view.png" /></p>
+<p><img alt="mkdocs + github talk useful extensions" src="../images/mkdocsgh-extensions.png" /></p>
+<p><img alt="mkdocs + github talk extensions" src="../images/md_extensions_view.png" /></p>
 <h2 id="special-thanks"><img alt="❤" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2764.svg" title=":heart:" /> Special thanks<a class="headerlink" href="#special-thanks" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>mkdocs</strong>: <code>@waylan</code> <code>@oprypin</code></li>
