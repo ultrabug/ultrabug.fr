@@ -6,9 +6,7 @@ repo_url: https://github.com/ultrabug/ultrabug.fr
 theme:
   name: material
   favicon: assets/images/favicon.ico
-  font:
-    text: Ubuntu
-    code: Ubuntu Mono
+  font: false
   # https://materialdesignicons.com/
   icon:
     logo: material/human-greeting
