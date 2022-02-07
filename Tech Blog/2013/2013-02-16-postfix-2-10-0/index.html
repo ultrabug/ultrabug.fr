@@ -4863,7 +4863,7 @@
 <ul>
 <li>Separation of relay policy (with smtpd_relay_restrictions) from spam policy (with smtpd_{client, helo, sender, recipient}_restrictions), which makes accidental open relay configuration less likely. The default is backwards compatible.</li>
 <li><strong>HAproxy</strong> load-balancer support for postscreen(8) and smtpd(8). The <strong>nginx</strong> proxy was already supported by Postfix 2.9 smtpd(8), using XCLIENT commands.</li>
-<li>Support for the TLSv1 and TLSv2 protocols, as well as support to turn them off if needed for inter-operability.</li>
+<li>Support for the TLSv1 and TLSv2 protocols, as well as support to turn them off if needed for interoperability.</li>
 <li><strong>Laptop-friendly</strong> configuration. By default, Postfix now uses UNIX-domain sockets instead of FIFOs, and thus avoids MTIME file system updates on an idle mail system.</li>
 <li>Revised <strong>postconf</strong>(1) command. The "-x" option expands $name in a parameter value (both main.cf and master.cf); the "-o name=value" option overrides a main.cf parameter setting; and postconf(1) now warns about a $name that has no name=value setting.</li>
 </ul>

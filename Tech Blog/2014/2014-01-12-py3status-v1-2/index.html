@@ -4879,7 +4879,7 @@
 <h2 id="changelog">changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h2>
 <ul>
 <li>new module dpms.py allowing activation and deactivation of DPMS thx to <strong>André Doser</strong></li>
-<li>order i3status output updates to prevent it from overwritting any modification made on i3status json list by a user module, this avoids a possible user filter flapping on i3status modules</li>
+<li>order i3status output updates to prevent it from overwriting any modification made on i3status json list by a user module, this avoids a possible user filter flapping on i3status modules</li>
 <li>fix delay on first execution of each module which could be equal to py3status interval time before being executed : <strong>your modules get executed and displayed immediately no matter py3status' interval</strong></li>
 <li>the real i3status thread output json list is passed to all modules as the i3status_output_json parameter, <strong>this allows any user module to change any of the i3status output by simply altering the given json on the list</strong>, inspired thx to <strong>@drestebon</strong> on issue #23</li>
 <li>add validation for the position parameter</li>
