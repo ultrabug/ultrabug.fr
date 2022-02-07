@@ -81,7 +81,7 @@ operations and deliver to be the promised boring database.
 
 For some time I even hoped that [workload prioritization] could be used better
 to diminish repair impacts on performance but it's never been released to us
-Open Source users anyway so I never had the chance to build a realy opinion on
+Open Source users anyway so I never had the chance to build a really opinion on
 that (and I like to remind that we are also paying customers at Numberly: we
 do not run enterprise because we choose not to).
 

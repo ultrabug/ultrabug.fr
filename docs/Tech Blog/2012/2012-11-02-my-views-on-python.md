@@ -63,7 +63,7 @@ Let's sample some famous [software written in python](http://en.wikipedia.org/wi
 
 ### Web applications
 
-Python also have some **solid** and very powerful librairies able to manage asynchronous, real-time and scalable web applications and services. We already do have some of those robust web apps running in production and python demonstrates everyday all of the strenghts I already talked about here. We use librairies such as **gevent** along with web frameworks like **flask** and message queuing with **zeromq**. Someday I may write a post about our python web stack, it may be interesting to share about it.
+Python also have some **solid** and very powerful libraries able to manage asynchronous, real-time and scalable web applications and services. We already do have some of those robust web apps running in production and python demonstrates everyday all of the strengths I already talked about here. We use libraries such as **gevent** along with web frameworks like **flask** and message queuing with **zeromq**. Someday I may write a post about our python web stack, it may be interesting to share about it.
 
 I have been able to recode a web app written in .NET very quickly while enhancing it in every way possible. It is way faster, reliable, **fault tolerant** and maintainable that it was before. Thanks to python we have a **short development iteration** which proves itself everyday as the application grows and is capable to meet and achieve any new challenge we're asked to take care of. I'm convinced that no other language could have been so powerful and versatile than python to do so.
 

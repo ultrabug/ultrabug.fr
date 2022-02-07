@@ -16,7 +16,7 @@ Interesting stuff is happening on the event log (syslog) community and more prec
 
 As of today there's no real standard on how to format and structure data on a syslog message. Every project has its own log message structure and syntax (qmail and postfix don't log a mail delivery failure the same way for example), so we rely on parsers to extract any given data from a log message because the syslog software has no way to do it for us. I for one have coded a postfix log parser and believe me it's not a pleasant thing to do and maintain !
 
-The main idea about structuring syslog messages is to represent them using **JSON** along with the current free form strings to prevent backward compatibility breakage. To achieve this, we need to normalize and extend this format so that syslog softwares such as **rsyslog** and **syslog-ng** can directly understand them. That's where **CEE-enhanced messages** and **Lumberjack** kick in.
+The main idea about structuring syslog messages is to represent them using **JSON** along with the current free form strings to prevent backward compatibility breakage. To achieve this, we need to normalize and extend this format so that syslog software such as **rsyslog** and **syslog-ng** can directly understand them. That's where **CEE-enhanced messages** and **Lumberjack** kick in.
 
 # CEE-enhanced messages
 

@@ -18,7 +18,7 @@ I recently heard about **[consul](http://www.consul.io)**, a new attempt to solv
 
 ## WTF is consul ?
 
-Consul is a few months' old project (_and already available on Gentoo !_) from [the guys making Vagrant](http://www.hashicorp.com/). I especially like its datacenter centric architecture, intuitive deployment and its DNS + HTTP API query mecanisms. This sounds promising so far !
+Consul is a few months' old project (_and already available on Gentoo !_) from [the guys making Vagrant](http://www.hashicorp.com/). I especially like its datacenter centric architecture, intuitive deployment and its DNS + HTTP API query mechanisms. This sounds promising so far !
 
 This is a descripion taken from the Hashicorp's blog :
 

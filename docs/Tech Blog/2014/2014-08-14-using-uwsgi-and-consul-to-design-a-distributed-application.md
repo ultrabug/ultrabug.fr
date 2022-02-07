@@ -111,9 +111,9 @@ $ uwsgi --ini uwsgi-consul-demo.ini --ini uwsgi-consul-demo.ini:server1 --ini uw
 \* server #2 is up on port 2002
 
 [consul] workers ready, let's register the service to the agent
-[consul] service consul-demo-server registered succesfully
+[consul] service consul-demo-server registered successfully
 [consul] workers ready, let's register the service to the agent
-[consul] service consul-demo-server registered succesfully
+[consul] service consul-demo-server registered successfully
 
  
 

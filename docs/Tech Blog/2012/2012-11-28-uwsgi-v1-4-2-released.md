@@ -15,7 +15,7 @@ Quick post for a bugfix release with some added flavor features for PHP users.
 ## highlights
 
 - improved perl mules support
-- fixed pending datas management in https router
+- fixed pending data management in https router
 - fixed thread-offloading of really big static files
 - added --php-app-qs as micro-optimization (in-place of rewrite rules) for php apps
 - added --php-var to inject custom (fixed) vars in the request

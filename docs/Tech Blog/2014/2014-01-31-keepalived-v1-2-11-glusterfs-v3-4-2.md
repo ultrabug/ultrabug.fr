@@ -28,7 +28,7 @@ Quick post for two quick bumps related to clustering.
 - vrrp: dont try to load ip_vs module when not needed
 - Pim van den Berg work on libipvs-2.6 to sync with libipvs from ipvsadm 1.27
 - vrrp: extend ip parser to support default and default6
-- vrrp: fix/extend gratuitous ARP handling (multiple people reported issues where MASTER didnt recover properly after outage due to no gratuitous ARP sent)
+- vrrp: fix/extend gratuitous ARP handling (multiple people reported issues where MASTER didn't recover properly after outage due to no gratuitous ARP sent)
 - Multiple fixes to genhash
 - vrrp: fix vrrp socket sync while leaving FAULT state (old old bug here)
 - Full [changelog here](http://www.keepalived.org/changelog.html)

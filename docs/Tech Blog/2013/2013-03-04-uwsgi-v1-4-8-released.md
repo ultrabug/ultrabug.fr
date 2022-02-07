@@ -16,7 +16,7 @@ Yet another bump for uWSGI as upstream is working hard on the 1.9 branch which w
 
 - **new fully non-blocking API** which applies to all plugins, this will benefit the perl/PSGI plugin as well
 - faster uwsgi/HTTP/FastCGI/SCGI native sockets thanks to better parsers
-- splitted error logging from request logging for enhanced debugging
+- split error logging from request logging for enhanced debugging
 - more **offloading** improvements such as a new function to write files on disk and non-blocking workers for static files service
 - better static files handling thanks to the new caching system
 - totally rewritten web cache system allows you to have multiple caches per instance and tune them finely

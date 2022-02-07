@@ -10,7 +10,7 @@ tags:
 
 A few months ago I had the chance to get to know about one of the upcoming HP innovation in the server architecture : the Moonshot project. Now that it is public, I thought I'd take some time to talk about it as I'm convinced this is something big enough to change the way we see datacenter infrastructures and servers in general. I'll do my best to keep it short and understandable so if you want deeper technical insights, fell free to ask or search around.
 
-## The nowdays servers
+## The nowadays servers
 
 As a reminder, that's what a standard server looks like today :
 
@@ -48,7 +48,7 @@ Now the basic stuff to understand and keep in mind is that those racks can typic
 
 The more processing power you need, the more racks you need, the more datacenters you need. Think of facebook or google and their enormous amount of servers/racks/datacenters around the world. Every new device (PC/tablet/smartphone) activated is a new client to an always-growing infrastructure of those powerhouses.
 
-Basically, there's a limit in the number of full datacenters you can build and operate eventually (not to mention powering them up) but there's worse : the new devices/clients growth is higher than our datacenter building/powering capabilites.
+Basically, there's a limit in the number of full datacenters you can build and operate eventually (not to mention powering them up) but there's worse : the new devices/clients growth is higher than our datacenter building/powering capabilities.
 
 The Moonshot project is one of HP's response to this challenge : permit businesses to accommodate and serve this rapidly growing demand of devices/clients without the datacenter model collapsing. Their method ? Invent a new server architecture from scratch.
 

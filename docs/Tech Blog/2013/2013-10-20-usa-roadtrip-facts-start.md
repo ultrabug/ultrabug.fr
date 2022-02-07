@@ -23,7 +23,7 @@ That's a nice total of 6444 miles / **10 370 km** ! It's more than the trip from
 
 ## The start
 
-We headed to the Death Valley but took a detour to "visit" an abandonned waterpark in the middle of the desert !
+We headed to the Death Valley but took a detour to "visit" an abandoned waterpark in the middle of the desert !
 
 [![39240010](images/39240010-1024x835.jpg)](http://www.ultrabug.fr/wordpress/wp-content/uploads/2013/10/39240010.jpg)[![39170001](images/39170001-1024x835.jpg)](http://www.ultrabug.fr/wordpress/wp-content/uploads/2013/10/39170001.jpg)
 

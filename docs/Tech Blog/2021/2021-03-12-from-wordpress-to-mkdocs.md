@@ -46,7 +46,7 @@ list above... After all, a git based website made out of text files that is
 built by a CI and hosted through CD looks exactly the same to me as a technical
 documentation build and hosting process!
 
-All it needs is some nice sugar to accomodate with specific needs.
+All it needs is some nice sugar to accommodate with specific needs.
 
 ## Converting my Wordpress content to Markdown
 
@@ -72,7 +72,7 @@ section needs to sort articles by the "most recent" first while some other
 sections of the website simply need alphabetical ordering. Wait, what if this
 particular sub-section you wanted first? What about emojis or nice thumbnails?
 
-Here is a list of what I'm using to enrich MkDocs and accomodate my needs:
+Here is a list of what I'm using to enrich MkDocs and accommodate my needs:
 
 - [X] [mkdocs-material](https://github.com/squidfunk/mkdocs-material): this is
 a responsive and good looking theme for MkDocs that offers some nice features
