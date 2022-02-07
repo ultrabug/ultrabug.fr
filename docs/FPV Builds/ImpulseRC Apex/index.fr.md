@@ -129,7 +129,7 @@ Bi-directional DShot is enabled and supported natively by the BLHeli32 ESC:
 
 ![Apex Build Betaflight config](images/2021-02-03-215828_1663x1431_scrot.png)
 
-Filter settings to accomodate the bi-directional DShot:
+Filter settings to accommodate the bi-directional DShot:
 
 ![Apex Build Betaflight filter config](images/2021-02-03-215759_1674x652_scrot.png)
 

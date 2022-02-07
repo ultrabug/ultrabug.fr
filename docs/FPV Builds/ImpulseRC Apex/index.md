@@ -8,7 +8,7 @@ I chose the **ImpulseRC Apex Base Frame Kit** because I did not want to rely on 
 
 It was quite a challenge to get everything to fit properly but I love the result and I hope you'll appreciate the density and great balance of this build.
 
-This ends up as a compact (but not too much) build without sacrifying the space for the electronics. It is clean (to my standards at least) and very powerful.
+This ends up as a compact (but not too much) build without sacrificing the space for the electronics. It is clean (to my standards at least) and very powerful.
 
 I enjoyed working on it very much and I hope you'll get a sense of it reading this build guide. Enjoy!
 
@@ -129,7 +129,7 @@ Bi-directional DShot is enabled and supported natively by the BLHeli32 ESC:
 
 ![Apex Build Betaflight config](images/2021-02-03-215828_1663x1431_scrot.png)
 
-Filter settings to accomodate the bi-directional DShot:
+Filter settings to accommodate the bi-directional DShot:
 
 ![Apex Build Betaflight filter config](images/2021-02-03-215759_1674x652_scrot.png)
 
