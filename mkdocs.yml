@@ -31,7 +31,7 @@ extra:
     - icon: fontawesome/solid/rss-square
       link: https://ultrabug.fr/feed_rss_created.xml
       name: ultrabug RSS feed
-copyright: Copyright &copy; 2011-2021 Alexys Jacob
+copyright: Copyright &copy; 2011-2022 Alexys Jacob
 
 # https://facelessuser.github.io/pymdown-extensions/
 markdown_extensions:
