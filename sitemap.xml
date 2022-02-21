@@ -1713,6 +1713,14 @@
          
     </url>
     <url>
+         <loc>https://ultrabug.fr/Tech%20Blog/2022/2022-02-21-learning-rust-the-hard-way/</loc>
+         <lastmod>2022-02-21</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://ultrabug.fr/en/Tech%20Blog/2022/2022-02-21-learning-rust-the-hard-way/"/>
+         <xhtml:link rel="alternate" hreflang="fr" href="https://ultrabug.fr/fr/Tech%20Blog/2022/2022-02-21-learning-rust-the-hard-way/"/>
+         
+    </url>
+    <url>
          <loc>https://ultrabug.fr/Tech%20Talks/</loc>
          <lastmod>2022-02-21</lastmod>
          <changefreq>daily</changefreq>

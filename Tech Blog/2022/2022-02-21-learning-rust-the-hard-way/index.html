@@ -1,0 +1,5411 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ultrabug.fr/Tech%20Blog/2022/2022-02-21-learning-rust-the-hard-way/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.10">
+    
+    
+      
+        <title>Learning Rust the hard way for a production Kafka+ScyllaDB pipeline - Ultrabug</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.d6be258b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="Ultrabug's RSS Feed" href="https://ultrabug.fr/feed_rss_created.xml">
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#learning-rust-the-hard-way-for-a-production-kafkascylladb-pipeline" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Ultrabug" class="md-header__button md-logo" aria-label="Ultrabug" data-md-component="logo">
+      
+  
+    
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 9h2.31l.32-3h2l-.32 3h2l.32-3h2l-.32 3H15v2h-1.9l-.2 2H15v2h-2.31l-.32 3h-2l.32-3h-2l-.32 3h-2l.32-3H5v-2h1.9l.2-2H5V9m4.1 2-.2 2h2l.2-2M19 6h-2v8h2m0 2h-2v2h2z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Ultrabug
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Learning Rust the hard way for a production Kafka+ScyllaDB pipeline
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <div class="md-header__option">
+        <div class="md-select">
+          
+          <button class="md-header__button md-icon" aria-label="Select language">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7 1.62-4.33L19.12 17h-3.24z"/></svg>
+          </button>
+          <div class="md-select__inner">
+            <ul class="md-select__list">
+              
+                <li class="md-select__item">
+                  <a href="./" hreflang="en" class="md-select__link">
+                    <img style="height: 10px; border: 0px;" alt="en" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f1ec-1f1e7.svg" title="english" /> English
+                  </a>
+                </li>
+                
+                <li class="md-select__item">
+                  <a href="../../../fr/Tech%20Blog/2022/2022-02-21-learning-rust-the-hard-way/" hreflang="fr" class="md-select__link">
+                    <img style="height: 10px; border: 0px;" alt="fr" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f1eb-1f1f7.svg" title="français" /> Français
+                  </a>
+                </li>
+                
+            </ul>
+          </div>
+        </div>
+      </div>
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ultrabug/ultrabug.fr/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      About
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link md-tabs__link--active">
+        Tech Blog
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Tech%20Talks/" class="md-tabs__link">
+        Tech Talks
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../FPV%20Handbook/" class="md-tabs__link">
+        FPV Handbook
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../FPV%20Builds/ImpulseRC%20Apex/" class="md-tabs__link">
+        FPV Builds
+      </a>
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Ultrabug" class="md-nav__button md-logo" aria-label="Ultrabug" data-md-component="logo">
+      
+  
+    
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 9h2.31l.32-3h2l-.32 3h2l.32-3h2l-.32 3H15v2h-1.9l-.2 2H15v2h-2.31l-.32 3h-2l.32-3h-2l-.32 3h-2l.32-3H5v-2h1.9l.2-2H5V9m4.1 2-.2 2h2l.2-2M19 6h-2v8h2m0 2h-2v2h2z"/></svg>
+
+    </a>
+    Ultrabug
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ultrabug/ultrabug.fr/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Tech Blog
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Tech Blog" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Tech Blog
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Technical articles
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2">
+          2022
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2022" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          2022
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Learning Rust the hard way for a production Kafka+ScyllaDB pipeline
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Learning Rust the hard way for a production Kafka+ScyllaDB pipeline
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#project-context-at-numberly" class="md-nav__link">
+    Project context at Numberly
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-rusted-opportunity" class="md-nav__link">
+    The (rusted) opportunity
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-never-tried-before-rust-promises" class="md-nav__link">
+    The (never tried before) Rust promises
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#efficient-software-faster-software" class="md-nav__link">
+    Efficient software != Faster software
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-reliable-software-paradigms" class="md-nav__link">
+    The reliable software paradigms
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-rust-the-hard-way" class="md-nav__link">
+    Learning Rust the hard way
+  </a>
+  
+    <nav class="md-nav" aria-label="Learning Rust the hard way">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#confluent-kafka-schema-registry" class="md-nav__link">
+    Confluent Kafka Schema Registry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apache-avro-rust-was-broken" class="md-nav__link">
+    Apache Avro Rust was broken
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asynchronous-patterns-to-optimize-latency" class="md-nav__link">
+    Asynchronous patterns to optimize latency
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scylla-rust-shard-aware-driver" class="md-nav__link">
+    Scylla Rust (shard-aware) driver
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exporting-metrics-properly-for-prometheus" class="md-nav__link">
+    Exporting metrics properly for Prometheus
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grafana-dashboarding" class="md-nav__link">
+    Grafana dashboarding
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#did-i-really-lose-time-because-of-rust" class="md-nav__link">
+    Did I really lose time because of Rust
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion-it-went-better-than-expected" class="md-nav__link">
+    Conclusion: it went better than expected
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" data-md-state="indeterminate" type="checkbox" id="__nav_2_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3">
+          2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2021/2021-07-28-create-beautiful-and-localized-documentations-and-websites-using-mkdocs-github/" class="md-nav__link">
+        Create beautiful and localized documentations and websites using MkDocs + Github
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2021/2021-05-06-on-scylla-manager-suspend-resume/" class="md-nav__link">
+        On Scylla Manager Suspend & Resume feature
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2021/2021-03-12-from-wordpress-to-mkdocs/" class="md-nav__link">
+        Migrating from Wordpress to Mkdocs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" data-md-state="indeterminate" type="checkbox" id="__nav_2_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4">
+          2020
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2020" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          2020
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2020/2020-11-06-renaming-and-reshaping-scylla-tables-using-scylla-migrator/" class="md-nav__link">
+        Renaming and reshaping Scylla tables using scylla-migrator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2020/2020-09-07-py3status-v3-29/" class="md-nav__link">
+        py3status v3.29
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2020/2020-08-24-python-scylla-driver-how-we-unleashed-the-scylla-monsters-performance/" class="md-nav__link">
+        Python scylla-driver: how we unleashed the Scylla monster's performance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2020/2020-04-14-py3status-v3-28-goodbye-py2-6-3-4/" class="md-nav__link">
+        py3status v3.28 - goodbye py2.6-3.4
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_5" data-md-state="indeterminate" type="checkbox" id="__nav_2_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_5">
+          2019
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2019" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          2019
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2019/2019-12-28-scylla-summit-2019/" class="md-nav__link">
+        Scylla Summit 2019
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2019/2019-09-22-py3status-v3-20-europython-2019-edition/" class="md-nav__link">
+        py3status v3.20 - EuroPython 2019 edition
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2019/2019-04-17-meet-the-py3status-logo/" class="md-nav__link">
+        Meet the py3status logo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2019/2019-03-29-scylla-four-ways-to-optimize-your-disk-space-consumption/" class="md-nav__link">
+        Scylla: four ways to optimize your disk space consumption
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2019/2019-03-25-py3status-v3-17/" class="md-nav__link">
+        py3status v3.17
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2019/2019-03-01-bye-bye-google-analytics/" class="md-nav__link">
+        Bye bye Google Analytics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2019/2019-01-20-py3status-v3-16/" class="md-nav__link">
+        py3status v3.16
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_6" data-md-state="indeterminate" type="checkbox" id="__nav_2_6" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_6">
+          2018
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2018" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          2018
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2018/2018-12-06-scylla-summit-2018-write-up/" class="md-nav__link">
+        Scylla Summit 2018 write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2018/2018-11-10-py3status-v3-14/" class="md-nav__link">
+        py3status v3.14
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2018/2018-09-28-py3status-v3-13/" class="md-nav__link">
+        py3status v3.13
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2018/2018-07-19-authenticating-and-connecting-to-a-ssl-enabled-scylla-cluster-using-spark-2/" class="md-nav__link">
+        Authenticating and connecting to a SSL enabled Scylla cluster using Spark 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2018/2018-07-06-a-botspot-story/" class="md-nav__link">
+        A botspot story
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2018/2018-04-03-py3status-v3-8/" class="md-nav__link">
+        py3status v3.8
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2018/2018-02-28-evaluating-scylladb-for-production-2-2/" class="md-nav__link">
+        Evaluating ScyllaDB for production 2/2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2018/2018-01-23-evaluating-scylladb-for-production-1-2/" class="md-nav__link">
+        Evaluating ScyllaDB for production 1/2
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_7" data-md-state="indeterminate" type="checkbox" id="__nav_2_7" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_7">
+          2017
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2017" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          2017
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-12-22-talks-page/" class="md-nav__link">
+        Talks page
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-12-12-py3status-v3-7/" class="md-nav__link">
+        py3status v3.7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-11-02-gentoo-linux-on-dell-xps-13-9365-and-9360/" class="md-nav__link">
+        Gentoo Linux on DELL XPS 13 9365 and 9360
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-10-13-gentoo-linux-listed-rethinkdbs-website/" class="md-nav__link">
+        Gentoo Linux listed RethinkDB's website
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-08-22-py3status-v3-6/" class="md-nav__link">
+        py3status v3.6
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-08-08-scylladb-meets-gentoo-linux/" class="md-nav__link">
+        ScyllaDB meets Gentoo Linux
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-06-02-load-balancing-hadoop-hive-with-f5-big-ip/" class="md-nav__link">
+        Load balancing Hadoop Hive with F5 BIG-IP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-05-16-hardening-ssh-authentication-using-yubikey-32/" class="md-nav__link">
+        Hardening SSH authentication using Yubikey (3/2)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-05-12-hardening-ssh-authentication-using-yubikey-22/" class="md-nav__link">
+        Hardening SSH authentication using Yubikey (2/2)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-05-12-hardening-ssh-authentication-using-yubikey-12/" class="md-nav__link">
+        Hardening SSH authentication using Yubikey (1/2)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-04-10-py3status-v3-5/" class="md-nav__link">
+        py3status v3.5
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2017/2017-01-27-py3status-v3-4/" class="md-nav__link">
+        py3status v3.4
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_8" data-md-state="indeterminate" type="checkbox" id="__nav_2_8" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8">
+          2016
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2016" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          2016
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2016/2016-11-21-py3status-v3-3/" class="md-nav__link">
+        py3status v3.3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2016/2016-09-02-rethinkdb-on-gentoo-linux/" class="md-nav__link">
+        RethinkDB on Gentoo Linux
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2016/2016-06-25-py3status-v3-0/" class="md-nav__link">
+        py3status v3.0
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2016/2016-03-02-py3status-v2-9/" class="md-nav__link">
+        py3status v2.9
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2016/2016-01-02-gentoo-linux-on-dell-xps-13-9350/" class="md-nav__link">
+        Gentoo Linux on DELL XPS 13 9350
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_9" data-md-state="indeterminate" type="checkbox" id="__nav_2_9" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_9">
+          2015
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2015" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_9">
+          <span class="md-nav__icon md-icon"></span>
+          2015
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-12-31-uwsgi-v2-0-12/" class="md-nav__link">
+        uWSGI v2.0.12
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-11-26-py3status-v2-7/" class="md-nav__link">
+        py3status v2.7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-10-20-uhashring-consistent-hashing-in-python/" class="md-nav__link">
+        uhashring : consistent hashing in python
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-10-19-consistent-hashing-101/" class="md-nav__link">
+        Consistent Hashing 101
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-09-14-mongodb-3-0-upgrade-in-production-step-4-victory/" class="md-nav__link">
+        MongoDB 3.0 upgrade in production : step 4 victory !
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-08-27-py3status-v2-6/" class="md-nav__link">
+        py3status v2.6
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-08-17-py3status-v2-5/" class="md-nav__link">
+        py3status v2.5
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-07-22-designing-a-scalable-and-distributed-application/" class="md-nav__link">
+        Designing a scalable and distributed application
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-07-09-mongodb-3-0-upgrade-in-production-step-3-hope/" class="md-nav__link">
+        MongoDB 3.0 upgrade in production : step 3 hope
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-05-26-mongodb-3-0-upgrade-in-production-step-2-failed/" class="md-nav__link">
+        MongoDB 3.0 upgrade in production : step 2 failed
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-05-23-gevent-ssl-support-fixed-for-python-2-7-9/" class="md-nav__link">
+        Gevent : SSL support fixed for python 2.7.9
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-05-13-uwsgi-gevent-and-pymongo-3-threads-mayhem/" class="md-nav__link">
+        uWSGI, gevent and pymongo 3 threads mayhem
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-05-07-mongodb-3-0-upgrade-in-production-first-steps/" class="md-nav__link">
+        MongoDB 3.0 upgrade in production : first steps
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-03-31-py3status-v2-4/" class="md-nav__link">
+        py3status v2.4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-03-17-mongodb-3-0-1/" class="md-nav__link">
+        mongoDB 3.0.1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-02-27-mongodb-2-6-8-2-4-13-the-upcoming-3-0-0/" class="md-nav__link">
+        mongoDB 2.6.8, 2.4.13 & the upcoming 3.0.0
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015/2015-01-04-py3status-v2-0/" class="md-nav__link">
+        py3status v2.0
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_10" data-md-state="indeterminate" type="checkbox" id="__nav_2_10" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_10">
+          2014
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2014" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_10">
+          <span class="md-nav__icon md-icon"></span>
+          2014
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-12-20-gentoo-linux-pxe-builder/" class="md-nav__link">
+        Gentoo Linux PXE builder
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-11-20-rip-ns2/" class="md-nav__link">
+        RIP ns2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-10-14-one-month-in-turkey/" class="md-nav__link">
+        One month in Turkey
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-10-08-py3status-v1-6/" class="md-nav__link">
+        py3status v1.6
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-08-14-using-uwsgi-and-consul-to-design-a-distributed-application/" class="md-nav__link">
+        Using uWSGI and Consul to design a distributed application
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-08-12-hd-daymaker-led-headlamp/" class="md-nav__link">
+        HD Daymaker LED Headlamp
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-08-01-europython-2014/" class="md-nav__link">
+        Europython 2014
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-06-15-iran-yazd/" class="md-nav__link">
+        Iran : Yazd
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-06-04-consul-on-gentoo-linux/" class="md-nav__link">
+        Consul on Gentoo Linux
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-06-02-uwsgi-v2-0-5-1/" class="md-nav__link">
+        uWSGI v2.0.5.1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-05-25-iran-shiraz/" class="md-nav__link">
+        Iran : Shiraz
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-05-23-rsyslog-v7-6-3/" class="md-nav__link">
+        rsyslog v7.6.3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-05-20-iran-tehran/" class="md-nav__link">
+        Iran : Tehran
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-05-14-mongodb-v2-6-1/" class="md-nav__link">
+        mongoDB v2.6.1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-05-06-uwsgi-v2-0-4/" class="md-nav__link">
+        uWSGI v2.0.4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-05-04-after-vacation-bug-hunting/" class="md-nav__link">
+        After vacation bug hunting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-04-16-py3status-v1-4/" class="md-nav__link">
+        py3status v1.4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-04-08-mongodb-2-4-10-pymongo-2-7/" class="md-nav__link">
+        mongoDB 2.4.10 & pymongo 2.7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-04-04-convert-special-characters-to-ascii-in-python/" class="md-nav__link">
+        Convert special characters to ASCII in python
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-03-17-nightster-bw/" class="md-nav__link">
+        Nightster B&W
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-03-07-couchbase-on-gentoo-linux/" class="md-nav__link">
+        Couchbase on Gentoo Linux
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-02-23-py3status-v1-3/" class="md-nav__link">
+        py3status v1.3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-02-18-mongodb-v2-4-9v2-2-7-rabbitmq-v3-2-3/" class="md-nav__link">
+        mongoDB v2.4.9/v2.2.7, rabbitMQ v3.2.3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-01-31-keepalived-v1-2-11-glusterfs-v3-4-2/" class="md-nav__link">
+        keepalived v1.2.11 & glusterfs v3.4.2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-01-17-uwsgi-v2-0/" class="md-nav__link">
+        uWSGI v2.0
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-01-12-py3status-v1-2/" class="md-nav__link">
+        py3status v1.2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-01-10-tuning-pacemaker-for-large-clusters/" class="md-nav__link">
+        Tuning pacemaker for large clusters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2014/2014-01-03-aircraft-boneyard/" class="md-nav__link">
+        Aircraft Boneyard
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_11" data-md-state="indeterminate" type="checkbox" id="__nav_2_11" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_11">
+          2013
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2013" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_11">
+          <span class="md-nav__icon md-icon"></span>
+          2013
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-12-24-rsyslog-v7-4-7/" class="md-nav__link">
+        rsyslog v7.4.7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-12-15-py3status-v1-1/" class="md-nav__link">
+        py3status v1.1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-12-05-arcosanti/" class="md-nav__link">
+        Arcosanti
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-11-27-rip-stabber/" class="md-nav__link">
+        RIP stabber
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-11-15-keepalived-v1-2-9/" class="md-nav__link">
+        keepalived v1.2.9
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-11-09-mongodb-v2-4-8-rabbitmq-v3-2-1-rsyslog-v-7-4-6/" class="md-nav__link">
+        mongoDB v2.4.8, rabbitMQ v3.2.1, rsyslog v7.4.6
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-11-07-monument-valley/" class="md-nav__link">
+        Monument Valley
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-11-03-north-rim-grand-canyon-the-navajo-indians/" class="md-nav__link">
+        North rim Grand Canyon & the Navajo Indians
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-10-29-bryce-canyon/" class="md-nav__link">
+        Bryce Canyon
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-10-27-death-valley/" class="md-nav__link">
+        Death Valley
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-10-25-drop-down-terminal-in-i3/" class="md-nav__link">
+        Drop-down terminal in i3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-10-22-mongodb-v2-4-7-pymongo-v2-6-3/" class="md-nav__link">
+        mongoDB v2.4.7 & pymongo v2.6.3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-10-20-usa-roadtrip-facts-start/" class="md-nav__link">
+        USA roadtrip facts & start
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-10-17-latest-cluster-releases/" class="md-nav__link">
+        Latest cluster releases
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-10-15-wonderlands-roadtrip/" class="md-nav__link">
+        Wonderlands roadtrip
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-09-10-rsyslog-v7-4-4-released/" class="md-nav__link">
+        rsyslog : v7.4.4 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-09-03-pacemaker-v1-1-10-corosync-v2-3-1/" class="md-nav__link">
+        pacemaker v1.1.10 & corosync v2.3.1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-08-30-py3status-v1-0/" class="md-nav__link">
+        py3status v1.0
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-08-21-mongodb-v2-4-6-pymongo-v2-6/" class="md-nav__link">
+        mongoDB v2.4.6 & pymongo v2.6
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-08-16-rabbitmq-v3-1-5-released/" class="md-nav__link">
+        rabbitMQ : v3.1.5 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-08-13-rabbitmq-v3-1-4-released/" class="md-nav__link">
+        rabbitMQ : v3.1.4 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-08-02-rsyslog-v7-4-3-released/" class="md-nav__link">
+        rsyslog : v7.4.3 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-07-11-paris-siege-du-pcf/" class="md-nav__link">
+        Paris : siège du PCF
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-07-10-mongodb-v2-4-5-rabbitmq-v3-1-3/" class="md-nav__link">
+        mongoDB v2.4.5 & rabbitMQ v3.1.3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-06-24-py3status-v0-13/" class="md-nav__link">
+        py3status v0.13
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-06-20-py3status-v0-12/" class="md-nav__link">
+        py3status v0.12
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-06-15-hp-moonshot/" class="md-nav__link">
+        HP Moonshot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-06-13-vertigo/" class="md-nav__link">
+        Vertigo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-06-05-mongodb-latest-releases/" class="md-nav__link">
+        mongoDB : latest releases
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-06-02-roadtrip-3600/" class="md-nav__link">
+        Roadtrip 3600
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-05-31-using-keepalived-for-a-self-balancing-cluster/" class="md-nav__link">
+        Using keepalived for a self-balancing cluster
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-05-25-san-francisco-street-art/" class="md-nav__link">
+        San Francisco : street art
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-05-21-rabbitmq-v3-1-0-released/" class="md-nav__link">
+        rabbitMQ : v3.1.1 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-05-17-squid-proxy-blocking-download-of-some-file-extensions/" class="md-nav__link">
+        Squid proxy : blocking download of some file extensions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-05-16-fujifilm-gf670w/" class="md-nav__link">
+        Fujifilm GF670W
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-04-26-mongodb-and-pacemaker-recent-bumps/" class="md-nav__link">
+        mongoDB and Pacemaker recent bumps
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-04-24-hello-gentoo-planet/" class="md-nav__link">
+        Hello Gentoo Planet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-04-18-san-francisco-streets/" class="md-nav__link">
+        San Francisco : streets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-04-18-py3status-v0-9/" class="md-nav__link">
+        py3status v0.9
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-04-18-mongodb-v2-4-2-released/" class="md-nav__link">
+        mongoDB v2.4.2 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-04-16-san-francisco-chinatown/" class="md-nav__link">
+        San Francisco : chinatown
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-04-14-py3status-v0-8/" class="md-nav__link">
+        py3status v0.8
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-04-06-py3status-v0-7/" class="md-nav__link">
+        py3status v0.7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-30-tokyo-mont-fuji/" class="md-nav__link">
+        Tokyo, mont Fuji
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-25-mongodb-v2-4-1-and-pymongo-2-5-released/" class="md-nav__link">
+        mongoDB v2.4.1 and pymongo 2.5 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-24-python-writing-a-proper-setup-for-your-project/" class="md-nav__link">
+        Python : writing a proper setup for your project
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-20-mongodb-v2-4-0-released/" class="md-nav__link">
+        mongoDB : v2.4.0 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-19-py3status-v0-5/" class="md-nav__link">
+        py3status v0.5
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-16-rabbitmq-v3-0-4-released/" class="md-nav__link">
+        rabbitMQ : v3.0.4 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-15-follow-up-on-pacemaker-v1-1-9-and-updated-pacemaker-gui/" class="md-nav__link">
+        Follow-up on pacemaker v1.1.9 and updated pacemaker-gui
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-13-pacemaker-vulnerability-and-v1-1-9-release/" class="md-nav__link">
+        Pacemaker vulnerability and v1.1.9 release
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-11-uwsgi-v1-4-9-released/" class="md-nav__link">
+        uWSGI : v1.4.9 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-05-switching-from-xchat-to-hexchat/" class="md-nav__link">
+        Switching from Xchat to HexChat
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-03-04-uwsgi-v1-4-8-released/" class="md-nav__link">
+        uWSGI : v1.4.8 released & v2.0 sneak peek
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-02-26-uwsgi-v1-4-6-released/" class="md-nav__link">
+        uWSGI : v1.4.6 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-02-26-uwsgi-mono-asp-net-support/" class="md-nav__link">
+        uWSGI : Mono ASP.NET support
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-02-23-packaging-py3status/" class="md-nav__link">
+        Packaging py3status
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-02-21-meet-py3status/" class="md-nav__link">
+        Meet py3status
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-02-18-mongodb-2-4-0-rc/" class="md-nav__link">
+        mongoDB 2.4.0 RC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-02-16-postfix-2-10-0/" class="md-nav__link">
+        Postfix 2.10.0
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-02-15-clustering-resource-agents-v3-9-5-crmsh-v1-2-5/" class="md-nav__link">
+        Clustering : resource-agents v3.9.5 & crmsh v1.2.5
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-02-13-moosefs-v1-6-26-released/" class="md-nav__link">
+        MooseFS : v1.6.26 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-02-12-rabbitmq-v3-0-2-released/" class="md-nav__link">
+        rabbitMQ : v3.0.2 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-02-02-mongodb-v2-2-3-uwsgi-v1-4-5/" class="md-nav__link">
+        mongoDB v2.2.3 & uwsgi v1.4.5
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-01-27-turkey-istanbul/" class="md-nav__link">
+        Turkey, Istanbul
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-01-25-python-new-zeromq-and-mongodb-drivers/" class="md-nav__link">
+        Python : new zeroMQ and mongoDB drivers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-01-20-portugal-villa-extramuros/" class="md-nav__link">
+        Portugal, Villa Extramuros
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-01-18-clustering-corosync-v2-3-0-resource-agents-3-9-4/" class="md-nav__link">
+        Clustering : corosync v2.3.0 & resource-agents-3.9.4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-01-15-coming-soon-on-mongodb/" class="md-nav__link">
+        Coming soon on mongoDB
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-01-11-rabbitmq-2-8-7-3-0-1-released/" class="md-nav__link">
+        rabbitMQ 2.8.7 & 3.0.1 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2013/2013-01-10-uwsgi-v1-4-4-released/" class="md-nav__link">
+        uWSGI : v1.4.4 released
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_12" data-md-state="indeterminate" type="checkbox" id="__nav_2_12" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_12">
+          2012
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2012" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_12">
+          <span class="md-nav__icon md-icon"></span>
+          2012
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-12-16-portugal-algarve/" class="md-nav__link">
+        Portugal, Algarve
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-12-13-uwsgi-v1-4-3-released/" class="md-nav__link">
+        uWSGI : v1.4.3 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-12-05-python-appnexus/" class="md-nav__link">
+        Python @ Appnexus
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-11-28-uwsgi-v1-4-2-released/" class="md-nav__link">
+        uWSGI : v1.4.2 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-11-28-mongodb-v2-2-2-and-pymongo-v2-4-released/" class="md-nav__link">
+        mongoDB v2.2.2 and pymongo v2.4 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-11-20-rsyslog-new-v7-branch-released/" class="md-nav__link">
+        rsyslog : new v7 branch released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-11-19-uwsgi-v1-4-1-lts-released/" class="md-nav__link">
+        uWSGI : v1.4.1 LTS released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-11-09-clustering-corosync-v2-1-0-pacemaker-v1-1-8/" class="md-nav__link">
+        Clustering : corosync v2.1.0 & pacemaker v1.1.8
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-11-05-portugal-tavira/" class="md-nav__link">
+        Portugal, Tavira
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-11-04-mongodb-ebuilds-cleanup-and-v2-2-1-released/" class="md-nav__link">
+        mongoDB : ebuilds cleanup and v2.2.1 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-11-02-my-views-on-python/" class="md-nav__link">
+        My views on Python
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-10-29-uwsgi-v1-2-6-and-v1-3-released/" class="md-nav__link">
+        uWSGI : v1.2.6 and v1.3 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-09-11-gentoo-make-conf-et-make-profile-demenagent/" class="md-nav__link">
+        Gentoo : make.conf et make.profile déménagent
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-09-03-rabbitmq-2-8-6-released/" class="md-nav__link">
+        rabbitMQ 2.8.6 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-08-30-the-mongodb-2-2-era/" class="md-nav__link">
+        The mongoDB 2.2 era
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-08-27-les-vosges/" class="md-nav__link">
+        Les Vosges
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-08-20-mongodb-v2-0-7-released/" class="md-nav__link">
+        mongoDB : v2.0.7 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-08-14-uwsgi-v1-2-5-released/" class="md-nav__link">
+        uWSGI : v1.2.5 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-08-07-rabbitmq-v2-8-5-released/" class="md-nav__link">
+        rabbitMQ : v2.8.5 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-08-03-httping/" class="md-nav__link">
+        Httping
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-07-23-clustering-glue-v1-0-10-released/" class="md-nav__link">
+        Clustering : glue v1.0.10 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-07-09-uwsgi-v1-2-4-released/" class="md-nav__link">
+        uWSGI : v1.2.4 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-07-09-pymongo-v2-2-1-released/" class="md-nav__link">
+        pymongo : v2.2.1 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-06-18-flask-pymongo-new-ebuild-in-portage/" class="md-nav__link">
+        Flask-PyMongo : new ebuild in portage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-06-15-rsyslog-v6-2-2-released/" class="md-nav__link">
+        rsyslog : v6.2.2 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-06-12-mongodb-export-based-on-objectids-timestamp/" class="md-nav__link">
+        mongoDB : export based on objectIDs' timestamp
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-06-06-mongodb-v2-0-6-release/" class="md-nav__link">
+        mongoDB : v2.0.6 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-06-01-rsyslog-new-v6-branch-in-portage/" class="md-nav__link">
+        rsyslog : new v6 branch in portage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-05-25-state-of-the-event-log-architecture-enhancements/" class="md-nav__link">
+        State of the event log architecture enhancements
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-05-16-clustering-corosync-v1-4-3-pacemaker-v1-1-7-released/" class="md-nav__link">
+        Clustering : corosync v1.4.3 & pacemaker v1.1.7 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-05-15-uwsgi-new-ebuild-in-portage/" class="md-nav__link">
+        uWSGI : new ebuild in portage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-05-11-pymongo-v2-2-released/" class="md-nav__link">
+        pymongo : v2.2 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-05-11-mongodb-v2-0-5-released/" class="md-nav__link">
+        mongoDB : v2.0.5 released
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-03-19-uwsgi-network-spooling-of-messages-between-applications/" class="md-nav__link">
+        uWSGI : network spooling of messages between applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-02-27-nginx-conditional-uwsgi-error-handling/" class="md-nav__link">
+        nginx : conditional uWSGI error handling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-01-13-portage-internals/" class="md-nav__link">
+        Portage internals
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2012/2012-01-11-portage-basics/" class="md-nav__link">
+        Portage basics
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" data-md-state="indeterminate" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Tech Talks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Tech Talks" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Tech Talks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/" class="md-nav__link">
+        Community talks and awards
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" data-md-state="indeterminate" type="checkbox" id="__nav_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          2022
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2022" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          2022
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2022/scylla-summit-2022/" class="md-nav__link">
+        Scylla Summit 2022
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3" data-md-state="indeterminate" type="checkbox" id="__nav_3_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3">
+          2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2021/europython-2021/" class="md-nav__link">
+        EuroPython 2021
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2021/scylla-confluent-webinar-2021/" class="md-nav__link">
+        Scylla + Confluent Kafka (webinar)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2021/scylla-summit-2021/" class="md-nav__link">
+        Scylla Summit 2021
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_4" data-md-state="indeterminate" type="checkbox" id="__nav_3_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_4">
+          2020
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2020" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          2020
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2020/europython-2020/" class="md-nav__link">
+        EuroPython 2020
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2020/pycon-india-2020/" class="md-nav__link">
+        PyCon India 2020
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2020/scylla-university/" class="md-nav__link">
+        Scylla University
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_5" data-md-state="indeterminate" type="checkbox" id="__nav_3_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_5">
+          2019
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2019" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          2019
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2019/europython-2019/" class="md-nav__link">
+        EuroPython 2019
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2019/scylla-summit-2019/" class="md-nav__link">
+        Scylla Summit 2019
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_6" data-md-state="indeterminate" type="checkbox" id="__nav_3_6" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_6">
+          2018
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2018" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          2018
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2018/europython-2018/" class="md-nav__link">
+        EuroPython 2018
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2018/pyconfr-2018/" class="md-nav__link">
+        PyConFR 2018
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2018/scylla-summit-2018/" class="md-nav__link">
+        Scylla Summit 2018
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_7" data-md-state="indeterminate" type="checkbox" id="__nav_3_7" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_7">
+          2017
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2017" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          2017
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2017/europython2017/" class="md-nav__link">
+        EuroPython 2017
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2017/scaling-python/" class="md-nav__link">
+        Scaling Python interview (book)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_8" data-md-state="indeterminate" type="checkbox" id="__nav_3_8" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_8">
+          2016
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2016" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_8">
+          <span class="md-nav__icon md-icon"></span>
+          2016
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2016/" class="md-nav__link">
+        EuroPython 2016
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_9" data-md-state="indeterminate" type="checkbox" id="__nav_3_9" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_9">
+          2015
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2015" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_9">
+          <span class="md-nav__icon md-icon"></span>
+          2015
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2015/" class="md-nav__link">
+        EuroPython 2015
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_10" data-md-state="indeterminate" type="checkbox" id="__nav_3_10" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_10">
+          2014
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2014" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_10">
+          <span class="md-nav__icon md-icon"></span>
+          2014
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2014/" class="md-nav__link">
+        Paris.py 5
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_11" data-md-state="indeterminate" type="checkbox" id="__nav_3_11" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_11">
+          2013
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2013" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_11">
+          <span class="md-nav__icon md-icon"></span>
+          2013
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tech%20Talks/2013/" class="md-nav__link">
+        EuroPython 2013
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" data-md-state="indeterminate" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          FPV Handbook
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="FPV Handbook" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          FPV Handbook
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2" data-md-state="indeterminate" type="checkbox" id="__nav_4_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2">
+          Batteries
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Batteries" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Batteries
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/Batteries/" class="md-nav__link">
+        Batteries notes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/Batteries/lipo_performance_database/" class="md-nav__link">
+        LiPo database
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/Batteries/skyrc-q200/" class="md-nav__link">
+        SkyRC Q200 Charger
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3" data-md-state="indeterminate" type="checkbox" id="__nav_4_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_3">
+          Betaflight
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Betaflight" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Betaflight
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/Betaflight/osd-dji-fpv/" class="md-nav__link">
+        DJI FPV Goggles OSD setup
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/Betaflight/uav-tech-presets/" class="md-nav__link">
+        UAV Tech presets
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_4" data-md-state="indeterminate" type="checkbox" id="__nav_4_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_4">
+          Build Tips
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Build Tips" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          Build Tips
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/Build%20Tips/antennas/" class="md-nav__link">
+        Antenna mounting tips
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_5" data-md-state="indeterminate" type="checkbox" id="__nav_4_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_5">
+          ExpressLRS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ExpressLRS" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_5">
+          <span class="md-nav__icon md-icon"></span>
+          ExpressLRS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/ExpressLRS/" class="md-nav__link">
+        ExpressLRS
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_6" data-md-state="indeterminate" type="checkbox" id="__nav_4_6" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_6">
+          FC & ESC
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="FC & ESC" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_6">
+          <span class="md-nav__icon md-icon"></span>
+          FC & ESC
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/FC%20%26%20ESC/blheli32/" class="md-nav__link">
+        BLHeliSuite32
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/FC%20%26%20ESC/mamba-f405-mini-3/" class="md-nav__link">
+        Mamba F405+F35 Mini Mk3 DJI
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/FC%20%26%20ESC/speedybee-f7/" class="md-nav__link">
+        Speedybee F7 V2 Stack
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/FC%20%26%20ESC/t-motor-f7/" class="md-nav__link">
+        T-Motor F7+F55A PROII HD
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_7" data-md-state="indeterminate" type="checkbox" id="__nav_4_7" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_7">
+          Frames
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Frames" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_7">
+          <span class="md-nav__icon md-icon"></span>
+          Frames
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/Frames/" class="md-nav__link">
+        ImpulseRC Apex
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_8" data-md-state="indeterminate" type="checkbox" id="__nav_4_8" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_8">
+          Legal documents
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Legal documents" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_8">
+          <span class="md-nav__icon md-icon"></span>
+          Legal documents
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/Legal%20documents/" class="md-nav__link">
+        DGAC
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_9" data-md-state="indeterminate" type="checkbox" id="__nav_4_9" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_9">
+          Prints
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Prints" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_9">
+          <span class="md-nav__icon md-icon"></span>
+          Prints
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/Prints/" class="md-nav__link">
+        3D printing useful list
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_10" data-md-state="indeterminate" type="checkbox" id="__nav_4_10" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_10">
+          RX
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="RX" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_10">
+          <span class="md-nav__icon md-icon"></span>
+          RX
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/RX/" class="md-nav__link">
+        TBS Tracer
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_11" data-md-state="indeterminate" type="checkbox" id="__nav_4_11" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_11">
+          TX
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="TX" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_11">
+          <span class="md-nav__icon md-icon"></span>
+          TX
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/TX/tbs_agent_lite/" class="md-nav__link">
+        TBS Agent Lite
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/TX/tx16s/" class="md-nav__link">
+        TX16S
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_12" data-md-state="indeterminate" type="checkbox" id="__nav_4_12" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_12">
+          VTX
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="VTX" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_12">
+          <span class="md-nav__icon md-icon"></span>
+          VTX
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Handbook/VTX/" class="md-nav__link">
+        Caddx Vista
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" data-md-state="indeterminate" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          FPV Builds
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="FPV Builds" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          FPV Builds
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" data-md-state="indeterminate" type="checkbox" id="__nav_5_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1">
+          ImpulseRC Apex
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ImpulseRC Apex" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          ImpulseRC Apex
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPV%20Builds/ImpulseRC%20Apex/" class="md-nav__link">
+        Apex 5" HD on base frame kit
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/ultrabug/ultrabug.fr/edit/master/docs/Tech Blog/2022/2022-02-21-learning-rust-the-hard-way.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="learning-rust-the-hard-way-for-a-production-kafkascylladb-pipeline">Learning Rust the hard way for a production Kafka+ScyllaDB pipeline<a class="headerlink" href="#learning-rust-the-hard-way-for-a-production-kafkascylladb-pipeline" title="Permanent link">&para;</a></h1>
+<p>This is the web version of the talk I gave at <a href="https://www.scylladb.com/presentations/learning-rust-the-hard-way-for-a-production-kafka-scylladb-pipeline/">Scylla Summit 2022</a>.</p>
+<p><img alt="learning rust the hard way" src="../images/learning-rust-hard-way-banner.png" /></p>
+<h2 id="project-context-at-numberly">Project context at Numberly<a class="headerlink" href="#project-context-at-numberly" title="Permanent link">&para;</a></h2>
+<p>You may remember that Numberly is a digital data marketing expert helping brands connect with their customers using all digital channels available.</p>
+<p>As a data company, we operate on a lot of data that is fast moving. This <strong>event driven</strong> approach drives our technological choices towards platforms that allow us to process and react to stimulus as close to real time as possible.</p>
+<p>As such <strong>we combine Kafka and Scylla superpowers extensively</strong> thanks to streams and specialized pipeline applications that we'll call data processors here.</p>
+<p><img alt="pipeline overview" src="../images/pipeline-overview.png" /></p>
+<p>Each of those pipeline data processor applications prepares and enriches the incoming data so that it is useful to the downstream business / partner or client applications.</p>
+<p>Relevance of a data driven decision is at its best when it's close to the event's time of occurrence which means that <strong>availability and latency are business critical to us</strong>.</p>
+<p>Latency and resilience are the pillars upon which we have to build our platforms to <strong>make our business reliable in the face of our clients and partners</strong>.</p>
+<p>Those data processor apps, kafka, and of course Scylla can't fail, if they do we get angry partners and clients... And nobody wants to deal with an angry client!</p>
+<h2 id="the-rusted-opportunity">The (rusted) opportunity<a class="headerlink" href="#the-rusted-opportunity" title="Permanent link">&para;</a></h2>
+<p>The data industry and ecosystems are always changing. Last fall, we had to adapt three of the most demanding data processors written in Python.</p>
+<p>Those processor applications were doing the job for more than 5 years, <strong>they were battle tested and trustworthy</strong>.</p>
+<p>But I was following Rust maturation for a while, I was curious and it always felt less intimidating than C or C++ to me. So when this opportunity came, I went to my colleagues and told them:</p>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p><strong>Hey why not rewrite those 3 python applications that we know work very well with one rust application which we don't even know the language?</strong></p>
+</div>
+<p>Ok, I must admit that I lost my CTO badge for a few seconds when I saw their faces...</p>
+<h2 id="the-never-tried-before-rust-promises">The (never tried before) Rust promises<a class="headerlink" href="#the-never-tried-before-rust-promises" title="Permanent link">&para;</a></h2>
+<p>Rust makes promises that some people seem to agree with, it's intriguing!</p>
+<p>It is supposed to...</p>
+<ul>
+<li>Be secure<ul>
+<li><strong>Memory and thread safety as first class citizens</strong></li>
+<li><strong>No runtime or garbage collector</strong></li>
+</ul>
+</li>
+<li>Be easy to deploy<ul>
+<li>Compiled binaries are self-sufficient</li>
+</ul>
+</li>
+<li>Make no compromises<ul>
+<li>Strongly and statically typed</li>
+<li><strong>Exhaustivity is mandatory</strong></li>
+<li><strong>Built-in error management syntax and primitives</strong></li>
+</ul>
+</li>
+<li>Play well with Python<ul>
+<li>PyO3 can be used to run Rust from Python (or the contrary)</li>
+</ul>
+</li>
+</ul>
+<p>But furthermore, their marketing motto speaks to the marketer inside me:</p>
+<div class="admonition quote">
+<p class="admonition-title">Quote</p>
+<p>A language empowering <strong>everyone</strong> to build <strong>reliable</strong> and <strong>efficient</strong> software.</p>
+</div>
+<p>That being said, careful readers will notice that I did not mention <em>speed</em> in the Rust promises.</p>
+<p>Isn't Rust supposed to be OMG fast? No, they talk about efficiency and it's not the same!</p>
+<h2 id="efficient-software-faster-software">Efficient software != Faster software<a class="headerlink" href="#efficient-software-faster-software" title="Permanent link">&para;</a></h2>
+<p>Efficient software does not always mean faster software.</p>
+<p>Brett Cannon, a Python core developer, advocates that <a href="https://snarky.ca/programming-language-selection-is-a-form-of-premature-optimization/">selecting a programming language for being faster on paper is a form or premature optimization</a>.</p>
+<p><img alt="brett cannon" src="../images/brett-optimization.png" width="500" /></p>
+<p>I agree with him in the sense that the word <em>Fast</em> have different meanings depending on your objectives.</p>
+<p><strong>To me, Rust can be said to be faster as a consequence of being Efficient</strong>, which does not cover all the items on the list here.</p>
+<p>Let's apply them to my context:</p>
+<ul>
+<li>Fast to develop?<ul>
+<li><strong>No. Python is way faster, did that for 15 years</strong></li>
+</ul>
+</li>
+<li>Fast to maintain?<ul>
+<li><strong>No. Nobody at Numberly does Rust yet</strong></li>
+</ul>
+</li>
+<li>Fast to prototype?<ul>
+<li><strong>No. Code must be complete to compile and run</strong></li>
+</ul>
+</li>
+<li>Fast to process data?<ul>
+<li><strong>Sure. To prove it, measure it first</strong></li>
+</ul>
+</li>
+<li>Fast to cover all failure cases?<ul>
+<li><strong>Definitely. Mandatory exhaustivity + error handling primitives</strong></li>
+</ul>
+</li>
+</ul>
+<p>As we can see in my case, <strong>choosing Rust over Python will mean that I will definitely lose time</strong>!</p>
+<div class="admonition check">
+<p class="admonition-title">Quote</p>
+<p><strong>I did not choose Rust to be “faster”</strong>. Our Python code was fast enough to deliver their pipeline processing.</p>
+</div>
+<p>So why would I want to lose time? The short answer is <strong>Innovation</strong>!</p>
+<p><img alt="a word on innovation" src="../images/innovation-quote.png" /></p>
+<h2 id="the-reliable-software-paradigms">The reliable software paradigms<a class="headerlink" href="#the-reliable-software-paradigms" title="Permanent link">&para;</a></h2>
+<p>Now what will I gain from losing time other than the pain of using semicolons and brackets?</p>
+<p>Supposedly a more reliable software thanks to Rust unique design and paradigms.</p>
+<p>In other words, <strong>what makes me slow is also an opportunity to make my software stronger</strong>!</p>
+<ul>
+<li>Low level paradigms (ownership, borrowing, lifetimes)<ul>
+<li><strong>If it compiles, it's safe</strong></li>
+</ul>
+</li>
+<li>Strong type safety<ul>
+<li><strong>Predictable, readable, maintainable</strong></li>
+</ul>
+</li>
+<li>Compilation (debug, release)<ul>
+<li><strong>Rust compiler is very helpful vs a random Python exception</strong></li>
+</ul>
+</li>
+<li>Dependency management<ul>
+<li><strong>Finally something looking sane vs Python mess</strong></li>
+</ul>
+</li>
+<li>Exhaustive pattern matching<ul>
+<li><strong>Confidence that you're not forgetting something</strong></li>
+</ul>
+</li>
+<li>Error management primitives (Result)<ul>
+<li><strong>Handle failure right from the language syntax</strong></li>
+</ul>
+</li>
+</ul>
+<div class="admonition check">
+<p class="admonition-title">Quote</p>
+<p>I chose Rust because it provided me with the <strong>programming paradigms at the right abstraction level</strong> that I needed to finally understand and better <strong>explain the reliability and performance</strong> of an application.</p>
+</div>
+<h2 id="learning-rust-the-hard-way">Learning Rust the hard way<a class="headerlink" href="#learning-rust-the-hard-way" title="Permanent link">&para;</a></h2>
+<p>Here is an overview of all the aspects and all the technological stacks that I had to deal with. I'll detail the most insightful parts below.</p>
+<p><img alt="stack overview" src="../images/stack-overview.png" width="500" /></p>
+<h3 id="confluent-kafka-schema-registry">Confluent Kafka Schema Registry<a class="headerlink" href="#confluent-kafka-schema-registry" title="Permanent link">&para;</a></h3>
+<p>We use Confluent Kafka Community edition with a <strong>Schema Registry to handle our Avro encoded messages</strong>.</p>
+<p>Confluent Schema Registry adds a magic byte to kafka message payloads, breaking vanilla Apache Avro schema deserialization.</p>
+<p>Luckily for me, <a href="https://github.com/gklijs/schema_registry_converter">Gerard Klij had done the heavy lifting in his crate</a> which helped me a lot before I discovered performance problems. We are working on <a href="https://github.com/gklijs/schema_registry_converter/discussions/71">improving that</a> and I hope to switch back to his helpful project once we're done.</p>
+<p>Until then I decided to use the manual approach shown here and <strong>decode Avro messages myself with respect of their schema</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="sd">/// Deserialize the given kafka raw `message` using the provided</span>
+<span class="sd">/// Avro `schema` and return a Navigation struct message to be</span>
+<span class="sd">/// used by the processors.</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">get_decoded_message</span><span class="p">(</span><span class="n">schema</span>: <span class="kp">&amp;</span><span class="nc">Schema</span><span class="p">,</span><span class="w"> </span><span class="n">message</span>: <span class="kp">&amp;</span><span class="nc">BorrowedMessage</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="n">Navigation</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/*</span>
+<span class="cm">    DO NOT pass the reader schema as last argument to from_avro_datum</span>
+<span class="cm">    this implies a resolve() on each value and impacts performances badly</span>
+<span class="cm">    &gt; Ok(from_avro_datum(&amp;schema, &amp;mut reader, Some(&amp;schema)).unwrap()) // decode + resolve</span>
+<span class="cm">    */</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cursor</span>::<span class="n">new</span><span class="p">(</span><span class="o">&amp;</span><span class="n">message</span><span class="p">.</span><span class="n">payload</span><span class="p">().</span><span class="n">unwrap</span><span class="p">()[</span><span class="mi">5</span><span class="o">..</span><span class="p">]);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">from_avro_datum</span><span class="p">(</span><span class="o">&amp;</span><span class="n">schema</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">reader</span><span class="p">,</span><span class="w"> </span><span class="nb">None</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">inner</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">inner</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="n">anyhow</span><span class="o">!</span><span class="p">(</span><span class="n">err</span><span class="p">));</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">navigation</span>: <span class="nc">Navigation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="o">&amp;</span><span class="n">val</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">Value</span>::<span class="n">Record</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">from_value</span>::<span class="o">&lt;</span><span class="n">Navigation</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">val</span><span class="p">).</span><span class="n">unwrap</span><span class="p">(),</span><span class="w"></span>
+<span class="w">        </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="n">anyhow</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;could not map avro data to struct&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(</span><span class="n">navigation</span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h3 id="apache-avro-rust-was-broken">Apache Avro Rust was broken<a class="headerlink" href="#apache-avro-rust-was-broken" title="Permanent link">&para;</a></h3>
+<p>Then I hit the second wall when even if my reading of the Avro payload was done right <strong>I could not deserialize them</strong>...</p>
+<p>As a total Rustian newbie, I blamed myself for days before even daring to open Apache Avro source code and look at it. <strong>I eventually found out that Apache Avro was broken for complex schemas like us</strong>!</p>
+<p>It made me wonder if anyone in the whole world was actually using Avro with Rust in production...even more knowing that the project had been given to the Apache foundation without a committer able to merge PRs at the time.</p>
+<p><strong>So here I am contributing fixes to Apache Avro Rust</strong> which eventually got merged three months later in Jan. 2022: <a href="https://github.com/apache/avro/pull/1368">AVRO-3232</a> and <a href="https://github.com/apache/avro/pull/1379">AVRO-3240</a>.</p>
+<p>Anyway, another unexpected fact that Rust allowed me to prove is that <strong>deserializing Avro is faster than deserializing JSON</strong> in our case of rich and complex data structures. My colleague Othmane was sure of it, I could finally prove it!</p>
+<p>Once Avro was fixed, I could start experimenting with the <code>--release</code> flag and run my code <strong>optimized</strong> which I was not expecting such a speed boost from!</p>
+<p><img alt="avro rust optimized latency" src="../images/avro-optimized.png" width="500" /></p>
+<h3 id="asynchronous-patterns-to-optimize-latency">Asynchronous patterns to optimize latency<a class="headerlink" href="#asynchronous-patterns-to-optimize-latency" title="Permanent link">&para;</a></h3>
+<p>Once I was able to consume messages from Kafka, I started looking at the best pattern to process them.</p>
+<p>I found the <a href="https://tokio.rs">tokio asynchronous runtime</a> very intuitive coming from Python asyncio.</p>
+<p>I played a lot with <strong>various code patterns to optimize and make consuming messages from Kafka latency stable and reliable</strong>.</p>
+<p>One of the interesting findings was to not defer the decoding of Avro messages to a green-thread but do it right in the consumer loop. Deserialization is a <strong>CPU bound operation which will benefit from not being cooperative</strong> with other green-thread tasks!</p>
+<p>Similar, allowing and controlling your parallelism will help stabilize your I/O bound operations, let's see a real example of that:</p>
+<p><img alt="parallelism absorbing latency" src="../images/parallelism-latency.png" /></p>
+<p><strong>Deferring the rest of my processing logic which is I/O bound to green-threads helped absorb tail latencies without affecting my kafka consuming speed</strong>.</p>
+<p>The Grafana dashboard above shows that around 9:00 something made Scylla slower than usual, <strong>scylla select and insert P95 latencies went up by 16</strong>.</p>
+<p>That's where parallelism load (the little bump on the first graph) also started to increase as I had more active green-threads processing messages.</p>
+<p><strong>But it only hit my kafka consuming latency by a factor of 2 at P95</strong>, effectively absorbing tail latencies due to this ephemeral overload!</p>
+<p>This is the typical example of something that was harder to pinpoint and demonstrate in Python but became clear with Rust.</p>
+<h3 id="scylla-rust-shard-aware-driver">Scylla Rust (shard-aware) driver<a class="headerlink" href="#scylla-rust-shard-aware-driver" title="Permanent link">&para;</a></h3>
+<p>I found the <a href="https://github.com/scylladb/scylla-rust-driver">Scylla Rust driver</a> to be intuitive and well featured, congratulations to the team which is also very helpful on their dedicated channel on the Scylla Slack service, join us there!</p>
+<p>The new <code>CachingSession</code> is very handy to cache your prepared statements so you don't have to do it yourself like I did at first...</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Prepared queries are NOT paged by default, use <a href="https://cvybhu.github.io/scyllabook/queries/paged.html">paged queries</a> with <code>execute_iter()</code> instead!</p>
+</div>
+<p>I'm showcasing a code example of a production connection function to scylla, using SSL, multi-datacenter awareness and a caching session:</p>
+<div class="highlight"><pre><span></span><code><span class="sd">/// Connect to Scylla and return a `CachingSession` that will</span>
+<span class="sd">/// be used by the processors.</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">get_scylla_session</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">scylla_nodes</span>: <span class="nb">Vec</span><span class="o">&lt;&amp;</span><span class="kt">str</span><span class="o">&gt;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">scylla_user</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">scylla_password</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ssl_ca_path</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">,</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="n">CachingSession</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">context_builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SslContextBuilder</span>::<span class="n">new</span><span class="p">(</span><span class="n">SslMethod</span>::<span class="n">tls</span><span class="p">())</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">ca_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fs</span>::<span class="n">canonicalize</span><span class="p">(</span><span class="n">PathBuf</span>::<span class="n">from</span><span class="p">(</span><span class="n">ssl_ca_path</span><span class="p">))</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">context_builder</span><span class="p">.</span><span class="n">set_ca_file</span><span class="p">(</span><span class="n">ca_dir</span><span class="p">.</span><span class="n">as_path</span><span class="p">())</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">context_builder</span><span class="p">.</span><span class="n">set_verify</span><span class="p">(</span><span class="n">SslVerifyMode</span>::<span class="n">PEER</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// load balancing policy</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">local_dc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;*</span><span class="n">DATACENTER</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">dc_robin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Box</span>::<span class="n">new</span><span class="p">(</span><span class="n">DcAwareRoundRobinPolicy</span>::<span class="n">new</span><span class="p">(</span><span class="n">local_dc</span><span class="p">.</span><span class="n">to_string</span><span class="p">()));</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">policy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arc</span>::<span class="n">new</span><span class="p">(</span><span class="n">TokenAwarePolicy</span>::<span class="n">new</span><span class="p">(</span><span class="n">dc_robin</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// the size of the prepared statement cache has no impact on the underlying</span>
+<span class="w">    </span><span class="c1">// DashMap memory consumption as it is only used by the CachingSession</span>
+<span class="w">    </span><span class="c1">// struct logic itself.</span>
+<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;scylla connecting to {:?} as user {} on datacenter {}&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="o">&amp;</span><span class="n">scylla_nodes</span><span class="p">,</span><span class="w"> </span><span class="n">scylla_user</span><span class="p">,</span><span class="w"> </span><span class="n">local_dc</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">caching_session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CachingSession</span>::<span class="n">from</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="n">SessionBuilder</span>::<span class="n">new</span><span class="p">()</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="n">known_nodes</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scylla_nodes</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="n">connection_timeout</span><span class="p">(</span><span class="n">Duration</span>::<span class="n">from_secs</span><span class="p">(</span><span class="mi">15</span><span class="p">))</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="n">ssl_context</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="n">context_builder</span><span class="p">.</span><span class="n">build</span><span class="p">()))</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="n">user</span><span class="p">(</span><span class="n">scylla_user</span><span class="p">,</span><span class="w"> </span><span class="n">scylla_password</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="n">load_balancing</span><span class="p">(</span><span class="n">policy</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="n">build</span><span class="p">()</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="k">await</span><span class="o">?</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="mi">1000</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(</span><span class="n">caching_session</span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h3 id="exporting-metrics-properly-for-prometheus">Exporting metrics properly for Prometheus<a class="headerlink" href="#exporting-metrics-properly-for-prometheus" title="Permanent link">&para;</a></h3>
+<p>Now to Prometheus which even if it comes late on this presentation is actually <strong>one of the first things I did setup on my application</strong>.</p>
+<p>For all the experiments I did, I measured their latency and throughput impacts thanks to Prometheus.</p>
+<p><strong>For a test to be meaningful, those measurements must be made right and then graphed right</strong>. Scylla people know this by heart but it's usually harder for mortals like the rest of us...</p>
+<p>So here is an example of how I measure scylla query insertion latency.</p>
+<p>The first and important gotcha is to setup your histogram bucket correctly with your expected graphing finesse:</p>
+<div class="highlight"><pre><span></span><code><span class="k">pub</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">ref</span><span class="w"> </span><span class="n">SCYLLA_INSERT_QUERIES_LATENCY_HIST_SEC</span>: <span class="nc">Histogram</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">register_histogram</span><span class="o">!</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="s">&quot;scylla_insert_queries_latency_seconds&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="s">&quot;Scylla INSERT query latency histogram in seconds&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">0.0005</span><span class="p">,</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0025</span><span class="p">,</span><span class="w"> </span><span class="mf">0.005</span><span class="p">,</span><span class="w"> </span><span class="mf">0.01</span><span class="p">,</span><span class="w"> </span><span class="mf">0.025</span><span class="p">,</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.25</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="mf">15.0</span><span class="p">],</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+<span class="p">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&quot;failed to create prometheus metric&quot;</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+<p>Here I expect scylla latency to vary between 50µs and 15s which is the maximal server timeout I'm allowing for writes.</p>
+<p>Then I use it like this: I start a timer on the histogram and record its duration on success with <code>timer.observe_duration();</code> and drop it on failure with <code>drop(timer);</code> so that my metrics are not polluted by possible errors.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="n">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SCYLLA_INSERT_QUERIES_LATENCY_HIST_SEC</span><span class="p">.</span><span class="n">start_timer</span><span class="p">();</span><span class="w"></span>
+<span class="k">match</span><span class="w"> </span><span class="n">scylla_session</span><span class="w"></span>
+<span class="w">    </span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">scylla_statement</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">scylla_parameters</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">.</span><span class="k">await</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">timer</span><span class="p">.</span><span class="n">observe_duration</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(())</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="nb">Err</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nb">drop</span><span class="p">(</span><span class="n">timer</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">PROCESSING_ERRORS_TOTAL</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="n">with_label_values</span><span class="p">(</span><span class="o">&amp;</span><span class="p">[</span><span class="s">&quot;scylla_insert&quot;</span><span class="p">])</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="n">inc</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">error</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;insert_in_scylla: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">anyhow</span><span class="o">!</span><span class="p">(</span><span class="n">err</span><span class="p">))</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h3 id="grafana-dashboarding">Grafana dashboarding<a class="headerlink" href="#grafana-dashboarding" title="Permanent link">&para;</a></h3>
+<p><strong>One of my best time investment in this project was to create a detailed and meaningful Grafana dashboard</strong> so I could see and compare the results of my Rust application experimentations.</p>
+<p><img alt="grafana dashboard" src="../images/grafana-dashboard.png" width="500" /></p>
+<p>Make sure you graph as much things as possible!</p>
+<ul>
+<li>cache sizes (statements)</li>
+<li>query and throughput rates and occurrence of everything, <strong>discerning the difference between the two</strong></li>
+<li>make errors metrics meaningful by using labels (by type)</li>
+<li>kubernetes pod memory</li>
+</ul>
+<p>Also read the <a href="https://grafana.com/blog/2020/06/23/how-to-visualize-prometheus-histograms-in-grafana/">great article that the folks at Grafana wrote on how to visualize prometheus histograms right in Grafana</a>, it's not as obvious as one might think!</p>
+<h2 id="did-i-really-lose-time-because-of-rust">Did I really lose time because of Rust<a class="headerlink" href="#did-i-really-lose-time-because-of-rust" title="Permanent link">&para;</a></h2>
+<p>The real question is: do I have the feeling to have lost time at all? <strong>Short answer: hell no!</strong></p>
+<p>The syntax was surprisingly simple and intuitive to adopt even coming from Python.</p>
+<p>In the end I have to confess that <strong>Rust made me want to test and analyze everything at a lower level and I absolutely failed to resist the temptation</strong>!</p>
+<p>So most of my time was spent on testing, graphing, analyzing and trying to come up with a decent and insightful explanation: <strong>this surely does not look like wasted time to me!</strong></p>
+<p>For the number hungry of you in the audience, here are some numbers taken from the application:</p>
+<ul>
+<li>Kafka consumer max throughput with processing? 200K msg/s on 20 partitions</li>
+<li>Avro deserialization P50 latency? 75µs</li>
+<li>Scylla SELECT P50 latency on 1.5B+ rows tables? 250µs</li>
+<li>Scylla INSERT P50 latency on 1.5B+ rows tables? 2ms</li>
+</ul>
+<h2 id="conclusion-it-went-better-than-expected">Conclusion: it went better than expected<a class="headerlink" href="#conclusion-it-went-better-than-expected" title="Permanent link">&para;</a></h2>
+<p>It went way better than expected!</p>
+<ul>
+<li>Rust crates ecosystem is mature, similar to Python Package Index</li>
+<li>The scylla-rust-driver is stable and efficient!</li>
+<li>It took me a while to accept that Apache Avro was broken, not me...</li>
+<li><strong>3 Python apps totalling 54 pods replaced by 1 Rust app totalling 20 pods</strong></li>
+<li><strong>This feels like the most reliable and efficient software I ever wrote!</strong></li>
+</ul>
+<p>Even if it was my first Rust application, I felt confident during the development process which transformed into confidence in a predictable and resilient software.</p>
+<p>After weeks of production, the new Rust pipeline processor proves to be very stable and resilient.</p>
+<p><strong>So now I can fairly say that yes, Rust promises are living up to expectations!</strong></p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <!-- Footer -->
+<footer class="md-footer">
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <!-- Copyright and theme information -->
+<div class="md-copyright">
+    
+      <div class="md-copyright__highlight">
+        Copyright &copy; 2011-2022 Alexys Jacob
+      </div>
+    
+    
+      This website uses no tracker and is made with ❤ in Paris using
+      <a
+        href="https://squidfunk.github.io/mkdocs-material/"
+        target="_blank" rel="noopener"
+      >
+        Material for MkDocs
+      </a>
+    
+</div>
+
+      <!-- Social links -->
+      
+        <div class="md-social">
+  
+    
+    
+    <a href="https://twitter.com/ultrabug" target="_blank" rel="noopener" title="ultrabug on Twitter" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+    <a href="https://github.com/ultrabug" target="_blank" rel="noopener" title="ultrabug on Github" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    <a href="https://ultrabug.fr/feed_rss_created.xml" target="_blank" rel="noopener" title="ultrabug RSS feed" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M400 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM112 416c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm157.533 0h-34.335c-6.011 0-11.051-4.636-11.442-10.634-5.214-80.05-69.243-143.92-149.123-149.123-5.997-.39-10.633-5.431-10.633-11.441v-34.335c0-6.535 5.468-11.777 11.994-11.425 110.546 5.974 198.997 94.536 204.964 204.964.352 6.526-4.89 11.994-11.425 11.994zm103.027 0h-34.334c-6.161 0-11.175-4.882-11.427-11.038-5.598-136.535-115.204-246.161-251.76-251.76C68.882 152.949 64 147.935 64 141.774V107.44c0-6.454 5.338-11.664 11.787-11.432 167.83 6.025 302.21 141.191 308.205 308.205.232 6.449-4.978 11.787-11.432 11.787z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.expand", "navigation.sections", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.092fa1f6.min.js"}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.e3b2bf44.min.js"></script>
+      
+    
+  </body>
+</html>
