@@ -1,5 +1,13 @@
 # ExpressLRS
 
+## Wiring
+
+![ep wiring](images/EPWiring.png)
+
+## Flashing
+
+Link to the [ExpressLRS HappyModel EP documentation](https://www.expresslrs.org/2.0/quick-start/receivers/hmep2400/)
+
 ## My usual settings
 
 - 250Hz packet rate
