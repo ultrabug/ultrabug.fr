@@ -28,7 +28,7 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/ultrabug
       name: ultrabug on Github
-    - icon: fontawesome/solid/rss-square
+    - icon: fontawesome/solid/square-rss
       link: https://ultrabug.fr/feed_rss_created.xml
       name: ultrabug RSS feed
 copyright: Copyright &copy; 2011-2022 Alexys Jacob
