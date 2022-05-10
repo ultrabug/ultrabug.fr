@@ -1873,6 +1873,14 @@
          
     </url>
     <url>
+         <loc>https://ultrabug.fr/Tech%20Talks/2022/scylla-rust-webinar/</loc>
+         <lastmod>2022-05-10</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://ultrabug.fr/en/Tech%20Talks/2022/scylla-rust-webinar/"/>
+         <xhtml:link rel="alternate" hreflang="fr" href="https://ultrabug.fr/fr/Tech%20Talks/2022/scylla-rust-webinar/"/>
+         
+    </url>
+    <url>
          <loc>https://ultrabug.fr/Tech%20Talks/2022/scylla-summit-2022/</loc>
          <lastmod>2022-05-10</lastmod>
          <changefreq>daily</changefreq>
