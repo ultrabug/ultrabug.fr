@@ -81,14 +81,6 @@
          
     </url>
     <url>
-         <loc>https://ultrabug.fr/FPV%20Handbook/ExpressLRS/</loc>
-         <lastmod>2022-05-10</lastmod>
-         <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://ultrabug.fr/en/FPV%20Handbook/ExpressLRS/"/>
-         <xhtml:link rel="alternate" hreflang="fr" href="https://ultrabug.fr/fr/FPV%20Handbook/ExpressLRS/"/>
-         
-    </url>
-    <url>
          <loc>https://ultrabug.fr/FPV%20Handbook/FC%20%26%20ESC/blheli32/</loc>
          <lastmod>2022-05-10</lastmod>
          <changefreq>daily</changefreq>
@@ -145,11 +137,19 @@
          
     </url>
     <url>
-         <loc>https://ultrabug.fr/FPV%20Handbook/RX/</loc>
+         <loc>https://ultrabug.fr/FPV%20Handbook/RX/expresslrs/</loc>
          <lastmod>2022-05-10</lastmod>
          <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="en" href="https://ultrabug.fr/en/FPV%20Handbook/RX/"/>
-         <xhtml:link rel="alternate" hreflang="fr" href="https://ultrabug.fr/fr/FPV%20Handbook/RX/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="https://ultrabug.fr/en/FPV%20Handbook/RX/expresslrs/"/>
+         <xhtml:link rel="alternate" hreflang="fr" href="https://ultrabug.fr/fr/FPV%20Handbook/RX/expresslrs/"/>
+         
+    </url>
+    <url>
+         <loc>https://ultrabug.fr/FPV%20Handbook/RX/tracer/</loc>
+         <lastmod>2022-05-10</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://ultrabug.fr/en/FPV%20Handbook/RX/tracer/"/>
+         <xhtml:link rel="alternate" hreflang="fr" href="https://ultrabug.fr/fr/FPV%20Handbook/RX/tracer/"/>
          
     </url>
     <url>
