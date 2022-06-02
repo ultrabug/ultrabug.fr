@@ -1,6 +1,7 @@
 site_name: Ultrabug
 site_url: https://ultrabug.fr
 repo_url: https://github.com/ultrabug/ultrabug.fr
+site_description: "Ultrabug - Open Source Author and Contributor. Tech Blog and Talks. FPV Handbook and Builds."
 
 # https://squidfunk.github.io/mkdocs-material/
 theme:
@@ -37,6 +38,7 @@ copyright: Copyright &copy; 2011-2022 Alexys Jacob
 markdown_extensions:
   - attr_list
   - admonition
+  - meta
   - toc:
       permalink: true
   - pymdownx.emoji:
