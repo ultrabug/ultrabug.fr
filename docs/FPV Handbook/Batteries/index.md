@@ -1,9 +1,11 @@
 # Batteries notes
 
 !!! danger
-    LiPo batteries are **dangerous** and can catch fire when they are damaged
-    or badly maintained. What is written here is meant as a quick reminder and
-    does not replace a fully comprehensive guide on battery management.
+    LiPo batteries are **dangerous** and can
+    [catch fire](https://www.youtube.com/watch?v=n3urBpFIBgY) when they are
+    damaged or badly maintained. What is written here is meant as a quick
+    reminder and does not replace a fully comprehensive guide on
+    battery management.
 
 ## Calculating charging amperage
 
@@ -34,3 +36,11 @@ amperage you calculated above but do not do it too often.
   them.
 - The calculation of charging amperage should be multiplied by the number of
   batteries being charged in parallel but should not exceed 1C per battery.
+
+## Batteries operation voltages
+
+The voltages below are listed **per cell**.
+
+- **LiPo**: safe voltage range is 3.0V to 4.2V (drone use keep above 3.5V)
+- **LiPo HV**: safe voltage range is 3.0V to 4.35V (drone use keep above 3.5V)
+- **LiIon**: safe voltage range is 2.5V to 4.2V
