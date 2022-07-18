@@ -17,7 +17,7 @@ Je suis engagé dans plusieurs communautés Open Source et je consacre une part 
 Je suis l'auteur de plusieurs projets Open Source comme par exemple :
 
 - [py3status](https://github.com/ultrabug/py3status): un wrapper à i3status sous [i3wm](https://i3wm.org/) écrit en Python
-- [uhashring](https://github.com/ultrabug/uhashring): une librairie complète qui implémente du consistent hashing en Python compatible avec ketama
+- [uhashring](https://github.com/ultrabug/uhashring): une librairie complète qui implémente du consistent hashing en Python compatible avec ketama, ce projet a été désigné comme critique sur PyPI
 - [mkdocs-static-i18n](https://github.com/ultrabug/mkdocs-static-i18n): un plugin pour MkDocs vous permettant de créer une documentation (ou un site web comme le mien) multi-langue
 - [matterhook](https://github.com/numberly/matterhook): une librairie Python permettant d'interagir avec les Webhooks Mattermost
 
