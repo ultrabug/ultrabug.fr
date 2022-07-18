@@ -12,7 +12,7 @@ Cela fait plus de 10 ans que je suis développeur [Gentoo Linux](https://gentoo.
 
 ### Open Source author and contributor
 
-Je suis engagé dans plusieurs communautés Open Source et je consacre une part non négligeable de mon temps à contribuer à des projets Open Source.
+Je suis engagé dans plusieurs communautés Open Source et je consacre une part non négligeable de mon temps à contribuer à des projets Open Source. GitHub m'a remercié d'être [l'un des 900 maintainers Open Source](https://github.blog/2022-06-24-thank-you-to-our-maintainers/) dont l'entreprise dépend pour opérer sa plateforme.
 
 Je suis l'auteur de plusieurs projets Open Source comme par exemple :
 
@@ -52,12 +52,9 @@ Je partage aussi ma modeste expérience de cette discipline dans mon [FPV Handbo
 
 Si mon travail vous impacte positivement, vous pouvez dire merci en donnant une
 étoile :star: aux projets en question, me remercier avec un
-[don libre sur Paypal](https://paypal.me/alexysjacob1), via Github Sponsor ou Tipeee:
+[don libre sur Paypal](https://paypal.me/alexysjacob1), via [Github Sponsor](https://github.com/sponsors/ultrabug) ou [Tipeee](https://fr.tipeee.com/ultrabug).
 
 <iframe src="https://github.com/sponsors/ultrabug/button" title="Sponsor ultrabug" height="35" width="116" style="border: 0;"></iframe>
-
-<a href="https://fr.tipeee.com/ultrabug" class="tipeee-project-small">Dire merci à Ultrabug sur Tipeee</a>
-<script async src="https://plugin.tipeee.com/widget.js" charset="utf-8"></script>
 
 ## Contact me
 

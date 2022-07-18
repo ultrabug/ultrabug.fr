@@ -12,7 +12,7 @@ I've been a [Gentoo Linux](https://gentoo.org) developer for more than 10 years 
 
 ### Open Source author and contributor
 
-I'm strongly involved in various Open Source communities and am spending a fair amount of my time contributing to Open Source projects.
+I'm strongly involved in various Open Source communities and am spending a fair amount of my time contributing to Open Source projects. GitHub recognized me as [one of the 900 Open Source maintainers](https://github.blog/2022-06-24-thank-you-to-our-maintainers/) they rely on to run their platform.
 
 I am the author of several Open Source projects, for instance:
 
@@ -21,7 +21,7 @@ I am the author of several Open Source projects, for instance:
 - [mkdocs-static-i18n](https://github.com/ultrabug/mkdocs-static-i18n): a MkDocs plugin that allows you to create localized versions of your documentation (or even websites such as mine)
 - [matterhook](https://github.com/numberly/matterhook): a Python library to interact with Mattermost Webhooks
 
-This is a quick list of projects I have contributed to:
+This is a quick list of projects I also contribute to:
 
 - [MkDocs](https://github.com/mkdocs/mkdocs)
 - [Apache Airflow](https://github.com/apache/airflow)
@@ -52,12 +52,9 @@ I share my modest experience on this hobby through my [FPV Handbook](/FPV Handbo
 
 If my work impacts you and make you happy you can say thank you by starring
 :star: my repositories, considering making a
-[single donation on Paypal](https://paypal.me/alexysjacob1), becoming a Github Sponsor or using Tipeee:
+[donation on Paypal](https://paypal.me/alexysjacob1), via [Github Sponsor](https://github.com/sponsors/ultrabug) or [Tipeee](https://fr.tipeee.com/ultrabug).
 
 <iframe src="https://github.com/sponsors/ultrabug/button" title="Sponsor ultrabug" height="35" width="116" style="border: 0;"></iframe>
-
-<a href="https://en.tipeee.com/ultrabug" class="tipeee-project-small">Say thanks to Ultrabug on Tipeee</a>
-<script async src="https://plugin.tipeee.com/widget.js" charset="utf-8"></script>
 
 ## Contact me
 
