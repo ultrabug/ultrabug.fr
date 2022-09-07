@@ -5114,7 +5114,7 @@ General key info..: <span class="o">[</span>none<span class="o">]</span>
 <div class="highlight"><pre><span></span><code>gpg/card&gt; admin
 Admin commands are allowed
 </code></pre></div>
-<p>We can start generating the <strong>Signature, Encryption and Authentication keys</strong> on the Yubikey. During the process, you will be prompted alternatively for the <strong>admin PIN and PIN</strong>.</p>
+<p>We can start generating the <strong>Signature, Encryption and Authentication keys</strong> on the Yubikey. During the process, you will be prompted alternatively for the <strong>PIN and admin PIN</strong>.</p>
 <div class="highlight"><pre><span></span><code>gpg/card&gt; generate
 Make off-card backup of encryption key? <span class="o">(</span>Y/n<span class="o">)</span>
 
@@ -5345,15 +5345,12 @@ ssb&gt;  rsa4096 <span class="m">2017</span>-05-16 <span class="o">[</span>E<spa
 max-cache-ttl 86400
 enable-ssh-support
 </code></pre></div>
-<p>Then you will need to update your <strong>~/.bashrc</strong> file to automatically start gpg-agent and override ssh-agent's environment variables. Add this at the end of your <strong>~/.bashrc</strong> file (or equivalent).</p>
+<p>Then you will need to update your <strong>~/.bashrc</strong> file to automatically start gpg-agent and override ssh-agent's environment variables. Add this at the end of your <strong>~/.bashrc</strong> file (or equivalent, MacOSX users should place this in their <strong>~/.bash_profile</strong> file).</p>
 <div class="highlight"><pre><span></span><code># start gpg-agent if it&#39;s not running
 # then override SSH authentication socket to use gpg-agent
-pgrep -l gpg-agent &amp;&gt;/dev/null
-if [[ &quot;$?&quot; != &quot;0&quot; ]]; then
- gpg-agent --daemon &amp;&gt;/dev/null
-fi
-SSH_AUTH_SOCK=/run/user/$(id -u)/gnupg/S.gpg-agent.ssh
-export SSH_AUTH_SOCK
+export GPG_TTY=&quot;$(tty)&quot;
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
 </code></pre></div>
 <p>To simulate a clean slate, unplug your card then kill any running gpg-agent:</p>
 <div class="highlight"><pre><span></span><code>$ killall gpg-agent
