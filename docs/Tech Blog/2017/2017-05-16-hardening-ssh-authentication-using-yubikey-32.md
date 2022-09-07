@@ -112,7 +112,7 @@ gpg/card> admin
 Admin commands are allowed
 ```
 
-We can start generating the **Signature, Encryption and Authentication keys** on the Yubikey. During the process, you will be prompted alternatively for the **admin PIN and PIN**.
+We can start generating the **Signature, Encryption and Authentication keys** on the Yubikey. During the process, you will be prompted alternatively for the **PIN and admin PIN**.
 
 ```bash
 gpg/card> generate
@@ -413,17 +413,14 @@ max-cache-ttl 86400
 enable-ssh-support
 ```
 
-Then you will need to update your **~/.bashrc** file to automatically start gpg-agent and override ssh-agent's environment variables. Add this at the end of your **~/.bashrc** file (or equivalent).
+Then you will need to update your **~/.bashrc** file to automatically start gpg-agent and override ssh-agent's environment variables. Add this at the end of your **~/.bashrc** file (or equivalent, MacOSX users should place this in their **~/.bash_profile** file).
 
 ```
 # start gpg-agent if it's not running
 # then override SSH authentication socket to use gpg-agent
-pgrep -l gpg-agent &>/dev/null
-if [[ "$?" != "0" ]]; then
- gpg-agent --daemon &>/dev/null
-fi
-SSH_AUTH_SOCK=/run/user/$(id -u)/gnupg/S.gpg-agent.ssh
-export SSH_AUTH_SOCK
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
 ```
 
 To simulate a clean slate, unplug your card then kill any running gpg-agent:
