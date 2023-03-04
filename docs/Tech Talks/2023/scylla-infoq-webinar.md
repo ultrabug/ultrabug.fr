@@ -2,7 +2,7 @@
 
 ![scylla rust webinar](../images/2023_infoq_webinar.jpg)
 
-The [InfoQ community](https://www.infoq.com/) hosted a webinar on March 2nd 2023 where Peter Coreless from ScyllaDB and I shared to stage. This opportunity allowed me to once again update my Scylla Summit 2022 talk and share [my experience of learning Rust the hard way in the migration of Python pipelines to Rust](https://ultrabug.fr/Tech%20Blog/2022/2022-02-21-learning-rust-the-hard-way/).
+The [InfoQ community](https://www.infoq.com/) hosted a webinar on March 2nd 2023 where Peter Coreless from ScyllaDB and I shared the stage. This opportunity allowed me to once again update my Scylla Summit 2022 talk and share [my experience of learning Rust the hard way in the migration of Python pipelines to Rust](https://ultrabug.fr/Tech%20Blog/2022/2022-02-21-learning-rust-the-hard-way/).
 
 **This topic does have a lot of traction** it seems, that's for good!
 

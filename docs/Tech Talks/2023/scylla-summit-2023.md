@@ -2,7 +2,7 @@
 
 ## Building a 100% ScyllaDB Shard-Aware Application Using Rust
 
-Yet another edition of the [Scylla Summit with exciting and great presentations](https://www.scylladb.com/scylladb-summit-2023/presentations/?siteplacement=stickybanner) and I was fortunate to be part of it but this year I'm proud to have been accompanied by two of my colleagues: Joseph and Yassir!
+Yet another edition of the [Scylla Summit with exciting presentations](https://www.scylladb.com/scylladb-summit-2023/presentations/?siteplacement=stickybanner) which I was fortunate to be part of. But this year I'm proud to have shared the stage with two of my colleagues: Joseph and Yassir!
 
 ![Scylla Summit 2023](../images/numberly-scylla-summit-2023.jpg)
 
@@ -25,4 +25,4 @@ You can find a **written transcript of the presentation on the [numberly.tech bl
 
 This work and the numerous Open-Source contributions that we brought to the ScyllaDB community has been rewarded by the **Technical Achievement Award** from ScyllaDB.
 
-I'm feel very honored by this award as it demonstrates that any innovative idea pushed to its limits with the right people can end up in creative and breakthrough technical achievements... now live in production at Numberly!
+I feel very honored by this award as it demonstrates that any innovative idea can be transformed into breakthrough technical achievements and contributions. Now live in production at Numberly!

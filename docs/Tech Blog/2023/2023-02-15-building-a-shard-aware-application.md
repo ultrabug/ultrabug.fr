@@ -13,7 +13,7 @@ tags:
 
 # Building a 100% ScyllaDB Shard-Aware Application Using Rust
 
-I wrote web transcript of the talk I gave with my colleagues at [Scylla Summit 2023](https://www.scylladb.com/presentations/building-a-100-scylladb-shard-aware-application-using-rust/).
+I wrote a web transcript of the talk I gave with my colleagues Joseph and Yassir at [Scylla Summit 2023](https://www.scylladb.com/presentations/building-a-100-scylladb-shard-aware-application-using-rust/).
 
 [![building a 100% shard aware application using rust](images/numberly-scylla-summit-2023.jpg)](https://numberly.tech/building-a-100-scylladb-shard-aware-application-using-rust-1aff048e0926)
 
