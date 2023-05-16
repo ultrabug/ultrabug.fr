@@ -50,13 +50,11 @@ I share my modest experience on this hobby through my [FPV Handbook](/FPV Handbo
 
 ## Support me
 
-If my work impacts you and make you happy you can say thank you by starring
-:star: my repositories, considering making a
-[donation on Paypal](https://paypal.me/alexysjacob1), via [Github Sponsor](https://github.com/sponsors/ultrabug) or [Tipeee](https://fr.tipeee.com/ultrabug).
-
-<iframe src="https://github.com/sponsors/ultrabug/button" title="Sponsor ultrabug" height="35" width="116" style="border: 0;"></iframe>
+If my work impacts you and make you happy you can say thank you by [starring :star: one of my repositories](https://github.com/ultrabug).
+You can also consider tipping me via [Paypal](https://paypal.me/alexysjacob1), [Github Sponsor](https://github.com/sponsors/ultrabug) or [Tipeee](https://fr.tipeee.com/ultrabug).
 
 ## Contact me
 
 - On [Twitter](https://twitter.com/ultrabug)
 - On [IRC Libera.Chat](https://libera.chat/) #gentoo-containers or [IRC OFTC](https://www.oftc.net/) #py3status
+- On [Discord](https://discord.com/) ultrabug #3055
