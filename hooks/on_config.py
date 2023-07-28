@@ -12,7 +12,7 @@ def gen_blog_redirects(config, path):
     return config
 
 
-def deploy_hooks(config):
+def on_config(config):
     chdir("docs")
     blog = Path("Tech Blog")
     #

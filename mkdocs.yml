@@ -32,7 +32,10 @@ extra:
     - icon: fontawesome/solid/square-rss
       link: https://ultrabug.fr/feed_rss_created.xml
       name: ultrabug RSS feed
-copyright: Copyright &copy; 2011-2022 Alexys Jacob
+copyright: Copyright &copy; 2011-2023 Alexys Jacob
+
+hooks:
+  - hooks/on_config.py
 
 # https://facelessuser.github.io/pymdown-extensions/
 markdown_extensions:
@@ -53,9 +56,6 @@ plugins:
       strict: false
   - redirects
   - search
-  - mkdocs-simple-hooks:
-      hooks:
-        on_config: "hooks.on_config:deploy_hooks"
   - rss:
       date_from_meta:
         as_creation: "date"
