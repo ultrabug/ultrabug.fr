@@ -1905,6 +1905,14 @@
          
     </url>
     <url>
+         <loc>https://ultrabug.fr/Tech%20Talks/2023/europython-2023/</loc>
+         <lastmod>2023-07-28</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="en" href="https://ultrabug.fr/en/Tech%20Talks/2023/europython-2023/"/>
+         <xhtml:link rel="alternate" hreflang="fr" href="https://ultrabug.fr/fr/Tech%20Talks/2023/europython-2023/"/>
+         
+    </url>
+    <url>
          <loc>https://ultrabug.fr/Tech%20Talks/2023/scylla-infoq-webinar/</loc>
          <lastmod>2023-07-28</lastmod>
          <changefreq>daily</changefreq>
