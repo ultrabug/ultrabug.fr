@@ -50,7 +50,10 @@ I share my modest experience on this hobby through my [FPV Handbook](/FPV Handbo
 
 ## Support me
 
-If my work impacts you and make you happy you can say thank you by [starring :star: one of my repositories](https://github.com/ultrabug).
+If my work impacts you and make you happy you can say thank you by [starring :star: one of my repositories](https://github.com/ultrabug):
+
+[![Star History Chart](https://api.star-history.com/svg?repos=ultrabug/py3status,ultrabug/mkdocs-static-i18n,ultrabug/uhashring&type=Date)](https://star-history.com/#ultrabug/py3status&ultrabug/mkdocs-static-i18n&ultrabug/uhashring&Date)
+
 You can also consider tipping me via [Paypal](https://paypal.me/alexysjacob1) or [Github Sponsor](https://github.com/sponsors/ultrabug).
 
 ## Contact me

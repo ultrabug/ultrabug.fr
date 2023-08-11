@@ -50,8 +50,11 @@ Je partage aussi ma modeste expérience de cette discipline dans mon [FPV Handbo
 
 ## Support me
 
-Si mon travail vous impacte positivement, vous pouvez dire merci en donnant [une étoile :star: à l'un de mes projets](https://github.com/ultrabug).
-Ou vous pouvez me remercier avec via un don libre [sur Paypal](https://paypal.me/alexysjacob1) ou [Github Sponsor](https://github.com/sponsors/ultrabug).
+Si mon travail vous impacte positivement, vous pouvez dire merci en donnant [une étoile :star: à l'un de mes projets](https://github.com/ultrabug):
+
+[![Star History Chart](https://api.star-history.com/svg?repos=ultrabug/py3status,ultrabug/mkdocs-static-i18n,ultrabug/uhashring&type=Date)](https://star-history.com/#ultrabug/py3status&ultrabug/mkdocs-static-i18n&ultrabug/uhashring&Date)
+
+Vous pouvez aussi me remercier avec via un don libre [sur Paypal](https://paypal.me/alexysjacob1) ou [Github Sponsor](https://github.com/sponsors/ultrabug).
 
 ## Contact me
 
