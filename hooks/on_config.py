@@ -13,7 +13,9 @@ def gen_blog_redirects(config, path):
 
 
 def on_config(config):
+    origin = Path().absolute()
     chdir("docs")
     blog = Path("Tech Blog")
     #
     gen_blog_redirects(config, blog)
+    chdir(origin)
