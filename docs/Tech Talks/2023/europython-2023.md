@@ -9,3 +9,4 @@
 In this talk I'll share the **learnings and achievements** I got by adding the **Rust** programming language into my **Python** life. Illustrating a real story now in production at scale, I'll walk you through all the pains and joys of this unexpected journey which changed me more than I anticipated.
 
 - [See the slides](../assets/EP2023 - Would Rust Make You A Better Pythonista.pdf)
+- [Watch the video](https://www.youtube.com/watch?v=HTb0FcKtkCc&list=PL8uoeex94UhFcwvAfWHybD7SfNgIUBRo-&index=113&pp=iAQB)
